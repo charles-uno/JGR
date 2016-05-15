@@ -12,18 +12,17 @@
 \usepackage[displaymath]{lineno}
 \usepackage{indentfirst}
 \usepackage{lineno}
-
-
-
-\usepackage{lipsum}
-
-
+\usepackage{lipsum} % For adding fake text. 
 
 \linenumbers*[1]
 
 %use to display figures in draft mode
 \setkeys{Gin}{draft=false}
- 
+
+% =====================================================================
+% ================================================ Title, Abstract, etc
+% =====================================================================
+
 \begin{document}
 \title{Modeling Pc4 Pulsations in Two and a Half Dimensions with
        Comparisons to Van Allen Probes Observations}
@@ -36,6 +35,7 @@
 \linespread{2}
 
 %\linenumbers
+
 \begin{abstract}
 
 \lipsum[1]
@@ -43,52 +43,112 @@
 \end{abstract}
 
 \begin{article}
+
+% =====================================================================
+% ======================================================== Introduction
+% =====================================================================
+
 \section{Introduction}
 
+See \cite{dai_2015}. 
+
+See \cite{lysak_2004}. 
+
+See \cite{lysak_2013}. 
+
+See \cite{motoba_2015}. 
+
 \lipsum[2-4]
+
+% =====================================================================
+% ===================================================== Numerical Model
+% =====================================================================
 
 \section{Numerical Model}
 
 \lipsum[5-6]
 
 \begin{figure}
-\begin{center}
-\includegraphics[width=15pc]{figures/placeholder.jpg}
-\caption{A narrow placeholder figure. Note that Minerva looks very stern. }
-\label{fig_placeholder_narrow}
-\end{center}
+    \label{fig_placeholder_narrow}
+    \begin{center}
+    \includegraphics[width=15pc]{figures/placeholder.jpg}
+    \caption{
+        A narrow placeholder figure. Note that Minerva looks very
+        stern. 
+    }
+    \end{center}
 \end{figure}
 
 \lipsum[7]
+
+% =====================================================================
+% =================================================== Numerical Results
+% =====================================================================
 
 \section{Numerical Results}
 
 \lipsum[8-10]
 
 \begin{figure}
-\begin{center}
-\includegraphics[width=\textwidth]{figures/placeholder.jpg}
-\caption{A wide placeholder figure. Note that Minerva looks very stern. }
-\label{fig_placeholder_wide}
-\end{center}
+    \label{fig_placeholder_wide}
+    \begin{center}
+    \includegraphics[width=\textwidth]{figures/placeholder.jpg}
+    \caption{
+        A wide placeholder figure. Note that Minerva looks very stern.
+    }
+    \end{center}
 \end{figure}
 
 \lipsum[11-13]
+
+% =====================================================================
+% ======================================================== Observations
+% =====================================================================
 
 \section{Van Allen Probes Observations}
 
 \lipsum[14-16]
 
+% =====================================================================
+% ========================================================== Discussion
+% =====================================================================
+
 \section{Discussion}
 
 \lipsum[17-19]
 
+% =====================================================================
+% ========================================================== References
+% =====================================================================
+
 \bibliographystyle{agu}
-\bibliography{jgr.bib}
+\bibliography{bibliography.bib}
 
 \end{article}
 
+% =====================================================================
+% ============================================================ Appendix
+% =====================================================================
+
+\begin{appendix}
+    \label{app}
+
+\begin{center}
+    {\bf APPENDIX A: FBK freq and amp interpolation}
+\end{center}
+
+\lipsum[20]
+
+\end{appendix}
+
+% =====================================================================
+% ==================================================== Acknowledgements
+% =====================================================================
+
 \begin{acknowledgments}
+
+\lipsum[21]
+
 \end{acknowledgments}
 
 \clearpage

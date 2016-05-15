@@ -4,7 +4,7 @@ LATEXMK=./latexmk/latexmk
 MAIN=jgr
 MAIN_PDF=$(MAIN).pdf
 MAIN_TEX=$(MAIN).tex
-HELPER_FILES= makefile agu2001.cls  aguplus.cls  agutex.cls $(MAIN).bib
+HELPER_FILES= makefile agutex.cls bibliography.bib
 FIGURES := $(wildcard figures/*)
 
 # By using ALWAYS_COMPILE as an undefined target, it will always force
@@ -25,6 +25,6 @@ $(MAIN_PDF): ALWAYS_COMPILE $(MAIN_TEX) $(HELPER_FILES) $(FIGURES)
 # files to clean up. 
 clean:
 	@ echo 'Cleaning up.'
-	@- $(LATEXMK) -C $(MAIN_TEX) &> /dev/null ||:
+	@- $(LATEXMK) -C $(MAIN_TEX) > /dev/null 2>&1 ||:
 
 
