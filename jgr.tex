@@ -14,10 +14,33 @@
 \usepackage{lineno}
 \usepackage{lipsum} % For adding fake text. 
 
+\usepackage{units} % SI unit typesetting
+\usepackage{xspace} % Automatically adjusting space after macros
+\usepackage{amsmath} % \text, and other math formatting options
+\usepackage{siunitx} % \num{} formatting and SI unit formatting
+
+\usepackage[noabbrev,capitalize]{cleveref} % Automatically determine \cref type
+
+\usepackage{xcolor} % so we can put todo notes in color. 
+
+% Configure the siunitx package
+\sisetup{
+    group-separator = {,}, % Use , to separate groups of digits, like 12,345
+    list-final-separator = {, and } % Always use the serial comma in \SIlist
+}
+
+% Configure the cleveref package
+\newcommand{\creflastconjunction}{, and } % Always use the serial comma
+
 \linenumbers*[1]
 
 %use to display figures in draft mode
 \setkeys{Gin}{draft=false}
+
+
+\input{my_definitions}
+
+
 
 % =====================================================================
 % ================================================ Title, Abstract, etc
@@ -38,7 +61,25 @@
 
 \begin{abstract}
 
-\lipsum[1]
+Field line resonances in the Pc4 range (\SIrange{7}{25}{\mHz}) serve
+to energize magnetospheric particles through drift-resonant
+interactions, carry energy from high to low altitude, induce currents in
+the magnetosphere, and accelerate particles into the atmosphere. Wave
+structure and polarization significantly impact the execution these
+roles. The present work showcases a new two and a half dimensional code,
+Tuna, ideally suited to model FLRs, with the ability to consider
+large-but-finite azimuthal modenumbers, coupling between the poloidal,
+toroidal, and compressional modes, and arbitrary harmonic structure.
+Using Tuna, the interplay between Joule dissipation and
+poloidal-to-toroidal rotation is considered for Pc4 pulsations under
+both dayside and nightside conditions. An attempt is also made to
+demystify giant pulsations, a class of Pc4 noted for its distinctive
+ground signatures. Numerical results are supplemented by a survey of
+\about700 Pc4 pulsations using data from the Van Allen Probes, the first
+such survey to characterize each event by both polarization and
+harmonic. The combination of numerical and observational results
+suggests an explanation for the disparate distributions observed in
+poloidal and toroidal Pc4 events. 
 
 \end{abstract}
 
@@ -58,15 +99,209 @@ See \cite{lysak_2013}.
 
 See \cite{motoba_2015}. 
 
-\lipsum[2-4]
-
 % =====================================================================
 % ===================================================== Numerical Model
 % =====================================================================
 
 \section{Numerical Model}
 
-\lipsum[5-6]
+The present section describes Tuna, a new two and a half dimensional \Alfven wave code based largely on that presented in \cite{lysak_2004} and \cite{lysak_2013}. Tuna's spatial grid resolves a two-dimensional slice of the magnetosphere, but that electric and magnetic fields are three-dimensional vectors. This apparent contradiction is resolved using a fixed azimuthal modenumber, \azm. Electric and magnetic fields are taken to be complex-valued, varying azimuthally per $\exp\arg{i\azm\phi}$; derivatives with respect to the azimuthal angle $\phi$ are then replaced by a factor of $i\azm$. 
+
+\todo{It's OK to do a fixed modenumber because we aren't worried about the interactions between dayside and nightside. These waves tend to be azimuthally localized.}
+
+Tuna's grid follows the modified dipole coordinates presented in \cite{lysak_2004}, as shown in \cref{def_coords}. This allows for the consideration of phenomena which are best expressed in terms of field-aligned coordinates (such as the conductivity and electric tensors), as well as those that lend themselves to spherical coordinates (such as a constant-altitude ionospheric boundary). 
+\begin{align}
+  \label{def_coords}
+  \lysakx & = - \frac{R}{r} \sin^2 \theta & 
+  \lysaky & = \phi &
+  \lysakz & = \frac{R^2}{r^2} \frac{\cos \theta}{\cos \theta_0}
+\end{align}
+
+Here, $R$ is the geocentric radius of the ionospheric boundary, taken to be at $R_E + \SI{100}{\km}$, and $r$, $\theta$, and $\phi$ are the usual spherical coordinates. 
+
+The grid is nonorthogonal, so covariant and contravariant basis vectors are tracked separately. Respectively, 
+\begin{align}
+  \ehat_i & \equiv \dd{\lysaki} \vec{x} &
+  \ehat^i & \equiv \dd{ \vec{x} } \lysaki
+\end{align}
+
+These basis vectors allow a mapping to the usual dipole coordinates:
+\begin{align}
+  \ehat^1 &\parallel \xhat &
+  \ehat^2 &\parallel \yhat &
+  \ehat_3 &\parallel \zhat
+\end{align}
+
+Where $\zhat$ lies along the magnetic field, $\yhat$ is azimuthally eastward, and $\xhat \equiv \yhat \times \zhat$ points radially outward at the equator. In addition, at the ionospheric boundary, a convenient mapping exists to the spherical basis:
+\begin{align}
+  \ehat_1 &\parallel \hat{\theta} &
+  \ehat_2 &\parallel \hat{\phi} &
+  \ehat^3 &\parallel \hat{r}
+\end{align}
+
+Electric and magnetic field vectors are projected between covariant and contravariant bases using the metric tensor:
+\begin{align}
+  A_i &= g_{ij} A^j &
+  A^i &= g^{ij} A_j &
+\end{align}
+
+Where
+\begin{align}
+  A_i &\equiv \vec{A} \cdot \hat{e}_i &
+  A^i &\equiv \vec{A} \cdot \hat{e}^i
+\end{align}
+
+And
+\begin{align}
+  g_{ij} &\equiv \hat{e}_i \cdot \hat{e}_j &
+  g^{ij} &\equiv \hat{e}^i \cdot \hat{e}^j 
+\end{align}
+
+Complete expressions for the basis vectors and metric tensor can be found in \cite{lysak_2004}. 
+
+The grid takes 150 values in \lysakx (150 field lines) and 350 values in \lysakz (350 grid points per field line). Spacing is on the order of \SI{10}{\km} near the ionosphere and \SI{1000}{\km} at the equator of the outermost field line. The inner boundary is placed at $L = 2$, and the outer boundary at $L = 10$. 
+
+Electric and magnetic fields are propagated on a Yee grid (see \cite{yee_1966}). Electric and magnetic fields are offset by half a time step, and each field component is defined on only odd or even grid points in each direction, arranged such that the curls in Maxwell's equations are computed using centered differences. 
+
+Magnetic fields are updated using Faraday's law:
+\begin{align}
+  \ddt \vec{B} &= - \curl{E} &
+  & \text{or} &
+  \ddt B^i &= -\frac{1}{ \sqrt{g} } \varepsilon^{ijk} \dd{u^j} E_k
+\end{align}
+
+Where $g \equiv \det \tensor{g}$ is the determinant of the metric tensor, also called the Jacobian. 
+
+
+
+
+
+
+
+\todo{...}
+
+
+
+
+
+
+ using \Ampere's law and Faraday's law. Current is split into an Ohmic term (${\tensor{\sigma} \cdot \vec{E}}$) and a driving term ($\vec{J}$). 
+\begin{align}
+  \label{def_eqns}
+  \ddt \vec{B} &= - \curl{E} &
+  \tensor{\epsilon} \cdot \ddt \vec{E} &= \oomz \curl{B} - \vec{J}
+    - \tensor{\sigma} \cdot \vec{E}
+\end{align}
+
+\todo{justify current driving}
+
+\todo{At the inner and outer boundaries, Dirichlet boundary conditions are imposed on the electric fields and Neumann boundary conditions on the magnetic fields. }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tuna resolves a meridional slice of the magnetosphere, essentially fixing \lysaky; within that slice, \lysakx indexes across field lines (note $\lysakx = -\frac{1}{L}$ for McIlwain parameter $L$), and \lysakz indexes along the field lines ($\lysakz = +1$ at the northern ionospheric foot point, $0$ at the equator, and $-1$ at the southern foot point for each field line). 
+
+
+
+
+
+The nonorthogonal nature of the coordinates allows for vectors to easily be expressed in terms of perpendicular 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+The coordinates are nonorthogonal, so it's necessary to track covariant and contravariant basis vectors separately; respectively,
+\begin{align}
+  \hat{e}_i & \equiv \dd{\lysaki} \vec{x} &
+  \hat{e}^i & \equiv \dd{ \vec{x} } \lysaki
+\end{align}
+
+Covariant basis vectors $\hat{e}_i$ are normal to the curve defined by constant
+$\lysaki$, while contravariant basis vectors $\hat{e}^i$ are tangent to the
+coordinate curve (equivalently, $\hat{e}^i$ is normal to the plane defined by
+constant $u^j$ for all $j \ne i$). These vectors are reciprocal to one another,
+and can be combined to give components of the metric tensor
+$\tensor{g}$. Per \cite{dhaeseleer_1991}, 
+\begin{align}
+  \label{def_metric}
+  \hat{e}^i \cdot \hat{e}_j &= \delta^i_j &
+  g_{ij} &\equiv \hat{e}_i \cdot \hat{e}_j &
+  g^{ij} &\equiv \hat{e}^i \cdot \hat{e}^j 
+\end{align}
+
+
+
+
+The basis vectors are 
+
+, ${\hat{e}_i \equiv \frac{\partial}{\partial \lysaki} \vec{r}}$ and ${\hat{e}^i \equiv \frac{\partial}{\partial \vec{r}} \lysaki}$. The basis vectors satisfy ${\hat{e}^i \cdot \hat{e}_j = \delta^i_j}$ and define the metric tensor via ${g_{ij} \equiv \hat{e}_i \cdot \hat{e_j}}$ and ${g^{ij} \equiv \hat{e^i} \cdot \hat{e^j}}$. The tensor, in turn, is used to move between the covariant and contravariant bases:
+\begin{align}
+  A_i &= g_{ij} A^j &
+  & \text{and} &
+  A^i &= g^{ij} A_j &
+\end{align}
+
+Where
+\begin{align}
+  A_i &\equiv \vec{A} \cdot \hat{e}_i &
+  & \text{and} &
+  A^i &\equiv \vec{A} \cdot \hat{e}^i
+\end{align}
+
+
+
+
+
+
+
+
+
+GRID
+
+
+PHYSICAL PARAMETER PROFILES
+
+
+DRIVING
+
+
+MAXWELL'S EQUATIONS
+
+
+BOUNDARY CONDITIONS
+
+
+
+
+
+
+
+
 
 \begin{figure}
     \label{fig_placeholder_narrow}
