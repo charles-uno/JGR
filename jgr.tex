@@ -40,11 +40,9 @@
 
 \input{my_definitions}
 
-
-
-% =====================================================================
-% ================================================ Title, Abstract, etc
-% =====================================================================
+% ######################################################################
+% ################################################# Title, Abstract, etc
+% ######################################################################
 
 \begin{document}
 \title{Modeling Pc4 Pulsations in Two and a Half Dimensions with
@@ -58,6 +56,10 @@
 \linespread{2}
 
 %\linenumbers
+
+% ======================================================================
+% ============================================================= Abstract
+% ======================================================================
 
 \begin{abstract}
 
@@ -85,9 +87,9 @@ poloidal and toroidal Pc4 events.
 
 \begin{article}
 
-% =====================================================================
-% ======================================================== Introduction
-% =====================================================================
+% ######################################################################
+% ######################################################### Introduction
+% ######################################################################
 
 \section{Introduction}
 
@@ -99,17 +101,67 @@ See \cite{lysak_2013}.
 
 See \cite{motoba_2015}. 
 
-% =====================================================================
-% ===================================================== Numerical Model
-% =====================================================================
+% ######################################################################
+% ################################################################ Model
+% ######################################################################
 
 \section{Numerical Model}
 
-The present section describes Tuna, a new two and a half dimensional \Alfven wave code based largely on that presented in \cite{lysak_2004} and \cite{lysak_2013}. Tuna's spatial grid resolves a two-dimensional slice of the magnetosphere, but that electric and magnetic fields are three-dimensional vectors. This apparent contradiction is resolved using a fixed azimuthal modenumber, \azm. Electric and magnetic fields are taken to be complex-valued, varying azimuthally per $\exp\arg{i\azm\phi}$; derivatives with respect to the azimuthal angle $\phi$ are then replaced by a factor of $i\azm$. 
+\todo{You can get this code on GitHub!}
 
-\todo{It's OK to do a fixed modenumber because we aren't worried about the interactions between dayside and nightside. These waves tend to be azimuthally localized.}
+Numerical results are obtained using Tuna, a new linear \Alfven wave
+code based on that described in \cite{lysak_2013}. Tuna models the
+evolution of three-dimensional electric and magnetic fields over a
+(two-dimensional) meridional slice of the magnetosphere. The code can
+colloquially be said to have two and a half (``tuna half'') dimensions,
+hence the name Tuna. 
 
-Tuna's grid follows the modified dipole coordinates presented in \cite{lysak_2004}, as shown in \cref{def_coords}. This allows for the consideration of phenomena which are best expressed in terms of field-aligned coordinates (such as the conductivity and electric tensors), as well as those that lend themselves to spherical coordinates (such as a constant-altitude ionospheric boundary). 
+For the purpose of evaluating derivatives in the azimuthal direction,
+fields are taken to vary as $\exp \arg{i \azm \phi}$ for fixed azimuthal
+modenumber \azm. Azimuthal derivatives are then replaced by a factor of
+$i \azm$; fields are complex-valued as a result. This assumption is
+easily justified in the case of Pc4 pulsations, which are typically
+localized in MLT, per
+\cite{anderson_1990,dai_2015,engebretson_1992,liu_2009}. 
+
+% ======================================================================
+% ========================================== Physical Parameter Profiles
+% ======================================================================
+
+Empirical profiles are used for the conductivity tensor
+$\tensor{\sigma}$ and the electric tensor $\tensor{\epsilon}$. The
+conductivity tensor $\tensor{\sigma}$ comes from values tabulated in
+\cite{kelley_1989}, and modified per \cite{lysak_2013} to take into
+account the loading of oxygen ions near the atmosphere. The electric
+tensor $\tensor{\epsilon}$ gives characteristic velocity $c$ along the
+magnetic field line and $\va$ in the perpendicular direction, where the
+\Alfven speed $\va$ is defined per
+\begin{align}
+    \label{def_va}
+    \va^2 &\equiv \frac{B^2}{\rho} &
+    & \text{or, equally,} &
+    \va^2 &\equiv \frac{1}{\mz\ep} 
+\end{align}
+
+\todo{Figure of conductivity profiles?}
+
+In \cref{def_va}, $B$ is the magnitude of the zeroth-order magnetic
+field, taken to be an ideal dipole field with magnitude \SI{3.1e4}{\nT}
+at the equator at Earth's surface. The density profile is modeled as the
+sum of a latitude-independent profile (\SI{10}{\percc} at the
+ionosphere, falling off as $\frac{1}{r}$) and a latitude-dependent one
+(\SI{e4}{\percc} at the ionosphere, with a sharp drop at $L = 4$).
+
+Four different physical parameter profiles are used for conductivity and
+\Alfven speed, corresponding to dayside and nightside conditions at the
+top and bottom of the solar cycle. 
+
+% ======================================================================
+% ============================================ Nonorthogonal Dipole Grid
+% ======================================================================
+
+Tuna's grid follows the modified dipole coordinates described in
+\cite{lysak_2004}:
 \begin{align}
   \label{def_coords}
   \lysakx & = - \frac{R}{r} \sin^2 \theta & 
@@ -117,212 +169,307 @@ Tuna's grid follows the modified dipole coordinates presented in \cite{lysak_200
   \lysakz & = \frac{R^2}{r^2} \frac{\cos \theta}{\cos \theta_0}
 \end{align}
 
-Here, $R$ is the geocentric radius of the ionospheric boundary, taken to be at $R_E + \SI{100}{\km}$, and $r$, $\theta$, and $\phi$ are the usual spherical coordinates. 
+Here, $R$ is the geocentric radius of the ionospheric boundary, taken to
+be at $R_E + \SI{100}{\km}$, $\theta_0$ is the invariant colatitude, and
+$r$, $\theta$, and $\phi$ are the usual spherical coordinates. 
 
-The grid is nonorthogonal, so covariant and contravariant basis vectors are tracked separately. Respectively, 
+\todo{Figure of the grid?}
+
+A thorough discussion of these coordinates, and explicit forms for the
+resulting basis vectors and metric tensor components can be found in
+\cite{lysak_2004}. At present, it's sufficient to note that the
+coordinates are nonorthogonal, and thus have covariant and contravariant
+basis vectors (${\ehat_i \equiv \dd{\lysaki}\vec{r}}$ and
+${\ehat^i \equiv \dd{\vec{r}}\lysaki}$ respectively) that do not line up
+with one another --- but that both the covariant and contravariant bases
+are valuable. 
+
+The basis vectors $\ehat^1$, $\ehat^2$, and $\ehat_3$ provide a mapping
+to the usual dipole coordinates, as shown in \cref{to_dipole}, which is
+the natural basis for the conductivity and electric tensors. 
 \begin{align}
-  \ehat_i & \equiv \dd{\lysaki} \vec{x} &
-  \ehat^i & \equiv \dd{ \vec{x} } \lysaki
+    \label{to_dipole}
+    \ehat^1 &\parallel \xhat &
+    \ehat^2 &\parallel \yhat &
+    \ehat_3 &\parallel \zhat
 \end{align}
 
-These basis vectors allow a mapping to the usual dipole coordinates:
-\begin{align}
-  \ehat^1 &\parallel \xhat &
-  \ehat^2 &\parallel \yhat &
-  \ehat_3 &\parallel \zhat
-\end{align}
+Where $\zhat$ lies along the magnetic field, $\yhat$ is azimuthally
+eastward, and $\xhat \equiv \yhat \times \zhat$ points radially outward
+at the equator. 
 
-Where $\zhat$ lies along the magnetic field, $\yhat$ is azimuthally eastward, and $\xhat \equiv \yhat \times \zhat$ points radially outward at the equator. In addition, at the ionospheric boundary, a convenient mapping exists to the spherical basis:
+In addition, at the ionospheric boundary, $\ehat_1$, $\ehat_2$, and
+$\ehat^3$ map to the spherical basis:
 \begin{align}
   \ehat_1 &\parallel \hat{\theta} &
   \ehat_2 &\parallel \hat{\phi} &
   \ehat^3 &\parallel \hat{r}
 \end{align}
 
-Electric and magnetic field vectors are projected between covariant and contravariant bases using the metric tensor:
+As a result, Tuna's grid is aligned everywhere to the zeroth-order
+dipole magnetic field, while also supporting a fixed-altitude
+ionospheric boundary. 
+
+The results shown in the present work use a grid of 150 values in 
+\lysakx (150 field lines) and 350 values in \lysakz (350 grid points per
+field line). Spacing is on the order of \SI{10}{\km} near the ionosphere
+and \SI{1000}{\km} at the equator of the outermost field line. The inner
+boundary is placed at $L = 2$, and the outer boundary at $L = 10$. The
+time step is determined from the smallest \Alfven crossing time, scaled
+down by a Courant factor of \num{0.1}. Typically,
+$\dt \about \SI{10}{\us}$.
+
+% ======================================================================
+% ================================================= Ring Current Driving
+% ======================================================================
+
+\todo{At high \azm, \Alfven waves are not compressional. If we want to
+see waves at $L\about5$, that's where the driving needs to be.}
+
+\todo{We know these waves interact with ring current particles. Proxy
+for substorm injection, etc. }
+
+\todo{DFT of DST for June 2013 storm. Bins are \SI{16}{\mHz} wide due to
+cadence of one minute. That's about the width of the Pc4 range. Fit of
+the pink noise suggests, then, that we might expect a wave in the Pc4
+range to contribute something like \SI{e-2}{\nT} to DST. Show the plot!}
+
+\todo{That maps out to a current of \about\SI{1}{\mega\A} in space, or
+\about\SI{e-4}{\uA/\m\squared} spread over \about\SI{1}{\RE\squared}. }
+
+\todo{We center just outside the plasmapause. $L\about5$,
+\SI{5}{\degree} off the equator, gaussian in $L$ and $\theta$. }
+
+\todo{Driving is sinusoidal, azimuthally directed.}
+
+% ======================================================================
+% ================================================== Maxwell's Equations
+% ======================================================================
+
+Driving is introduced through an anomalous current term $\vec{J}$ in
+\Ampere's law, in addition to the Ohmic current term
+${\tensor{\sigma} \cdot \vec{E}}$.
 \begin{align}
-  A_i &= g_{ij} A^j &
-  A^i &= g^{ij} A_j &
+    \label{amp_law}
+    \tensor{\epsilon} \cdot \ddt \vec{E} &= \oomz \curl{B} - \vec{J}
+      - \tensor{\sigma} \cdot \vec{E}
 \end{align}
 
-Where
+Because of the Ohmic current term, the electric field's time derivative
+in \cref{amp_law} depends on its own future value. This circular
+dependence is resolved using integrating factors. First, the expression
+is rewritten:
 \begin{align}
-  A_i &\equiv \vec{A} \cdot \hat{e}_i &
-  A^i &\equiv \vec{A} \cdot \hat{e}^i
+    \label{int_fac}
+    \Big( \tensor{\Omega} + \tensor{ \mathbb{I} }\ddt \Big) \cdot
+        \vec{E} &= \tensor{V}^2 \cdot \vec{F}
 \end{align}
 
-And
+Where $\tensor{ \mathbb{I} }$ is the identity and $\vec{F}$,
+$\tensor{V}^2$, and $\tensor{\Omega}$ are shorthand:
 \begin{align}
-  g_{ij} &\equiv \hat{e}_i \cdot \hat{e}_j &
-  g^{ij} &\equiv \hat{e}^i \cdot \hat{e}^j 
+    \vec{F} &\equiv \curl{B} - \mz \vec{J} &
+    \tensor{V}^2 &\equiv \frac{1}{\mz} \tensor{\epsilon}^{-1} &
+    \tensor{\Omega} &\equiv \tensor{\epsilon}^{-1} \cdot \tensor{\sigma}
 \end{align}
 
-Complete expressions for the basis vectors and metric tensor can be found in \cite{lysak_2004}. 
-
-The grid takes 150 values in \lysakx (150 field lines) and 350 values in \lysakz (350 grid points per field line). Spacing is on the order of \SI{10}{\km} near the ionosphere and \SI{1000}{\km} at the equator of the outermost field line. The inner boundary is placed at $L = 2$, and the outer boundary at $L = 10$. 
-
-Electric and magnetic fields are propagated on a Yee grid (see \cite{yee_1966}). Electric and magnetic fields are offset by half a time step, and each field component is defined on only odd or even grid points in each direction, arranged such that the curls in Maxwell's equations are computed using centered differences. 
-
-Magnetic fields are updated using Faraday's law:
+\cref{int_fac} is then solved by multiplying through by
+$\exp \arg{ \tensor{\Omega} \, t }$ (see \cite{hall_2015}), applying the
+product rule, and integrating over a time step \dt.
 \begin{align}
-  \ddt \vec{B} &= - \curl{E} &
-  & \text{or} &
-  \ddt B^i &= -\frac{1}{ \sqrt{g} } \varepsilon^{ijk} \dd{u^j} E_k
+    \label{amp_final}
+    \vec{E} &\assign \exp \arg{ -\tensor{\Omega} \, \dt } \cdot \vec{E} +
+      \dt \, \exp \arg{ -\tensor{\Omega} \, \tfrac{\dt}{2} } \cdot
+      \tensor{V}^2 \cdot \vec{F}
 \end{align}
 
-Where $g \equiv \det \tensor{g}$ is the determinant of the metric tensor, also called the Jacobian. 
+\cref{amp_final} is evaluated by separating the exponential into its
+diagonal (Pedersen) and off-diagonal (Hall) terms. The Hall terms give a
+rotation matrix around the magnetic field line, coupling the poloidal
+and toroidal modes, consistent with \cite{hughes_1974}. Terms
+proportional to $\exp \arg{ - \frac{\sz}{\ez}\dt }$ are also present.
+However, $\frac{\sz}{\ez}\dt \gtrsim 1000$, so these terms are
+vanishingly small. As a result, parallel electric fields are taken to be
+uniformly zero. 
 
-
-
-
-
-
-
-\todo{...}
-
-
-
-
-
-
- using \Ampere's law and Faraday's law. Current is split into an Ohmic term (${\tensor{\sigma} \cdot \vec{E}}$) and a driving term ($\vec{J}$). 
+Magnetic fields are simply advanced using Faraday's law:
 \begin{align}
-  \label{def_eqns}
-  \ddt \vec{B} &= - \curl{E} &
-  \tensor{\epsilon} \cdot \ddt \vec{E} &= \oomz \curl{B} - \vec{J}
-    - \tensor{\sigma} \cdot \vec{E}
+    \label{far_law}
+    \ddt \vec{B} &= - \curl{E}
 \end{align}
 
-\todo{justify current driving}
+For the sake of brevity, the present work does not expand the terms of
+\cref{amp_final,far_law} in the covariant basis. Those expressions can
+be found in \cite{mceachern_2016}. 
 
-\todo{At the inner and outer boundaries, Dirichlet boundary conditions are imposed on the electric fields and Neumann boundary conditions on the magnetic fields. }
+% ======================================================================
+% ================================================== Boundary Conditions
+% ======================================================================
 
+\todo{Dirichlet and Neumann conditions are applied to the electric and magnetic fields respectively (?) at the inner and outer boundaries. In practive, most wave activity is concentrated far from the boundary, so this doesn't matter much. Results are robust under an exchange of the two.}
 
+\todo{At the ionospheric boundary, say there's a thin current sheet representing the E layer of the ionosphere. Below that, the atmosphere is perfectly insulating, $\curl{B} = 0$. Along with $\div{B} = 0$ per Maxwell's equations, that gives the magnetic field in terms of a scalar magnetic potential $\Psi$, $\vec{B} = \nabla\Psi$ where $\nabla^2 \Psi = 0$. }
 
+\todo{Analytically, the solution is spherical harmonics. But we do a numerical solution instead, to ensure orthonormality on the incomplete grid (no pole or equator). }
 
+\todo{Assume that the thin current sheet at the top of the atmosphere is perfectly horizontal. Then he vertical component of the magnetic field is continuous through it. }
 
+\todo{Assume that Earth is a perfect conductor, so the vertical magnetic field goes to zero at the surface.}
 
+\todo{Finagle some things. We get some coefficients that take us from the vertical magnetic field to the $\theta$ and $\phi$ components of the magnetic field at the top and bottom of the atmosphere. The values at the top get plugged back in as boundary conditions; the ones are the bottom are purely output, and can be compared to ground magnetometer data.}
 
+\todo{See \cite{fujita_1988,lysak_2013}. }
 
-
-
-
-
-
-
-
-
-
-
-Tuna resolves a meridional slice of the magnetosphere, essentially fixing \lysaky; within that slice, \lysakx indexes across field lines (note $\lysakx = -\frac{1}{L}$ for McIlwain parameter $L$), and \lysakz indexes along the field lines ($\lysakz = +1$ at the northern ionospheric foot point, $0$ at the equator, and $-1$ at the southern foot point for each field line). 
-
-
-
-
-
-The nonorthogonal nature of the coordinates allows for vectors to easily be expressed in terms of perpendicular 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-The coordinates are nonorthogonal, so it's necessary to track covariant and contravariant basis vectors separately; respectively,
-\begin{align}
-  \hat{e}_i & \equiv \dd{\lysaki} \vec{x} &
-  \hat{e}^i & \equiv \dd{ \vec{x} } \lysaki
-\end{align}
-
-Covariant basis vectors $\hat{e}_i$ are normal to the curve defined by constant
-$\lysaki$, while contravariant basis vectors $\hat{e}^i$ are tangent to the
-coordinate curve (equivalently, $\hat{e}^i$ is normal to the plane defined by
-constant $u^j$ for all $j \ne i$). These vectors are reciprocal to one another,
-and can be combined to give components of the metric tensor
-$\tensor{g}$. Per \cite{dhaeseleer_1991}, 
-\begin{align}
-  \label{def_metric}
-  \hat{e}^i \cdot \hat{e}_j &= \delta^i_j &
-  g_{ij} &\equiv \hat{e}_i \cdot \hat{e}_j &
-  g^{ij} &\equiv \hat{e}^i \cdot \hat{e}^j 
-\end{align}
-
-
-
-
-The basis vectors are 
-
-, ${\hat{e}_i \equiv \frac{\partial}{\partial \lysaki} \vec{r}}$ and ${\hat{e}^i \equiv \frac{\partial}{\partial \vec{r}} \lysaki}$. The basis vectors satisfy ${\hat{e}^i \cdot \hat{e}_j = \delta^i_j}$ and define the metric tensor via ${g_{ij} \equiv \hat{e}_i \cdot \hat{e_j}}$ and ${g^{ij} \equiv \hat{e^i} \cdot \hat{e^j}}$. The tensor, in turn, is used to move between the covariant and contravariant bases:
-\begin{align}
-  A_i &= g_{ij} A^j &
-  & \text{and} &
-  A^i &= g^{ij} A_j &
-\end{align}
-
-Where
-\begin{align}
-  A_i &\equiv \vec{A} \cdot \hat{e}_i &
-  & \text{and} &
-  A^i &\equiv \vec{A} \cdot \hat{e}^i
-\end{align}
-
-
-
-
-
-
-
-
-
-GRID
-
-
-PHYSICAL PARAMETER PROFILES
-
-
-DRIVING
-
-
-MAXWELL'S EQUATIONS
-
-
-BOUNDARY CONDITIONS
-
-
-
-
-
-
-
-
-
-\begin{figure}
-    \label{fig_placeholder_narrow}
-    \begin{center}
-    \includegraphics[width=15pc]{figures/placeholder.jpg}
-    \caption{
-        A narrow placeholder figure. Note that Minerva looks very
-        stern. 
-    }
-    \end{center}
-\end{figure}
-
-\lipsum[7]
-
-% =====================================================================
-% =================================================== Numerical Results
-% =====================================================================
+% ######################################################################
+% #################################################### Numerical Results
+% ######################################################################
 
 \section{Numerical Results}
 
-\lipsum[8-10]
+\todo{Figure: snapshots of poloidal, toroidal, compressional magnetic field after 300 seconds, high \azm versus low \azm. Just dayside should be fine. }
+
+\todo{Figure: integrated energy in the poloidal and toroidal modes as a function of time. Analogous to figure 3 in \cite{mann_1995}. Probably two rows, one for dayside and one for nightside, rather than two figures. Four across should do it --- \azm of 1, 4, 16, 64. }
+
+\todo{Figure: Energy distribution by $L$-shell. Again, \azm of 1, 4, 16, 64. Probably four rows, for dayside/nightside poloidal/toroidal. }
+
+\todo{Figure: Ground signatures. The best peaks are at \azm of 16 and 32, but what we're really showing is that midsize \azm are stronger than those at very small or very large values. So should work to again show 1, 4, 16, 64. And four rows, dayside/nightside $B_\phi$/$B_\theta$. Note that $B_\phi$ is actually poloidal because of the \about\SI{90}{\degree} rotation due to the ionosphere. }
+
+
+The above results show agreement with a number of past FLR studies. In
+addition, several novel connections are suggested between known
+properties of Pc4 pulsations. 
+
+The present results suggest that the compressional character of poloidal
+Pc4s is to blame for the weak relationship they exhibit between $L$ and
+frequency, compared to that seen in toroidal events. Toroidal resonances
+are defined sharply in $L$ regardless of modenumber, while poloidal
+resonances are smeared in $L$ --- particularly at low \azm, but to some
+degree at high \azm as well. 
+
+The asymptotic rotation of energy from the poloidal mode to the toroidal
+mode is reproduced; at small \azm, the rotation timescale is comparable
+to a wave period, while at large modenumber it's on the order of 10
+periods. On the dayside, little energy is lost to Joule dissipation on
+rotation timescales, suggesting that the poloidal mode is a significant
+source of energy for same-harmonic toroidal waves. On the nightside,
+dissipation timescales are comparable to wave periods, suggesting that
+the poloidal mode gives rise to toroidal waves less effectively. 
+
+Ground signatures at low modenumber are shown to be weak because waves
+in space are weak; this is particularly true for poloidal waves --- a
+non-guided wave can't very well resonate along a field line --- but also
+true of toroidal waves insomuch as poloidal waves are their source. Pc4s
+resonate most strongly at high \azm, but high-\azm signatures are also
+attenuated by the atmosphere. The balance between the two effects falls
+around \azm of 16 to 32. It's further suggested that a high-\azm driver
+will cause a weak resonance in place rather than tunneling across field
+lines to a matching eigenfrequency, and that the same driving should
+give rise to stronger ground signatures during times of low solar
+activity, on both the dayside and the nightside. 
+
+\todo{Do we actually want to get into quiet versus active? Doubtful.}
+
+The findings together suggest, awkwardly, that the morphology of giant
+pulsations reveals relatively little about their origins. 
+
+One can consider a hypothetical magnetosphere subject to constant
+driving: broadband in frequency, broadband in modenumber, just outside
+the plasmapause. Low-\azm poloidal waves will quickly rotate to the
+toroidal mode (and/or propagate away). High-\azm waves will resonate in
+place, accumulating energy over time, and giving rise to ``multiharmonic
+toroidal waves'' (per \cite{takahashi_2011}); Fourier components that do
+not match the local eigenfrequency will accumulate energy over just a
+few wave periods before reaching asymptotic values. Waves with very high
+modenumbers will be attenuated by the ionosphere. The response on the
+ground will be counterclockwise at low latitude, clockwise at high
+latitude, peaked at $16 \lesssim \azm \lesssim 32$, mostly east-west
+polarized, and notably stronger during quiet solar conditions. In other
+words, the measurements will look very much like a giant pulsation. 
+
+The present results offer no explanation as to the tendency of giant
+pulsations to drift azimuthally, or to appear pre-dawn in MLT --- though
+the latter is addressed by the observational results in below. 
+
+% ######################################################################
+% ##################################################### Van Allen Probes
+% ######################################################################
+
+\section{Van Allen Probes Observations}
+
+\todo{Figure: A sample event.}
+
+\todo{Figure: Distribution of all Pc4 events.}
+
+\todo{Figure: Distribution of Pc4 events by mode.}
+
+The present chapter gives a survey of \about700 thirty-minute Pc4
+events, each characterized in terms of both parity and polarization, and
+selected in a way that does not introduce an apparent bias in either
+property. No past study has so thoroughly disentangled the parity and
+polarization of these waves.
+
+Coarsely speaking, event distributions are found to be consistent with
+past surveys. Toroidal events dominate overall, and are primarily seen
+on the morning side. Poloidal events are spread broadly in MLT, with a
+peak near noon and distinctive odd harmonics in the early morning. From
+there, the simultaneous consideration of harmonic and polarization,
+combined with the numerical results above, offers significant insight. 
+
+The near-noon peak of poloidal Pc4 events is shown to be due to even
+events (a majority subset). Odd poloidal events occur preferrentially
+near midnight and across the morning side. Similarly, toroidal events
+are mostly odd, and it is specifically the odd toroidal events which
+occur on the morningside, while even toroidal events peak near noon. 
+
+The spatial distribution of even poloidal events looks much like the
+spatial distribution of even toroidal events, except that the toroidal
+distribution is skewed dayward compared to the poloidal. The same can be
+said of the odd events. This is consistent (per the above numerical
+results) with poloidal events as an effective source for (same-parity)
+toroidal events on the dayside, and a less-effective source on the
+nightside. 
+
+As a corrolary, the distribution of odd poloidal events is found to
+closely resemble the distribution of giant pulsations: midnight and
+morning. This (consistent with the numerical results) suggests that the
+distinctive properties attributed to giant pulsations are in fact shared
+by odd poloidal Pc4s overall. 
+
+Curiously, odd toroidal events are found to occur at a higher rate than
+even ones, while the opposite is true for poloidal events. This
+disparity may offer clues to the source of these waves, or hint at a
+harmonic dependence in the rate of poloidal-to-toroidal rotation. 
+
+\todo{Do we want to get into event phase?}
+
+Event phase is also considered. Most events are shown to fall within
+\SI{15}{\degree} of $\pm\SI{90}{\degree}$, indicating that the traveling
+component of Pc4 pulsations is generally small compared to the standing
+component. Odd events are found to be spread more broadly in phase; this
+is likely a consequence of being measured near the equator, where (due
+to the electric field antinode) the lifetime of an odd event is
+significantly larger than that of an even event with the same phase. 
+
+% ######################################################################
+% ########################################################### Discussion
+% ######################################################################
+
+\section{Discussion}
+
+\todo{...}
+
+% ######################################################################
+% ########################################################### References
+% ######################################################################
+
+\bibliographystyle{agu}
+\bibliography{bibliography.bib}
+
+\end{article}
+
+% ######################################################################
+% ############################################################## Figures
+% ######################################################################
 
 \begin{figure}
     \label{fig_placeholder_wide}
@@ -334,57 +481,32 @@ BOUNDARY CONDITIONS
     \end{center}
 \end{figure}
 
-\lipsum[11-13]
 
-% =====================================================================
-% ======================================================== Observations
-% =====================================================================
 
-\section{Van Allen Probes Observations}
+% ######################################################################
+% ############################################################# Appendix
+% ######################################################################
 
-\lipsum[14-16]
+%\begin{appendix}
+%    \label{app}
+%\begin{center}
+%    {\bf APPENDIX A: FBK freq and amp interpolation}
+%\end{center}
+%\end{appendix}
 
-% =====================================================================
-% ========================================================== Discussion
-% =====================================================================
-
-\section{Discussion}
-
-\lipsum[17-19]
-
-% =====================================================================
-% ========================================================== References
-% =====================================================================
-
-\bibliographystyle{agu}
-\bibliography{bibliography.bib}
-
-\end{article}
-
-% =====================================================================
-% ============================================================ Appendix
-% =====================================================================
-
-\begin{appendix}
-    \label{app}
-
-\begin{center}
-    {\bf APPENDIX A: FBK freq and amp interpolation}
-\end{center}
-
-\lipsum[20]
-
-\end{appendix}
-
-% =====================================================================
-% ==================================================== Acknowledgements
-% =====================================================================
+% ######################################################################
+% ##################################################### Acknowledgements
+% ######################################################################
 
 \begin{acknowledgments}
 
-\lipsum[21]
+\lipsum[1]
 
 \end{acknowledgments}
+
+% ######################################################################
+% ###################################################### End of Document
+% ######################################################################
 
 \clearpage
 
