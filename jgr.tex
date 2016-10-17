@@ -1,8 +1,7 @@
-%\documentclass[draft,jgrga]{agutex}
-\documentclass[jgrga]{agutex}
-%\documentclass[jgrga]{aguplus}
+\documentclass{article}
+%\documentclass[jgrga]{agutex}
 
-%\documentclass{article}
+
 %\usepackage{natbib}
 \usepackage{graphicx}
 \usepackage{epstopdf}
@@ -18,6 +17,8 @@
 \usepackage{xspace} % Automatically adjusting space after macros
 \usepackage{amsmath} % \text, and other math formatting options
 \usepackage{siunitx} % \num{} formatting and SI unit formatting
+
+\usepackage{parskip} % http://ctan.org/pkg/parskip vskip instead of indent. 
 
 \usepackage[noabbrev,capitalize]{cleveref} % Automatically determine \cref type
 
@@ -38,7 +39,138 @@
 \setkeys{Gin}{draft=false}
 
 
-\input{my_definitions}
+% ######################################################################
+% ################################################### Shorthand / Macros
+% ######################################################################
+
+\newcommand{\about}{\ensuremath{\sim}}
+
+\newcommand{\real}{\ensuremath{\mathbb{R}\mathrm{e}}\xspace}
+\newcommand{\imag}{\ensuremath{\mathbb{I}\mathrm{m}}\xspace}
+
+\newcommand{\DST}{\text{Dst}\xspace}
+
+\newcommand{\dft}[1]{\ensuremath{\overset{\sim}{#1}}\xspace}
+
+% show todo notes in red. 
+\newcommand{\todo}[1]{ \textcolor{red}{TODO: #1} }
+% hide todo notes. 
+%\newcommand{\todo}[1]{}
+
+% Names with special characters. 
+\newcommand{\Alfven}{Alfv\'en\xspace}
+\newcommand{\Ampere}{Amp\`ere\xspace}
+\newcommand{\Schrodinger}{Schr\"odinger\xspace}
+
+% To make sure the capitalization is consistent. 
+\newcommand{\ohmlaw}{Ohm's law\xspace}
+\newcommand{\amplaw}{\Ampere's law\xspace}
+\newcommand{\farlaw}{Faraday's law\xspace}
+\newcommand{\maxeqs}{Maxwell's equations\xspace}
+
+% What should Radoski's dipole coordinates be named? \nu is overused. 
+\newcommand{\radx}{\ensuremath{x}\xspace}
+\newcommand{\rady}{\ensuremath{y}\xspace}
+\newcommand{\radz}{\ensuremath{z}\xspace}
+
+% What should Lysak's coordinates be named? I don't love u1 u2 u3. 
+\newcommand{\lysaki}{\ensuremath{u^i}\xspace}
+\newcommand{\lysakj}{\ensuremath{u^j}\xspace}
+\newcommand{\lysakx}{\ensuremath{u^1}\xspace}
+\newcommand{\lysaky}{\ensuremath{u^2}\xspace}
+\newcommand{\lysakz}{\ensuremath{u^3}\xspace}
+
+% Coordinate names... these should probably be italicized? 
+\newcommand{\x}{\ensuremath{x}\xspace}
+\newcommand{\y}{\ensuremath{y}\xspace}
+\newcommand{\z}{\ensuremath{z}\xspace}
+\newcommand{\X}{\ensuremath{X}\xspace}
+\newcommand{\Y}{\ensuremath{Y}\xspace}
+\newcommand{\Z}{\ensuremath{Z}\xspace}
+
+% Field-aligned unit vectors. 
+\newcommand{\ehat}{\ensuremath{\hat{e}}\xspace}
+\newcommand{\xhat}{\ensuremath{\hat{x}}\xspace}
+\newcommand{\yhat}{\ensuremath{\hat{y}}\xspace}
+\newcommand{\zhat}{\ensuremath{\hat{z}}\xspace}
+\newcommand{\Xhat}{\ensuremath{\hat{X}}\xspace}
+\newcommand{\Yhat}{\ensuremath{\hat{Y}}\xspace}
+\newcommand{\Zhat}{\ensuremath{\hat{Z}}\xspace}
+
+% Spherical unit vectors. 
+\newcommand{\rhat}{\ensuremath{\hat{r}}\xspace}
+\newcommand{\qhat}{\ensuremath{\hat{\theta}}\xspace}
+\newcommand{\fhat}{\ensuremath{\hat{\phi}}\xspace}
+
+% Use underlines for vectors and tensors. 
+\renewcommand{\vec}[1]{\ensuremath{\underline{#1}}}
+\newcommand{\tensor}[1]{\ensuremath{\underline{\underline{#1}}}}
+
+% Differential operators. 
+\newcommand{\dd}[1]{\ensuremath{ \frac{\partial}{\partial #1} }\xspace}
+\newcommand{\ddt}{\dd{t}\xspace}
+\newcommand{\curl}[1]{\ensuremath{ \nabla \times \vec{#1} }\xspace}
+\renewcommand{\div}[1]{\ensuremath{ \nabla \cdot \vec{#1} }\xspace}
+\newcommand{\grad}[1]{\ensuremath{ \nabla #1 }\xspace}
+
+% Properly-scaled parentheses for grouping terms or for arguments. 
+\newcommand{\lr}[1]{ \left( #1 \right) }
+\newcommand{\lrsmall}[1]{ \left( {\scriptstyle #1} \right) }
+\renewcommand{\arg}[1]{\!\lr{#1}}
+\newcommand{\argsmall}[1]{\!\lrsmall{#1}}
+\newcommand{\lrb}[1]{ \left[ #1 \right] }
+\newcommand{\argb}[1]{\!\lrb{#1}}
+
+% Define a better looking eV by moving the V slightly left
+\DeclareSIUnit\electronvolt{e\hspace{-0.08em}V}
+\DeclareSIUnit\keV{\kilo\electronvolt}
+\DeclareSIUnit\percc{/\cm\cubed}
+\DeclareSIUnit\RE{R_E}
+\DeclareSIUnit\nT{\nano\tesla}
+\DeclareSIUnit\nJ{\nano\joule}
+\DeclareSIUnit\S{S}
+\DeclareSIUnit\Mm{Mm}
+
+\newcommand{\dt}{\ensuremath{\delta \hspace{-0.1em} t}\xspace}
+\newcommand{\dr}{\ensuremath{\delta \hspace{-0.1em} r}\xspace}
+\newcommand{\dL}{\ensuremath{\delta \hspace{-0.1em} L}\xspace}
+
+% Assignment operator for pseudocode. 
+\newcommand{\assign}{\ensuremath{\leftarrow}\xspace}
+
+% Azimuthal modenumber, typically indicated with a lowercase m. 
+\newcommand{\azm}{\ensuremath{m}\xspace}
+
+% Electron mass, also typically indicated with a lowercase m. 
+\newcommand{\me}{\ensuremath{m_{e}}\xspace}
+
+% Jacobian dererminant, typically indicated with a capital J, which we are using for current. 
+\newcommand{\jac}{\ensuremath{ \sqrt{g} }\xspace}
+
+% Plasma frequency
+\newcommand{\op}{\ensuremath{\omega_P}\xspace}
+
+% Alfven speed. 
+\newcommand{\va}{\ensuremath{v_A}\xspace}
+
+% Perpendicular electric constant. 
+\newcommand{\ep}{\ensuremath{\epsilon_\bot}\xspace}
+
+% Epsilon zero, mu zero, and one over mu zero. 
+\newcommand{\ez}{\ensuremath{\epsilon_0}\xspace}
+\newcommand{\mz}{\ensuremath{\mu_0}\xspace}
+\newcommand{\oomz}{\ensuremath{ \frac{1}{\mz} }\xspace}
+
+% Conductivities. 
+\newcommand{\sz}{\ensuremath{\sigma_0}\xspace}
+\newcommand{\sh}{\ensuremath{\sigma_H}\xspace}
+\renewcommand{\sp}{\ensuremath{\sigma_P}\xspace}
+
+% Speed of light. 
+\newcommand{\C}{{\mathrm{c}}}
+
+% Add space between rows of tables
+\newcommand{\spacerows}[1]{\renewcommand{\arraystretch}{#1}}
 
 % ######################################################################
 % ################################################# Title, Abstract, etc
@@ -47,15 +179,23 @@
 \begin{document}
 \title{Modeling Pc4 Pulsations in Two and a Half Dimensions with
        Comparisons to Van Allen Probes Observations}
-\author{Charles McEachern, Robert Lysak, ...}
-\affil{University of Minnesota}
+\author{
+    Charles McEachern\textsuperscript{1},
+    Robert Lysak\textsuperscript{1},
+    ... \\
+    \textsuperscript{1} University of Minnesota
+}
 
-\lefthead{McEachern et al.}
-\righthead{Pc4s in 2.5D}
+%\affil{University of Minnesota}
 
-\linespread{2}
+%\lefthead{McEachern et al.}
+%\righthead{Pc4s in 2.5D}
+%\linespread{2}
 
 %\linenumbers
+
+\maketitle
+
 
 % ======================================================================
 % ============================================================= Abstract
@@ -85,7 +225,7 @@ poloidal and toroidal Pc4 events.
 
 \end{abstract}
 
-\begin{article}
+%\begin{article}
 
 % ######################################################################
 % ######################################################### Introduction
@@ -93,13 +233,76 @@ poloidal and toroidal Pc4 events.
 
 \section{Introduction}
 
-See \cite{dai_2015}. 
+Pc4s are interesting. 
 
-See \cite{lysak_2004}. 
+\begin{itemize}
+    \item Drift-resonant interactions with trapped energetic particles. 
+    \item Radial diffusion. 
+    \item Giant pulsations are mysterious and exciting. 
+\end{itemize}
 
-See \cite{lysak_2013}. 
+Pc4s can be classified in terms of their harmonic numbers. 
 
-See \cite{motoba_2015}. 
+\begin{itemize}
+    \item First harmonic is for drift resonance. 
+    \item Second harmonic is for drift-bounce resonance. 
+    \item You can sorta tell them apart by frequency, but there are disagreements. Mostly you need two observations -- satellite plus ground, or E and B on the same machine, like the Van Allen Probes. 
+\end{itemize}
+
+They can also be classified in terms of their azimuthal modenumber. 
+
+\begin{itemize}
+    \item One wavelength of a wave with modenumber \azm spans $\frac{24}{\azm}$ hours in MLT. 
+    \item Small \azm typically driven by broadband solar wind behavior. The waves are compressional -- they can move across magnetic field lines. 
+    \item Large \azm is driven by resonant interactions with trapped particles -- the waves are not compressional, so propagation is evanescent across field lines. 
+    \item Ground observations depend on \azm. At large \azm, a wave's ground signature is attenuated by the ionosphere. 
+\end{itemize}
+
+They can also be classified in terms of their polarization. 
+
+\begin{itemize}
+    \item Poloidal waves pulse. Magnetic field lines perturb radially. Associated azimuthal electric field perturbations. 
+    \item Toroidal waves twist. Magnetic field lines perturb azimuthally. Associated radial electric field perturbations. 
+    \item Poloidal waves rotate asymptotically to the toroidal mode, per \cite{mann_1995}. High-\azm poloidal waves have shorter lifetimes. 
+    \item Most observed waves are toroidal. 
+    \item Most poloidal waves are even modes. 
+    \item Toroidal frequencies are sharply defined in L. Poloidal show a more smeared-out dependence. \cite{engebretson_1986}
+    \item In this regime, wave polarization is rotated about \SI{90}{\degree} by the ionosphere\cite{}. An east-west magnetic perturbation in space is observed as a north-south perturbation at Earth's surface. 
+\end{itemize}
+
+Let's also talk about giant pulsations. 
+
+\begin{itemize}
+    \item Strong, well-formed ground signatures. Tabulated by eye for a century. 
+    \item Odd poloidal Pc4s, peaked from postmidnight to the early morning. 
+    \item A distinct break from mostly-toroidal, mostly-dayside Pc4s in general. 
+\end{itemize}
+
+Past models of the magnetosphere have been limited in their
+consideration of FLRs. Reasons include overly-simplified treatment of
+the ionospheric boundary, no consideration of the plasmapause, limited
+range in \azm, and the inability to compute ground signatures. The
+present work showcases a model which addresses these issues, providing a
+bird’s-eye view of the structure and evolution of FLRs. 
+
+Using this model, the present work explores novel connections between
+several of the seemingly-disparate Pc4 properties listed above.
+Poloidal-to-toroidal rotation timescales are compared to dayside and
+nightside Joule dissipation timescales; the implications to Pc4
+observations are considered. The strength and structure of ground
+signatures is investigated as function of ionospheric and driving
+conditions. And the distinctive properties associated with giant
+pulsations are matched against those of fundamental poloidal Pc4s in
+general. 
+
+Results are then validated against a survey of \about700 Pc4
+observations using data collected by the Van Allen probes. In contrast
+to other ULF wave surveys (for example, \cite{dai_2015} and
+\cite{motoba_2015}), the present work classifies each event by both
+polarization and harmonic. This crucial aspect of the analysis is
+possible only because the Van Allen Probes measure both electric and
+magnetic field waveforms. No past mission has provided access to such a
+rich data set for ULF wave events in the inner magnetosphere. 
 
 % ######################################################################
 % ################################################################ Model
@@ -114,11 +317,11 @@ code based on that described in \cite{lysak_2013}. Tuna models the
 evolution of three-dimensional electric and magnetic fields over a
 (two-dimensional) meridional slice of the magnetosphere. The code can
 colloquially be said to have two and a half (``tuna half'') dimensions,
-hence the name Tuna. 
+hence the name. 
 
 For the purpose of evaluating derivatives in the azimuthal direction,
 fields are taken to vary as $\exp \arg{i \azm \phi}$ for fixed azimuthal
-modenumber \azm. Azimuthal derivatives are then replaced by a factor of
+modenumber \azm. Azimuthal derivatives are replaced by a factor of
 $i \azm$; fields are complex-valued as a result. This assumption is
 easily justified in the case of Pc4 pulsations, which are typically
 localized in MLT, per
@@ -143,7 +346,7 @@ magnetic field line and $\va$ in the perpendicular direction, where the
     \va^2 &\equiv \frac{1}{\mz\ep} 
 \end{align}
 
-\todo{Figure of conductivity profiles?}
+\todo{Figure of conductivity profiles? Dissertation figure 5.3}
 
 In \cref{def_va}, $B$ is the magnitude of the zeroth-order magnetic
 field, taken to be an ideal dipole field with magnitude \SI{3.1e4}{\nT}
@@ -173,7 +376,7 @@ Here, $R$ is the geocentric radius of the ionospheric boundary, taken to
 be at $R_E + \SI{100}{\km}$, $\theta_0$ is the invariant colatitude, and
 $r$, $\theta$, and $\phi$ are the usual spherical coordinates. 
 
-\todo{Figure of the grid?}
+\todo{Figure of the grid? Dissertation figure 5.1}
 
 A thorough discussion of these coordinates, and explicit forms for the
 resulting basis vectors and metric tensor components can be found in
@@ -223,31 +426,38 @@ $\dt \about \SI{10}{\us}$.
 % ================================================= Ring Current Driving
 % ======================================================================
 
-\todo{At high \azm, \Alfven waves are not compressional. If we want to
-see waves at $L\about5$, that's where the driving needs to be.}
+Like the similar models of \cite{lysak_2013} and \cite{waters_2013},
+Tuna can be driven via compression of the simulation's outer boundary --
+typically taken as a proxy for solar wind activity. However, the shear
+and compressional \Alfven modes decouple at high \azm, preventing such
+waves from propagating across magnetic field lines. In order to model
+noncompressional Pc4 activity at $L\about5$, it's necessary to inject
+energy at $L\about5$. 
 
-\todo{We know these waves interact with ring current particles. Proxy
-for substorm injection, etc. }
+To this end, Tuna also allows simulations to be driven via modulation of
+the ring current, a stand-in for substorm injection events. The driving
+current is spread over a cross section of \about\SI{1}{\RE\squared},
+centered just outside the plasmapause and just off the equator. 
 
-\todo{DFT of DST for June 2013 storm. Bins are \SI{16}{\mHz} wide due to
-cadence of one minute. That's about the width of the Pc4 range. Fit of
-the pink noise suggests, then, that we might expect a wave in the Pc4
-range to contribute something like \SI{e-2}{\nT} to DST. Show the plot!}
+The magnitude of the driving current is estimated from a discrete
+Fourier transform of the Sym-H storm index during the June 2013 storm.
+Sym-H is tabulated once per minute, which is too slow to capture
+activity in the Pc4 band directly. However, a fit of the pink noise
+suggests that activity in the Pc4 range could plausibly give rise to a
+field at Earth's surface on the order of \SI{e-2}{\nT}. 
 
-\todo{That maps out to a current of \about\SI{1}{\mega\A} in space, or
-\about\SI{e-4}{\uA/\m\squared} spread over \about\SI{1}{\RE\squared}. }
-
-\todo{We center just outside the plasmapause. $L\about5$,
-\SI{5}{\degree} off the equator, gaussian in $L$ and $\theta$. }
-
-\todo{Driving is sinusoidal, azimuthally directed.}
+This corresponds to a ring current perturbation on the order of
+\SI{1}{\mega\A}, or \about\SI{e-4}{\uA/\m\squared} spread over
+\about\SI{1}{\RE\squared}. For the runs shown in the present work, the
+driving current is azimuthally directed, and its magnitude varies
+sinusoidally. 
 
 % ======================================================================
 % ================================================== Maxwell's Equations
 % ======================================================================
 
-Driving is introduced through an anomalous current term $\vec{J}$ in
-\Ampere's law, in addition to the Ohmic current term
+Mathematically, the driving current is introduced through an anomalous
+current term $\vec{J}$ in \Ampere's law, apart from the Ohmic current
 ${\tensor{\sigma} \cdot \vec{E}}$.
 \begin{align}
     \label{amp_law}
@@ -462,10 +672,10 @@ significantly larger than that of an even event with the same phase.
 % ########################################################### References
 % ######################################################################
 
-\bibliographystyle{agu}
+\bibliographystyle{plain}
 \bibliography{bibliography.bib}
 
-\end{article}
+%\end{article}
 
 % ######################################################################
 % ############################################################## Figures
@@ -498,20 +708,22 @@ significantly larger than that of an even event with the same phase.
 % ##################################################### Acknowledgements
 % ######################################################################
 
-\begin{acknowledgments}
+\section{Acknowledgements}
+
+%\begin{acknowledgments}
 
 \lipsum[1]
 
-\end{acknowledgments}
+%\end{acknowledgments}
 
 % ######################################################################
 % ###################################################### End of Document
 % ######################################################################
 
-\clearpage
+%\clearpage
 
 \end{document}
 
-\clearpage
+%\clearpage
 
 

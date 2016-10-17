@@ -28,3 +28,5 @@ clean:
 	@- $(LATEXMK) -C $(MAIN_TEX) > /dev/null 2>&1 ||:
 
 
+with-pandoc:
+	pandoc -s jgr.md --bibliography bibliography.bib --filter pandoc-citeproc
