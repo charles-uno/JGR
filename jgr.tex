@@ -11,18 +11,18 @@
 \usepackage[displaymath]{lineno}
 \usepackage{indentfirst}
 \usepackage{lineno}
-\usepackage{lipsum} % For adding fake text. 
+\usepackage{lipsum} % For adding fake text.
 
 \usepackage{units} % SI unit typesetting
 \usepackage{xspace} % Automatically adjusting space after macros
 \usepackage{amsmath} % \text, and other math formatting options
 \usepackage{siunitx} % \num{} formatting and SI unit formatting
 
-\usepackage{parskip} % http://ctan.org/pkg/parskip vskip instead of indent. 
+\usepackage{parskip} % http://ctan.org/pkg/parskip vskip instead of indent.
 
 \usepackage[noabbrev,capitalize]{cleveref} % Automatically determine \cref type
 
-\usepackage{xcolor} % so we can put todo notes in color. 
+\usepackage{xcolor} % so we can put todo notes in color.
 
 % Configure the siunitx package
 \sisetup{
@@ -52,35 +52,35 @@
 
 \newcommand{\dft}[1]{\ensuremath{\overset{\sim}{#1}}\xspace}
 
-% show todo notes in red. 
+% show todo notes in red.
 \newcommand{\todo}[1]{ \textcolor{red}{TODO: #1} }
-% hide todo notes. 
+% hide todo notes.
 %\newcommand{\todo}[1]{}
 
-% Names with special characters. 
+% Names with special characters.
 \newcommand{\Alfven}{Alfv\'en\xspace}
 \newcommand{\Ampere}{Amp\`ere\xspace}
 \newcommand{\Schrodinger}{Schr\"odinger\xspace}
 
-% To make sure the capitalization is consistent. 
+% To make sure the capitalization is consistent.
 \newcommand{\ohmlaw}{Ohm's law\xspace}
 \newcommand{\amplaw}{\Ampere's law\xspace}
 \newcommand{\farlaw}{Faraday's law\xspace}
 \newcommand{\maxeqs}{Maxwell's equations\xspace}
 
-% What should Radoski's dipole coordinates be named? \nu is overused. 
+% What should Radoski's dipole coordinates be named? \nu is overused.
 \newcommand{\radx}{\ensuremath{x}\xspace}
 \newcommand{\rady}{\ensuremath{y}\xspace}
 \newcommand{\radz}{\ensuremath{z}\xspace}
 
-% What should Lysak's coordinates be named? I don't love u1 u2 u3. 
+% What should Lysak's coordinates be named? I don't love u1 u2 u3.
 \newcommand{\lysaki}{\ensuremath{u^i}\xspace}
 \newcommand{\lysakj}{\ensuremath{u^j}\xspace}
 \newcommand{\lysakx}{\ensuremath{u^1}\xspace}
 \newcommand{\lysaky}{\ensuremath{u^2}\xspace}
 \newcommand{\lysakz}{\ensuremath{u^3}\xspace}
 
-% Coordinate names... these should probably be italicized? 
+% Coordinate names... these should probably be italicized?
 \newcommand{\x}{\ensuremath{x}\xspace}
 \newcommand{\y}{\ensuremath{y}\xspace}
 \newcommand{\z}{\ensuremath{z}\xspace}
@@ -88,7 +88,7 @@
 \newcommand{\Y}{\ensuremath{Y}\xspace}
 \newcommand{\Z}{\ensuremath{Z}\xspace}
 
-% Field-aligned unit vectors. 
+% Field-aligned unit vectors.
 \newcommand{\ehat}{\ensuremath{\hat{e}}\xspace}
 \newcommand{\xhat}{\ensuremath{\hat{x}}\xspace}
 \newcommand{\yhat}{\ensuremath{\hat{y}}\xspace}
@@ -97,23 +97,23 @@
 \newcommand{\Yhat}{\ensuremath{\hat{Y}}\xspace}
 \newcommand{\Zhat}{\ensuremath{\hat{Z}}\xspace}
 
-% Spherical unit vectors. 
+% Spherical unit vectors.
 \newcommand{\rhat}{\ensuremath{\hat{r}}\xspace}
 \newcommand{\qhat}{\ensuremath{\hat{\theta}}\xspace}
 \newcommand{\fhat}{\ensuremath{\hat{\phi}}\xspace}
 
-% Use underlines for vectors and tensors. 
+% Use underlines for vectors and tensors.
 \renewcommand{\vec}[1]{\ensuremath{\underline{#1}}}
 \newcommand{\tensor}[1]{\ensuremath{\underline{\underline{#1}}}}
 
-% Differential operators. 
+% Differential operators.
 \newcommand{\dd}[1]{\ensuremath{ \frac{\partial}{\partial #1} }\xspace}
 \newcommand{\ddt}{\dd{t}\xspace}
 \newcommand{\curl}[1]{\ensuremath{ \nabla \times \vec{#1} }\xspace}
 \renewcommand{\div}[1]{\ensuremath{ \nabla \cdot \vec{#1} }\xspace}
 \newcommand{\grad}[1]{\ensuremath{ \nabla #1 }\xspace}
 
-% Properly-scaled parentheses for grouping terms or for arguments. 
+% Properly-scaled parentheses for grouping terms or for arguments.
 \newcommand{\lr}[1]{ \left( #1 \right) }
 \newcommand{\lrsmall}[1]{ \left( {\scriptstyle #1} \right) }
 \renewcommand{\arg}[1]{\!\lr{#1}}
@@ -135,38 +135,38 @@
 \newcommand{\dr}{\ensuremath{\delta \hspace{-0.1em} r}\xspace}
 \newcommand{\dL}{\ensuremath{\delta \hspace{-0.1em} L}\xspace}
 
-% Assignment operator for pseudocode. 
+% Assignment operator for pseudocode.
 \newcommand{\assign}{\ensuremath{\leftarrow}\xspace}
 
-% Azimuthal modenumber, typically indicated with a lowercase m. 
+% Azimuthal modenumber, typically indicated with a lowercase m.
 \newcommand{\azm}{\ensuremath{m}\xspace}
 
-% Electron mass, also typically indicated with a lowercase m. 
+% Electron mass, also typically indicated with a lowercase m.
 \newcommand{\me}{\ensuremath{m_{e}}\xspace}
 
-% Jacobian dererminant, typically indicated with a capital J, which we are using for current. 
+% Jacobian dererminant, typically indicated with a capital J, which we are using for current.
 \newcommand{\jac}{\ensuremath{ \sqrt{g} }\xspace}
 
 % Plasma frequency
 \newcommand{\op}{\ensuremath{\omega_P}\xspace}
 
-% Alfven speed. 
+% Alfven speed.
 \newcommand{\va}{\ensuremath{v_A}\xspace}
 
-% Perpendicular electric constant. 
+% Perpendicular electric constant.
 \newcommand{\ep}{\ensuremath{\epsilon_\bot}\xspace}
 
-% Epsilon zero, mu zero, and one over mu zero. 
+% Epsilon zero, mu zero, and one over mu zero.
 \newcommand{\ez}{\ensuremath{\epsilon_0}\xspace}
 \newcommand{\mz}{\ensuremath{\mu_0}\xspace}
 \newcommand{\oomz}{\ensuremath{ \frac{1}{\mz} }\xspace}
 
-% Conductivities. 
+% Conductivities.
 \newcommand{\sz}{\ensuremath{\sigma_0}\xspace}
 \newcommand{\sh}{\ensuremath{\sigma_H}\xspace}
 \renewcommand{\sp}{\ensuremath{\sigma_P}\xspace}
 
-% Speed of light. 
+% Speed of light.
 \newcommand{\C}{{\mathrm{c}}}
 
 % Add space between rows of tables
@@ -221,7 +221,7 @@ ground signatures. Numerical results are supplemented by a survey of
 such survey to characterize each event by both polarization and
 harmonic. The combination of numerical and observational results
 suggests an explanation for the disparate distributions observed in
-poloidal and toroidal Pc4 events. 
+poloidal and toroidal Pc4 events.
 
 \end{abstract}
 
@@ -233,50 +233,51 @@ poloidal and toroidal Pc4 events.
 
 \section{Introduction}
 
-Pc4s are interesting. 
+Pc4s are interesting.
 
 \begin{itemize}
-    \item Drift-resonant interactions with trapped energetic particles. 
-    \item Radial diffusion. 
-    \item Giant pulsations are mysterious and exciting. 
+    \item Drift-resonant interactions with trapped energetic particles.
+    \item Radial diffusion.
+    \item Giant pulsations are mysterious and exciting.
 \end{itemize}
 
-Pc4s can be classified in terms of their harmonic numbers. 
+Pc4s can be classified in terms of their harmonic numbers.
 
 \begin{itemize}
-    \item First harmonic is for drift resonance. 
-    \item Second harmonic is for drift-bounce resonance. 
-    \item You can sorta tell them apart by frequency, but there are disagreements. Mostly you need two observations -- satellite plus ground, or E and B on the same machine, like the Van Allen Probes. 
+    \item First harmonic is for drift resonance; second harmonic is for drift-bounce resonance\cite{dai_2013,poulter_1983}.
+    \item You can sorta tell them apart by frequency, but there are disagreements\cite{takahashi_2013}. Mostly you need two observations -- satellite plus ground, or E and B on the same machine\cite{dai_2015}, like THEMIS\cite{angelopoulos_2008} or the Van Allen Probes\cite{stratton_2012}.
 \end{itemize}
 
-They can also be classified in terms of their azimuthal modenumber. 
+They can also be classified in terms of their azimuthal modenumber.
 
 \begin{itemize}
-    \item One wavelength of a wave with modenumber \azm spans $\frac{24}{\azm}$ hours in MLT. 
-    \item Small \azm typically driven by broadband solar wind behavior. The waves are compressional -- they can move across magnetic field lines. 
-    \item Large \azm is driven by resonant interactions with trapped particles -- the waves are not compressional, so propagation is evanescent across field lines. 
-    \item Ground observations depend on \azm. At large \azm, a wave's ground signature is attenuated by the ionosphere. 
+    \item One wavelength of a wave with modenumber \azm spans $\frac{24}{\azm}$ hours in MLT.
+    \item Small \azm typically driven by broadband solar wind behavior\cite{degeling_2014,hao_2014,zong_2009,chen_1974,liu_2011,southwood_1974}. The waves are compressional -- they can move across magnetic field lines.
+    \item Large \azm is driven by resonant interactions with trapped particles -- the waves are not compressional, so propagation is evanescent across field lines\cite{cummings_1969,radoski_1974}.
+    \item Ground observations depend on \azm. At large \azm, a wave's ground signature is attenuated by the ionosphere\cite{hughes_1976,wright_1999,yeoman_2001}.
 \end{itemize}
 
-They can also be classified in terms of their polarization. 
+They can also be classified in terms of their polarization.
 
 \begin{itemize}
-    \item Poloidal waves pulse. Magnetic field lines perturb radially. Associated azimuthal electric field perturbations. 
-    \item Toroidal waves twist. Magnetic field lines perturb azimuthally. Associated radial electric field perturbations. 
-    \item Poloidal waves rotate asymptotically to the toroidal mode, per \cite{mann_1995}. High-\azm poloidal waves have shorter lifetimes. 
-    \item Most observed waves are toroidal. 
-    \item Most poloidal waves are even modes. 
+    \item Poloidal waves pulse. Magnetic field lines perturb radially. Associated azimuthal electric field perturbations.
+    \item Toroidal waves twist. Magnetic field lines perturb azimuthally. Associated radial electric field perturbations.
+    \item Poloidal waves rotate asymptotically to the toroidal mode. High-\azm poloidal waves have shorter lifetimes\cite{mann_1995,mann_1997,radoski_1974}.
+    \item Most observed waves are toroidal\cite{anderson_1990}.
+    \item Most poloidal waves are even modes\cite{hughes_1978,singer_1982,takahashi_1990}.
     \item Toroidal frequencies are sharply defined in L. Poloidal show a more smeared-out dependence. \cite{engebretson_1986}
-    \item In this regime, wave polarization is rotated about \SI{90}{\degree} by the ionosphere\cite{}. An east-west magnetic perturbation in space is observed as a north-south perturbation at Earth's surface. 
+    \item In this regime, wave polarization is rotated about \SI{90}{\degree} by the ionosphere\cite{nishida_1964_screening}. An east-west magnetic perturbation in space is observed as a north-south perturbation at Earth's surface.
 \end{itemize}
 
-Let's also talk about giant pulsations. 
+Let's also talk about giant pulsations.
 
 \begin{itemize}
-    \item Strong, well-formed ground signatures. Tabulated by eye for a century. 
-    \item Odd poloidal Pc4s, peaked from postmidnight to the early morning. 
-    \item A distinct break from mostly-toroidal, mostly-dayside Pc4s in general. 
-    \item Chirality flips based on latitude, even within a single event. 
+    \item Strong, well-formed ground signatures. Tabulated by eye for a century\cite{birkeland_1901}.
+    \item Harmonic structure was a point of contention for decades, but recent multisatellite observations seem to be in agreement that they are odd harmonics, probably fundamental\cite{glassmeier_1999,hillebrand_1982,kokubun_1989,takahashi_2011}.
+    \item Poloidal Pc4s, peaked from postmidnight to the early morning\cite{chisham_1991,glassmeier_1980,rostoker_1979}.
+    \item A distinct break from mostly-toroidal, mostly-dayside Pc4s in general.
+    \item Most common during times of low solar activity\cite{brekke_1987}.
+    \item Chirality flips based on latitude, even within a single event\cite{harang_1941}.
 \end{itemize}
 
 Past models of the magnetosphere have been limited in their
@@ -284,7 +285,7 @@ consideration of FLRs. Reasons include overly-simplified treatment of
 the ionospheric boundary, no consideration of the plasmapause, limited
 range in \azm, and the inability to compute ground signatures. The
 present work showcases a model which addresses these issues, providing a
-bird’s-eye view of the structure and evolution of FLRs. 
+bird’s-eye view of the structure and evolution of FLRs.
 
 Using this model, the present work explores novel connections between
 several of the seemingly-disparate Pc4 properties listed above.
@@ -294,7 +295,7 @@ observations are considered. The strength and structure of ground
 signatures is investigated as function of ionospheric and driving
 conditions. And the distinctive properties associated with giant
 pulsations are matched against those of fundamental poloidal Pc4s in
-general. 
+general.
 
 Results are then validated against a survey of \about700 Pc4
 observations using data collected by the Van Allen probes. In contrast
@@ -303,7 +304,7 @@ to other ULF wave surveys (for example, \cite{dai_2015} and
 polarization and harmonic. This crucial aspect of the analysis is
 possible only because the Van Allen Probes measure both electric and
 magnetic field waveforms. No past mission has provided access to such a
-rich data set for ULF wave events in the inner magnetosphere. 
+rich data set for ULF wave events in the inner magnetosphere.
 
 % ######################################################################
 % ################################################################ Model
@@ -318,7 +319,7 @@ code based on that described in \cite{lysak_2013}. Tuna models the
 evolution of three-dimensional electric and magnetic fields over a
 (two-dimensional) meridional slice of the magnetosphere. The code can
 colloquially be said to have two and a half (``tuna half'') dimensions,
-hence the name. 
+hence the name.
 
 For the purpose of evaluating derivatives in the azimuthal direction,
 fields are taken to vary as $\exp \arg{i \azm \phi}$ for fixed azimuthal
@@ -326,7 +327,7 @@ modenumber \azm. Azimuthal derivatives are replaced by a factor of
 $i \azm$; fields are complex-valued as a result. This assumption is
 easily justified in the case of Pc4 pulsations, which are typically
 localized in MLT, per
-\cite{anderson_1990,dai_2015,engebretson_1992,liu_2009}. 
+\cite{anderson_1990,dai_2015,engebretson_1992,liu_2009}.
 
 % ======================================================================
 % ========================================== Physical Parameter Profiles
@@ -344,7 +345,7 @@ magnetic field line and $\va$ in the perpendicular direction, where the
     \label{def_va}
     \va^2 &\equiv \frac{B^2}{\rho} &
     & \text{or, equally,} &
-    \va^2 &\equiv \frac{1}{\mz\ep} 
+    \va^2 &\equiv \frac{1}{\mz\ep}
 \end{align}
 
 \todo{Figure of conductivity profiles? Dissertation figure 5.3}
@@ -358,7 +359,7 @@ ionosphere, falling off as $\frac{1}{r}$) and a latitude-dependent one
 
 Four different physical parameter profiles are used for conductivity and
 \Alfven speed, corresponding to dayside and nightside conditions at the
-top and bottom of the solar cycle. 
+top and bottom of the solar cycle.
 
 % ======================================================================
 % ============================================ Nonorthogonal Dipole Grid
@@ -368,14 +369,14 @@ Tuna's grid follows the modified dipole coordinates described in
 \cite{lysak_2004}:
 \begin{align}
   \label{def_coords}
-  \lysakx & = - \frac{R}{r} \sin^2 \theta & 
+  \lysakx & = - \frac{R}{r} \sin^2 \theta &
   \lysaky & = \phi &
   \lysakz & = \frac{R^2}{r^2} \frac{\cos \theta}{\cos \theta_0}
 \end{align}
 
 Here, $R$ is the geocentric radius of the ionospheric boundary, taken to
 be at $R_E + \SI{100}{\km}$, $\theta_0$ is the invariant colatitude, and
-$r$, $\theta$, and $\phi$ are the usual spherical coordinates. 
+$r$, $\theta$, and $\phi$ are the usual spherical coordinates.
 
 \todo{Figure of the grid? Dissertation figure 5.1}
 
@@ -386,11 +387,11 @@ coordinates are nonorthogonal, and thus have covariant and contravariant
 basis vectors (${\ehat_i \equiv \dd{\lysaki}\vec{r}}$ and
 ${\ehat^i \equiv \dd{\vec{r}}\lysaki}$ respectively) that do not line up
 with one another --- but that both the covariant and contravariant bases
-are valuable. 
+are valuable.
 
 The basis vectors $\ehat^1$, $\ehat^2$, and $\ehat_3$ provide a mapping
 to the usual dipole coordinates, as shown in \cref{to_dipole}, which is
-the natural basis for the conductivity and electric tensors. 
+the natural basis for the conductivity and electric tensors.
 \begin{align}
     \label{to_dipole}
     \ehat^1 &\parallel \xhat &
@@ -400,7 +401,7 @@ the natural basis for the conductivity and electric tensors.
 
 Where $\zhat$ lies along the magnetic field, $\yhat$ is azimuthally
 eastward, and $\xhat \equiv \yhat \times \zhat$ points radially outward
-at the equator. 
+at the equator.
 
 In addition, at the ionospheric boundary, $\ehat_1$, $\ehat_2$, and
 $\ehat^3$ map to the spherical basis:
@@ -412,9 +413,9 @@ $\ehat^3$ map to the spherical basis:
 
 As a result, Tuna's grid is aligned everywhere to the zeroth-order
 dipole magnetic field, while also supporting a fixed-altitude
-ionospheric boundary. 
+ionospheric boundary.
 
-The results shown in the present work use a grid of 150 values in 
+The results shown in the present work use a grid of 150 values in
 \lysakx (150 field lines) and 350 values in \lysakz (350 grid points per
 field line). Spacing is on the order of \SI{10}{\km} near the ionosphere
 and \SI{1000}{\km} at the equator of the outermost field line. The inner
@@ -433,26 +434,26 @@ typically taken as a proxy for solar wind activity. However, the shear
 and compressional \Alfven modes decouple at high \azm, preventing such
 waves from propagating across magnetic field lines. In order to model
 noncompressional Pc4 activity at $L\about5$, it's necessary to inject
-energy at $L\about5$. 
+energy at $L\about5$.
 
 To this end, Tuna also allows simulations to be driven via modulation of
 the ring current, a stand-in for substorm injection events. The driving
 current is spread over a cross section of \about\SI{1}{\RE}$^2$,
 centered just outside the plasmapause and just off the equator. In
-effect, the energy is delivered into a first-harmonic poloidal wave. 
+effect, the energy is delivered into a first-harmonic poloidal wave.
 
 The magnitude of the driving current is estimated from a discrete
 Fourier transform of the Sym-H storm index during the June 2013 storm.
 Sym-H is tabulated once per minute, which is too slow to capture
 activity in the Pc4 band directly. However, a fit of the pink noise
 suggests that activity in the Pc4 range could plausibly give rise to a
-field at Earth's surface on the order of \SI{e-2}{\nT}. 
+field at Earth's surface on the order of \SI{e-2}{\nT}.
 
 This corresponds to a ring current perturbation on the order of
 \SI{1}{\mega\A}, or \about\SI{e-4}{\uA/\m\squared} spread over
 \about\SI{1}{\RE}$^2$. For the runs shown in the present work, the
 driving current is azimuthally directed, and its magnitude varies
-sinusoidally. 
+sinusoidally.
 
 % ======================================================================
 % ================================================== Maxwell's Equations
@@ -502,7 +503,7 @@ and toroidal modes, consistent with \cite{hughes_1974}. Terms
 proportional to $\exp \arg{ - \frac{\sz}{\ez}\dt }$ are also present.
 However, $\frac{\sz}{\ez}\dt \gtrsim 1000$, so these terms are
 vanishingly small. As a result, parallel electric fields are taken to be
-uniformly zero. 
+uniformly zero.
 
 Magnetic fields are simply advanced using Faraday's law:
 \begin{align}
@@ -512,7 +513,7 @@ Magnetic fields are simply advanced using Faraday's law:
 
 For the sake of brevity, the present work does not expand the terms of
 \cref{amp_final,far_law} in the covariant basis. Those expressions can
-be found in \cite{mceachern_2016}. 
+be found in \cite{mceachern_2016}.
 
 % ======================================================================
 % ================================================== Boundary Conditions
@@ -520,7 +521,7 @@ be found in \cite{mceachern_2016}.
 
 Dirichlet and Neumann conditions are applied to the electric and
 magnetic fields respectively at the inner and outer boundaries. Results
-of the present work are robust under an exchange of the two. 
+of the present work are robust under an exchange of the two.
 
 Between the top of the neutral atmosphere and the bottom of the
 ionosphere, the model includes a thin, horizontal current sheet
@@ -541,7 +542,7 @@ potential, $\Psi$, such that $\vec{B}=\grad{\Psi}$. The neutral
 atmosphere is taken to be a perfect insulator, giving $\curl{B}=0$.
 Combined with $\div{B}=0$ (per Maxwell's equations), this ensures that
 $\Psi$ satisfies Laplace's equation, $\nabla^2 \Psi = 0$, and thus can
-be written as a sum of harmonics. 
+be written as a sum of harmonics.
 \begin{align}
   \label{psi_expansion}
   \Psi &= \displaystyle\sum_\ell \lr{ a_\ell \, r^\ell +
@@ -564,12 +565,12 @@ respectively:
   \end{split}
 \end{align}
 
-Where $\lambda \equiv \frac{R_E}{R_I} \sim \num{0.975}$ and $B_r \cdot Y_\ell^{-1} \equiv \displaystyle\sum_i B_r [i] \; Y_\ell^{-1} \! [i]$. 
+Where $\lambda \equiv \frac{R_E}{R_I} \sim \num{0.975}$ and $B_r \cdot Y_\ell^{-1} \equiv \displaystyle\sum_i B_r [i] \; Y_\ell^{-1} \! [i]$.
 
 Whereas magnetic field values at the top of the atmosphere are used to
 compute boundary electric field values, those at the bottom of the
 atmosphere are purely output, suitable for comparison with magnetometer
-data. 
+data.
 
 % ######################################################################
 % #################################################### Numerical Results
@@ -580,9 +581,9 @@ data.
 See \cref{fig_brms}
 
 \begin{itemize}
-    \item At low \azm, all components of the magnetic field are comparable in magnitude. 
-    \item At high \azm, the compressional component weakens. 
-    \item Toroidal activity is sharply concentrated at resonant $L$. 
+    \item At low \azm, all components of the magnetic field are comparable in magnitude.
+    \item At high \azm, the compressional component weakens.
+    \item Toroidal activity is sharply concentrated at resonant $L$.
     \item Poloidal activity is spread out in $L$. At high \azm, it just can't spread very far.
 \end{itemize}
 
@@ -590,43 +591,43 @@ See \cref{fig_energy}
 
 \begin{itemize}
     \item This figure mimics Figure 3 in \cite{mann_1995}
-    \item All driving is poloidal. That any energy is in the toroidal mode shows rotation. 
-    \item The rotation seems to be one-way, as Mann suggested. High-\azm waves rotate slower, also consistent with Mann. 
-    \item Note that Mann used perfectly conducting ionospheres. 
-    \item On the nightside, dissipation is as fast as rotation. There is no accumulation of energy over multiple drive periods. 
-    \item Poloidal mode looks to be a significant source of (same-harmonic) toroidal waves on the dayside. On the nightside, energy dissipates too fast to rotate to the toroidal mode. 
+    \item All driving is poloidal. That any energy is in the toroidal mode shows rotation.
+    \item The rotation seems to be one-way, as Mann suggested. High-\azm waves rotate slower, also consistent with Mann.
+    \item Note that Mann used perfectly conducting ionospheres.
+    \item On the nightside, dissipation is as fast as rotation. There is no accumulation of energy over multiple drive periods.
+    \item Poloidal mode looks to be a significant source of (same-harmonic) toroidal waves on the dayside. On the nightside, energy dissipates too fast to rotate to the toroidal mode.
 \end{itemize}
 
 See \cref{fig_layers_day}
 
 \begin{itemize}
     \item At low \azm, energy moves freely across field lines, even escaping the simulation domain. This makes it difficult to build up a string toroidal resonance in any particular place.
-    \item That clump at the top is probably nonphysical -- a third harmonic very close to the simulation boundary. 
-    \item As \azm increases, energy is less able to cross field lines. Maximum \azm, where the poloidal mode deposits all its energy on the same field line, is where the toroidal mode is strongest. 
-    \item (Would require an additional plot to show) If the drive frequency does not line up with the local eigenfrequency at high \azm, energy can't move across field lines to find a better match. Instead, the resonance is just weaker. 
+    \item That clump at the top is probably nonphysical -- a third harmonic very close to the simulation boundary.
+    \item As \azm increases, energy is less able to cross field lines. Maximum \azm, where the poloidal mode deposits all its energy on the same field line, is where the toroidal mode is strongest.
+    \item (Would require an additional plot to show) If the drive frequency does not line up with the local eigenfrequency at high \azm, energy can't move across field lines to find a better match. Instead, the resonance is just weaker.
 \end{itemize}
 
 See \cref{fig_layers_night}
 
 \begin{itemize}
-    \item At low \azm, as on the dayside, energy moves freely across field lines and even escapes. 
-    \item At high \azm, poloidal-to-toroidal rotation is slow compared to dissipation timescales. This is not the case on the dayside. 
-    \item As a result, the strongest nightside toroidal activity is at moderate \azm -- but overall the poloidal mode is a worse toroidal source on the nightside than it is on the dayside. 
+    \item At low \azm, as on the dayside, energy moves freely across field lines and even escapes.
+    \item At high \azm, poloidal-to-toroidal rotation is slow compared to dissipation timescales. This is not the case on the dayside.
+    \item As a result, the strongest nightside toroidal activity is at moderate \azm -- but overall the poloidal mode is a worse toroidal source on the nightside than it is on the dayside.
 \end{itemize}
 
-See \cref{fig_ground}
+See \cref{fig_ground_day,fig_ground_night}
 
 \begin{itemize}
-    \item At low \azm, ground signatures are weak because waves in space are weak. 
-    \item At high \azm, ground signatures are weak due to attenuation by the atmosphere. 
-    \item Ground signatures seem to be strongest at \azm of 16 to 32. 
-    \item Observers on the top and bottom halves of the event will see opposite chiralities. This is clearest on the nightside events. 
-    \item The strongest peaks are in $B_\phi$, which corresponds to the poloidal mode. 
-    \item These properties match the usual description of a giant pulsation. 
+    \item At low \azm, ground signatures are weak because waves in space are weak.
+    \item At high \azm, ground signatures are weak due to attenuation by the atmosphere.
+    \item Ground signatures seem to be strongest at \azm of 16 to 32.
+    \item Observers on the top and bottom halves of the event will see opposite chiralities. This is clearest on the nightside events.
+    \item The strongest peaks are in $B_\phi$, which corresponds to the poloidal mode.
+    \item These properties match the usual description of a giant pulsation.
 \end{itemize}
 
 The findings together suggest that the morphology of giant
-pulsations reveals relatively little about their origins. 
+pulsations reveals relatively little about their origins.
 
 One can consider a hypothetical magnetosphere subject to constant
 driving: broadband in frequency, broadband in modenumber, just outside
@@ -640,11 +641,11 @@ modenumbers will be attenuated by the ionosphere. The response on the
 ground will be counterclockwise at low latitude, clockwise at high
 latitude, peaked at modenumbers of 16 to 32, and mostly east-west
 polarized. In other words, the measurements will look very much like a
-giant pulsation. 
+giant pulsation.
 
 The present results offer no explanation as to the tendency of giant
 pulsations to drift azimuthally, or to appear pre-dawn in MLT --- though
-the latter is addressed by the observational results in below. 
+the latter is addressed by the observational results in below.
 
 % ######################################################################
 % ##################################################### Van Allen Probes
@@ -669,13 +670,13 @@ past surveys. Toroidal events dominate overall, and are primarily seen
 on the morning side. Poloidal events are spread broadly in MLT, with a
 peak near noon and distinctive odd harmonics in the early morning. From
 there, the simultaneous consideration of harmonic and polarization,
-combined with the numerical results above, offers significant insight. 
+combined with the numerical results above, offers significant insight.
 
 The near-noon peak of poloidal Pc4 events is shown to be due to even
 events (a majority subset). Odd poloidal events occur preferrentially
 near midnight and across the morning side. Similarly, toroidal events
 are mostly odd, and it is specifically the odd toroidal events which
-occur on the morningside, while even toroidal events peak near noon. 
+occur on the morningside, while even toroidal events peak near noon.
 
 The spatial distribution of even poloidal events looks much like the
 spatial distribution of even toroidal events, except that the toroidal
@@ -683,18 +684,18 @@ distribution is skewed dayward compared to the poloidal. The same can be
 said of the odd events. This is consistent (per the above numerical
 results) with poloidal events as an effective source for (same-parity)
 toroidal events on the dayside, and a less-effective source on the
-nightside. 
+nightside.
 
 As a corrolary, the distribution of odd poloidal events is found to
 closely resemble the distribution of giant pulsations: midnight and
 morning. This (consistent with the numerical results) suggests that the
 distinctive properties attributed to giant pulsations are in fact shared
-by odd poloidal Pc4s overall. 
+by odd poloidal Pc4s overall.
 
 Curiously, odd toroidal events are found to occur at a higher rate than
 even ones, while the opposite is true for poloidal events. This
 disparity may offer clues to the source of these waves, or hint at a
-harmonic dependence in the rate of poloidal-to-toroidal rotation. 
+harmonic dependence in the rate of poloidal-to-toroidal rotation.
 
 %\todo{Do we want to get into event phase?}
 
@@ -704,7 +705,7 @@ harmonic dependence in the rate of poloidal-to-toroidal rotation.
 %component. Odd events are found to be spread more broadly in phase; this
 %is likely a consequence of being measured near the equator, where (due
 %to the electric field antinode) the lifetime of an odd event is
-%significantly larger than that of an even event with the same phase. 
+%significantly larger than that of an even event with the same phase.
 
 % ######################################################################
 % ########################################################### Discussion
@@ -732,7 +733,7 @@ harmonic dependence in the rate of poloidal-to-toroidal rotation.
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_brms.pdf}
     \caption{
-        Each cell in the above figure shows root-mean-square magnetic field perturbations over the course of a \SI{300}{\s} run. The four columns show four different runs, with azimuthal modenumbers 1, 4, 16, and 64 respectively. The rows show poloidal, toroidal, and compressional magnetic field components. At low \azm, compressional activity is apparent by the fact that all three components of the magnetic perturbation are comparable in magnitude; as \azm increases, compressional activity diminishes. Poloidal waves are spread broadly in $L$ at low \azm, becoming guided only as large \azm prevents energy from moving across field lines. In contrast, toroidal waves are sharply defined in $L$ regardless of \azm. 
+        Each cell in the above figure shows root-mean-square magnetic field perturbations over the course of a \SI{300}{\s} run. The four columns show four different runs, with azimuthal modenumbers 1, 4, 16, and 64 respectively. The rows show poloidal, toroidal, and compressional magnetic field components. At low \azm, compressional activity is apparent by the fact that all three components of the magnetic perturbation are comparable in magnitude; as \azm increases, compressional activity diminishes. Poloidal waves are spread broadly in $L$ at low \azm, becoming guided only as large \azm prevents energy from moving across field lines. In contrast, toroidal waves are sharply defined in $L$ regardless of \azm.
     }
     \end{center}
 \end{figure}
@@ -744,7 +745,7 @@ harmonic dependence in the rate of poloidal-to-toroidal rotation.
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_energy.pdf}
     \caption{
-        Each cell above shows integrated poloidal (blue) and toroidal (red) energy as a function of time for a single run. The top row shows runs using a dayside ionospheric profile (driven at \SI{22}{\mHz}), and the bottom row nightside (driven at \SI{16}{\mHz}). Driving is purely poloidal, and energy rotates over time to the toroidal mode. On the dayside, it's clear that energy rotates faster when \azm is smaller, consistent with the findings of \cite{mann_1995}. On the nightside, the dissipation timescale is comparable to the rotation timescale, so there is no long-term accumulation of energy in either mode. 
+        Each cell above shows integrated poloidal (blue) and toroidal (red) energy as a function of time for a single run. The top row shows runs using a dayside ionospheric profile (driven at \SI{22}{\mHz}), and the bottom row nightside (driven at \SI{16}{\mHz}). Driving is purely poloidal, and energy rotates over time to the toroidal mode. On the dayside, it's clear that energy rotates faster when \azm is smaller, consistent with the findings of \cite{mann_1995}. On the nightside, the dissipation timescale is comparable to the rotation timescale, so there is no long-term accumulation of energy in either mode.
     }
     \end{center}
 \end{figure}
@@ -756,7 +757,7 @@ harmonic dependence in the rate of poloidal-to-toroidal rotation.
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_layers_day.pdf}
     \caption{
-        Above are the same runs shown in the top row of \cref{fig_energy}; the runs are the same except that \azm increases to the right. Rather than show the energy integrated over the whole simulation domain, the above figure shows energy density, with time on the horizontal axis and $L$ on the vertical axis. The top and bottom rows show poloidal and toroidal energy distributions respectively. Toroidal activity is shown to be sharply concentrated at resonant $L$ shells; it's strongest at high \azm because that's where energy rotates most effectively from the poloidal mode. Poloidal waves are spread broadly in $L$. At low \azm, some energy escapes the simulation domain entirely. Poloidal waves appear sharp only when high \azm prevents energy from spreading. 
+        Above are the same runs shown in the top row of \cref{fig_energy}; the runs are the same except that \azm increases to the right. Rather than show the energy integrated over the whole simulation domain, the above figure shows energy density, with time on the horizontal axis and $L$ on the vertical axis. The top and bottom rows show poloidal and toroidal energy distributions respectively. Toroidal activity is shown to be sharply concentrated at resonant $L$ shells; it's strongest at high \azm because that's where energy rotates most effectively from the poloidal mode. Poloidal waves are spread broadly in $L$. At low \azm, some energy escapes the simulation domain entirely. Poloidal waves appear sharp only when high \azm prevents energy from spreading.
     }
     \end{center}
 \end{figure}
@@ -768,7 +769,7 @@ harmonic dependence in the rate of poloidal-to-toroidal rotation.
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_layers_night.pdf}
     \caption{
-        The above figure is analogous to \cref{fig_layers_night}, except that it shows runs carried out using a nightside ionospheric profile instead of dayside. Four runs are shown, each at a different \azm, and the rows show poloidal and toroidal energy density as a function of $L$ and time. In a general sense, the behavior matches that seen on the dayside: poloidal activity is broad in $L$ while toroidal waves appear only where resonant. The difference is in the wave magnitude. With dayside and nightside driving at the same magnitude, the response on the nightside is smaller by an order of magnitude due to the increased Joule dissipation. 
+        The above figure is analogous to \cref{fig_layers_night}, except that it shows runs carried out using a nightside ionospheric profile instead of dayside. Four runs are shown, each at a different \azm, and the rows show poloidal and toroidal energy density as a function of $L$ and time. In a general sense, the behavior matches that seen on the dayside: poloidal activity is broad in $L$ while toroidal waves appear only where resonant. The difference is in the wave magnitude. With dayside and nightside driving at the same magnitude, the response on the nightside is smaller by an order of magnitude due to the increased Joule dissipation.
     }
     \end{center}
 \end{figure}
@@ -780,7 +781,7 @@ harmonic dependence in the rate of poloidal-to-toroidal rotation.
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_ground_day.pdf}
     \caption{
-        The magnetic ground signatures are shown for the same runs as in previous figures. Ground signatures at low \azm are weak because the waves in space are weak. Ground signatures at high \azm are attenuated before reaching ground magnetometers. The two effects combine to create a maximum at \azm\about16. The maximum ground signatures consistently appear in the east-west magnetic field component, corresponding to the poloidal mode. Careful examination shows furthermore that the events are clockwise to an observer above \about\SI{65}{\degree} and counterclockwise to an observer below. All of these properties are commonly ascribed to giant pulsations. 
+        The magnetic ground signatures are shown for the same runs as in previous figures. Ground signatures at low \azm are weak because the waves in space are weak. Ground signatures at high \azm are attenuated before reaching ground magnetometers. The two effects combine to create a maximum at \azm\about16. The maximum ground signatures consistently appear in the east-west magnetic field component, corresponding to the poloidal mode. Careful examination shows furthermore that the events are clockwise to an observer above \about\SI{65}{\degree} and counterclockwise to an observer below. All of these properties are commonly ascribed to giant pulsations.
     }
     \end{center}
 \end{figure}
@@ -792,7 +793,7 @@ harmonic dependence in the rate of poloidal-to-toroidal rotation.
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_ground_night.pdf}
     \caption{
-        Above are the ground signatures for the four nightside runs. As on the dayside, shown in \cref{fig_ground_day}, magnetic fields at Earth's surface are strongest when \azm\about16, and peak signals correspond to the poloidal mode. Compared to the dayside, ground signatures on the nightside are weaker, and the chirality shift (clockwise to the north and counterclockwise to the south) is much clearer. 
+        Above are the ground signatures for the four nightside runs. As on the dayside, shown in \cref{fig_ground_day}, magnetic fields at Earth's surface are strongest when \azm\about16, and peak signals correspond to the poloidal mode. Compared to the dayside, ground signatures on the nightside are weaker, and the chirality shift (clockwise to the north and counterclockwise to the south) is much clearer.
     }
     \end{center}
 \end{figure}
@@ -804,7 +805,7 @@ harmonic dependence in the rate of poloidal-to-toroidal rotation.
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_pos.pdf}
     \caption{
-        The above figure shows the distribution of data collected by the Van Allen Probes for which 3D electric and magnetic fields are available. (When the probe's axis aligns too closely with the magnetic field, the 3D electric field cannot be determined reliably.) Coverage is lopsided because the probes had completed one and a half precessions around Earth; that is, the nightside is double-sampled at apogee. Coverage is good outside $L\about4$; note that each day of sampling is broken down into 48 half-hour events. 
+        The above figure shows the distribution of data collected by the Van Allen Probes for which 3D electric and magnetic fields are available. (When the probe's axis aligns too closely with the magnetic field, the 3D electric field cannot be determined reliably.) Coverage is lopsided because the probes had completed one and a half precessions around Earth; that is, the nightside is double-sampled at apogee. Coverage is good outside $L\about4$; note that each day of sampling is broken down into 48 half-hour events.
     }
     \end{center}
 \end{figure}
@@ -866,5 +867,3 @@ harmonic dependence in the rate of poloidal-to-toroidal rotation.
 \end{document}
 
 %\clearpage
-
-
