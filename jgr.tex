@@ -512,34 +512,15 @@ Poynting flux along the field is computed from the electric and magnetic field t
 
 An example event, showing electric and magnetic field measurements as well as real and imaginary Poynting flux spectra, is shown in \cref{fig_event}.
 
-The poloidal and toroidal channels are independently checked for Pc4 waves. For each channel, a Gaussian profile is fit to the magnitude of the Poynting flux, $|\dft{S}\arg{\omega}|$. If the fit fails to converge, or if the peak of the Gaussian does not fall within \SI{5}{\mHz} of the peak value of \dft{S}, the event is discarded. Events are also discarded if their frequencies fall outside the Pc4 frequency range (\SIrange{7}{25}{\mHz}) or if their amplitudes fall below \SI{0.01}{\mW/\m\squared} (out of consideration for instrument sensitivity).
+The poloidal and toroidal channels are independently checked for Pc4 waves. For each channel, a Gaussian profile is fit to the magnitude of the Poynting flux, $|\dft{S}\arg{\omega}|$. If the fit fails to converge, or if the peak of the Gaussian does not fall within \SI{5}{\mHz} of the peak value of \dft{S}, the event is discarded. Events are also discarded if their frequencies fall outside the Pc4 frequency range (\SIrange{7}{25}{\mHz}) or if their amplitudes fall below \SI{0.01}{\mW/\m\squared} (out of consideration for instrument sensitivity). The magnitude threshold is set in Poynting flux instead of magnetic field (which is more typical) in an effort to reduce bias in event selection. When events are selected based on the magnitude of the wave magnetic field, odd waves become more difficult to detect, due to their magnetic field node at the equator\cite{dai_2015}.
 
-The magnitude threshold is set in Poynting flux instead of magnetic field (which is more typical) in an effort to reduce bias in event selection. When events are selected based on the magnitude of the wave magnetic field, odd waves become more difficult to detect, due to their magnetic field node at the equator. In fact, Dai et al mention explicitly in their 2015 survey that the magnetic field threshold is meant to preferrentially select even harmonics\cite{dai_2015}.
+Events are discarded if their parity is ambiguous. The electric field and the magnetic field must be coherent at a level of 0.9 or better, judged at the discrete Fourier transform point closest to the peak of the Gaussian fit. Any event within \SI{3}{\degree} of the magnetic equator is also not used. In order to distinguish an odd mode from an even mode, it's necessary to know whether the observation is made north or south of the equator.
 
-Events are discarded if their parity is ambiguous. The electric field and the magnetic field must be coherent at a level of 0.9 or better (judged at the discrete Fourier transform point closest to the peak of the Gaussian fit). Any event within \SI{3}{\degree} of the magnetic equator is also not used. In order to distinguish an odd mode from an even mode, it's necessary to know whether the observation is made north or south of the equator.
+A visual inspection of events shows that those with broad ``peaks'' in their spectra are typically bad fits of noisy or multiharmonic data. A threshold is set at a FWHM of \SI{3}{\mHz} (equally, a standard deviation of \SI{1.27}{\mHz}). Any event with a Gaussian fit broader than that is discarded.
 
-A visual inspection of events shows that those with broad ``peaks'' in their spectra are typically not peaked at all --- that are bad fits of noisy or multiharmonic data. A threshold is set at a FWHM of \SI{3}{\mHz} (equally, a standard deviation of \SI{1.27}{\mHz}). Any event with a Gaussian fit broader than that is discarded.
+\todo{This feels like a LOT of talk about event selection. }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\todo{Event selection! See \cref{fig_event}. }
-
-\todo{Reference figures here. Available data shown in \cref{fig_pos}. All events are shown in \cref{fig_all}. The events are broken up by mode in \cref{fig_mode}. }
-
-Coarsely speaking, event distributions are found to be consistent with past surveys. Toroidal events dominate overall, and are primarily seen on the morning side. Poloidal events are spread broadly in MLT, with a peak near noon and distinctive odd harmonics in the early morning. From there, the simultaneous consideration of harmonic and polarization, combined with the numerical results above, offers significant insight.
+Coarsely speaking, event distributions (shown in \cref{fig_all,fig_mode}) are found to be consistent with past surveys. Toroidal events dominate overall, and are primarily seen on the morning side. Poloidal events are spread broadly in MLT, with a peak near noon and distinctive odd harmonics in the early morning. From there, the simultaneous consideration of harmonic and polarization, combined with the numerical results above, offers significant insight.
 
 The near-noon peak of poloidal Pc4 events is shown to be due to even events (a majority subset). Odd poloidal events occur preferrentially near midnight and across the morning side. Toroidal events are mostly odd, and it is specifically the odd toroidal events which occur on the morningside, while even toroidal events peak near noon.
 
@@ -550,14 +531,6 @@ As a corrolary, the distribution of odd poloidal events is found to closely rese
 Curiously, odd toroidal events are found to occur at a higher rate than even ones, while the opposite is true for poloidal events. This disparity may offer clues to the source of these waves, or hint at a harmonic dependence in the rate of poloidal-to-toroidal rotation.
 
 \todo{Do we want to get into event phase?}
-
-%Event phase is also considered. Most events are shown to fall within
-%\SI{15}{\degree} of $\pm\SI{90}{\degree}$, indicating that the traveling
-%component of Pc4 pulsations is generally small compared to the standing
-%component. Odd events are found to be spread more broadly in phase; this
-%is likely a consequence of being measured near the equator, where (due
-%to the electric field antinode) the lifetime of an odd event is
-%significantly larger than that of an even event with the same phase.
 
 % ######################################################################
 % ########################################################### Discussion
@@ -584,7 +557,7 @@ Curiously, odd toroidal events are found to occur at a higher rate than even one
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_grid.pdf}
     \caption{
-        GRID
+        The model's nonorthogonal grid accommodates both a field-aligned geometry and a constant-height ionospheric boundary. Every fifth point is shown in each direction. The high concentration of grid points near Earth's equator is a consequence of the coordinate system, which converges at the equatorial ionosphere. Earth (not shown) is centered at the origin with unit radius.
     }
     \label{fig_grid}
     \end{center}
@@ -704,7 +677,7 @@ Curiously, odd toroidal events are found to occur at a higher rate than even one
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_all.pdf}
     \caption{
-        ...
+        The above figure shows the spatial distribution of all 708 observed Pc4 events. Counts are normalized by the amount of usable data in each bin. The value in the bottom-right corner is the mean of the rate in each bin, with the rate in each bin weighed by the area of that bin. Bins shown in white contain zero events.
     }
     \label{fig_all}
     \end{center}
@@ -716,7 +689,7 @@ Curiously, odd toroidal events are found to occur at a higher rate than even one
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_mode.pdf}
     \caption{
-        ...
+        The above figure shows the spatial distribution for the same 708 events shown in \cref{fig_all}, partitioned by polarization and parity. The selection criteria ensure that both properties are known for each event. Event counts are normalized by thetime spent by the amount of usable data in each bin. Counts shown in the bottom-left corners do not sum to 708 because some events trigger on both the poloidal channel and the toroidal channel.
     }
     \label{fig_mode}
     \end{center}
