@@ -520,58 +520,27 @@ Curiously, odd toroidal events are found to occur at a higher rate than even one
 
 \section{Discussion}
 
-\todo{The following is the dissertation Conclusion chapter...}
+\todo{The source code for Tuna is available at \texttt{https://github.com/UMN-Space-Physics}, as are the scripts used to download, process, and plot Van Allen Probes data.}
 
-Field line resonances in the Pc4 frequency range are known to exhibit a number of heretofore-unconnected properties. The present work discusses the development of Tuna, a numerical model created with Pc4s in mind. Using Tuna, Pc4s are modeled across varying frequencies, azimuthal modenumbers, and ionospheric conductivity profiles, suggesting novel connections between several properties. Numerical results are complemented by a survey of Pc4 events measured by the Van Allen Probes.
+The present work discusses the development of Tuna, a numerical model created with Pc4s in mind. Using Tuna, Pc4s are modeled across varying frequencies, azimuthal modenumbers, and ionospheric conductivity profiles, suggesting novel connections between several properties. Numerical results are complemented by a survey of Pc4 events measured by the Van Allen Probes.
 
-% -----------------------------------------------------------------------------
+Numerical work suggests that poloidal Pc4s rotate to the toroidal mode on timescales comparable to the oscillation period, suggesting poloidal waves as a significant source for toroidal waves. On the nightside, the dissipation timescale is comparable to the oscillation period as well, so much poloidal energy is lost before rotating to the toroidal mode.
 
-Tuna is a two and a half dimensional model --- it uses \maxeqs to simulate the evolution of three-dimensional \Alfven waves on a two-dimensional slice of the magnetosphere. Features include a nonorthogonal dipole geometry, a choice between several height-resolved ionospheric conductivity tensors, and a novel driving mechanism: ring current perturbation. Tuna has the capacity to simulate parallel currents and electric fields through the consideration of electron inertial effects, though those effects are disabled by default for the sake of stability. Tuna's source code and support scripts are publicly available at \texttt{https://github.com/UMN-Space-Physics}.
+Numerical results also suggest that the distinctive ground signatures attributed to giant pulsations may be features of odd poloidal Pc4s overall. Generic first harmonic poloidal waves are shown to exhibit peak ground signatures around ${\azm = 16}$, which are sharply peaked at auroral latitudes, and which occur preferrentially during times of quiet solar activity.
 
-Future development on Tuna could further parallelize the code using MPI; doing so could allow the electron inertial length to be properly resolved (which would in turn stabilize the electron inertial effects). Other potential improvements include dynamic ionospheric profiles, which become more conductive as energy is deposited in the ionosphere; deformation of the ideal dipole grid; and north-south asymmetry in the ionospheric profile to account for Earth's tilt.
-
-% -----------------------------------------------------------------------------
-
-Tuna suggests several novel results.
-
-Poloidal FLRs are shown to rotate to the toroidal mode on timescales comparable to the oscillation period, suggesting poloidal waves as a significant source for toroidal waves. On the nightside, the dissipation timescale is comparable to the oscillation period as well, so much poloidal energy is lost before rotating to the toroidal mode.
-
-Numerical results also suggest that the distinctive ground signatures attributed to giant pulsations may be features of odd poloidal Pc4s overall. Generic odd poloidal waves are shown to exhibit peak ground signatures at ${\azm = 16}$ to $32$, which are sharply peaked at auroral latitudes, and which occur preferrentially during times of quiet solar activity.
-
-At low \azm, poloidal waves move readily across $L$-shells, allowing energy to easily escape the simulation --- such waves can hardly even be called field line resonances. At high \azm, the poloidal mode becomes guided, though it is never defined as sharply in $L$ as the toroidal mode. This is consistent with observations showing toroidal frequencies to depend strongly on $L$ compared to poloidal frequencies.
-
-The present work exclusively used an odd, sinusoidal, poloidal driver; however, Tuna has the capacity to deliver more interesting driving waveforms as well, and higher harmonics could be added with trivial modifications to the code. Test particles could be added, which would be particularly interesting in runs including electron inertial effects (and thus parallel electric fields). Tuna could also be used to consider ``in situ'' measurements of wave phase.
+The present results are limited to an odd, sinusoidal, poloidal driver; however, Tuna has the capacity to deliver more interesting driving waveforms as well, and higher harmonics could be added with trivial modifications to the code.
 
 % -----------------------------------------------------------------------------
 
-Using data from the Van Allen Probes EMFISIS and EMF instruments, a survey of \about700 half-hour Pc4 events is presented, with each event classified by both polarization and harmonic. Scripts used to download, process, and plot the data are available at \texttt{https://github.com/UMN-Space-Physics}.
+Using data from the Van Allen Probes EMFISIS and EMF instruments, a survey of 762 half-hour Pc4 events is presented, with each event classified by both polarization and harmonic.
 
-Odd poloidal events are shown to be concentrated from midnight through the morning --- as with the numerical results, it seems that giant pulsations are unusual compared to Pc4s overall, but not compared to odd poloidal Pc4s specifically.
+Odd poloidal events are shown to be concentrated from midnight through the morning --- as with the numerical results, it seems that giant pulsations are unusual when compared to Pc4s overall, but not compared to odd poloidal Pc4s specifically.
 
 Odd toroidal events exhibit a similar distribution to odd poloidal events, but are skewed dayward across the morningside. The same is true for even events: even poloidal events peak at noon and are spread across the evening side, while even toroidal events peak at noon and are far less spread. These distributions are consistent with the poloidal mode as a significant source for same-harmonic toroidal events, particularly on the dayside, as suggested by the numerical results.
 
 Overall, poloidal and toroidal events exhibit disparate distributions because poloidal events are primarily even, while toroidal events are mostly odd; the cause is not apparent.
 
-The body of Pc4 events available in Van Allen Probe data is growing over time. After the probes complete their second precession, event statistics on the dayside should improve considerably, allowing more meaningful consideration of subsets of the events, such as those that take place during geomagnetically active times. Furthermore, the present work considered the two Van Allen Probes to be independent observers, but future work could look into the few Pc4 events which are observed simultaneously (or in quick succession) by both probes. This could offer significant insight into the spatial structure and temporal evolution of Pc4s --- particularly when complemented by numerical work!
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+The body of Pc4 events available in Van Allen Probe data is growing over time. After the probes complete their second precession, event statistics on the dayside should improve considerably. Furthermore, the present work considers the two Van Allen Probes to be independent observers, but future work could look into the few Pc4 events which are observed simultaneously (or in quick succession) by both probes.
 
 % ######################################################################
 % ########################################################### References
