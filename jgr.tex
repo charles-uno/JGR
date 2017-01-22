@@ -204,7 +204,7 @@
 
 \begin{abstract}
 
-Field line resonances (FLRs) in the Pc4 range (\SIrange{7}{25}{\mHz}) serve to energize magnetospheric particles through drift-resonant interactions, carry energy from high to low altitude, induce currents in the magnetosphere, and accelerate particles into the atmosphere. Wave structure and polarization significantly impact the execution these roles. The present work showcases a new two and a half dimensional code, Tuna, ideally suited to model FLRs, with the ability to consider a broad range of azimuthal modenumbers, coupling between the poloidal, toroidal, and compressional modes, and arbitrary harmonic structure. Using Tuna, the interplay between Joule dissipation and poloidal-to-toroidal rotation is considered for Pc4 pulsations under both dayside and nightside conditions. An effort is also made to incorporate giant pulsations, a subclass of Pc4 noted for its distinctive ground signatures, into the broader Pc4 morphology. Numerical results are supplemented by a survey of \about700 Pc4 pulsations using data from the Van Allen Probes, the first such survey to characterize each event by both polarization and harmonic. The combination of numerical and observational results suggests an explanation for the disparate distributions observed in poloidal and toroidal Pc4 events.
+Field line resonances (FLRs) in the Pc4 range (\SIrange{7}{25}{\mHz}) serve to energize magnetospheric particles through drift-resonant interactions, carry energy from high to low altitude, induce currents in the magnetosphere, and accelerate particles into the atmosphere. Wave structure and polarization significantly impact the execution these roles. The present work showcases a new two and a half dimensional code, Tuna, ideally suited to model FLRs, with the ability to consider a broad range of azimuthal modenumbers, coupling between the poloidal, toroidal, and compressional modes, and arbitrary harmonic structure. Using Tuna, the interplay between Joule dissipation and poloidal-to-toroidal rotation is considered for Pc4 pulsations under both dayside and nightside conditions. An effort is also made to incorporate giant pulsations, a subclass of Pc4 noted for its distinctive ground signatures, into the broader Pc4 morphology. Numerical results are supplemented by a survey of 762 Pc4 pulsations using data from the Van Allen Probes, the first such survey to characterize each event by both polarization and harmonic. The combination of numerical and observational results suggests an explanation for the disparate distributions observed in poloidal and toroidal Pc4 events.
 
 \end{abstract}
 
@@ -224,37 +224,25 @@ Harmonic number is a measure of FLR wavelength along the geomagnetic field line.
 
 Azimuthal modenumber corresponds to wave structure around Earth's equator. One wavelength of a wave with modenumber \azm spans $\frac{24}{\azm}$ hours in MLT. Small-\azm ($\azm \lesssim 10$) waves are typically driven by broadband solar wind conditions\cite{degeling_2014,hao_2014,zong_2009,chen_1974,liu_2011,southwood_1974}, and are compressional (the field-aligned and compressional wave components are coupled, allowing propagation across field lines). On the other hand, FLRs with large azimuthal modenumber originate within the magnetosphere via resonant interactions with trapped particles. Large-\azm waves are noncompressional, so propagation is evanescent across magnetic field lines\cite{cummings_1969,radoski_1974}. Large-\azm waves are less likely to be observed by ground magnetometers due to attenuation by the ionosphere\cite{hughes_1976,wright_1999,yeoman_2001}.
 
+The polarization of an FLR is determined by the direction of its electric and magnetic perturbations. Poloidal waves exhibit a radial magnetic perturbation and an azimuthal electric perturbation, while toroidal magnetic perturbations are azimuthal and toroidal electric perturbations are radial. Toroidal waves tend to show frequencies sharply defined in $L$, while poloidal wave observations show frequency to be spread more broadly\cite{engebretson_1986}. Poloidal waves have been shown to rotate asymptotically to the toroidal mode, with high-\azm waves doing so more quickly\cite{mann_1995,mann_1997,radoski_1974}.
 
+It's further notable that in this regime, wave polarization is rotated by about \SI{90}{\degree} by the ionosphere\cite{nishida_1964_screening}. A toroidal FLR, which exhibits an east-west magnetic pertururbation in space, manifests as a north-south magnetic perturbation at Earth's surface.
 
+Among magnetic pulsations in the Pc4 frequency range, giant pulsations are of particular interest. These ground signatures are strong and well-formed, so much so that they have been tabulated by eye for over a century\cite{birkeland_1901}. The harmonic structure of giant pulsations was a point of contention for decades, but recent multisatellite observations suggest that they are first harmonics\cite{glassmeier_1999,hillebrand_1982,kokubun_1989,takahashi_2011}. Giant polarizations are poloidal, and are most prevalent in the early morning\cite{chisham_1991,glassmeier_1980,rostoker_1979}, a distinct break from Pc4s in general which are mostly toroidal with a peak near noon\cite{anderson_1990}.
 
-They can also be classified in terms of their polarization.
-
+\todo{
 \begin{itemize}
-    \item Poloidal waves pulse. Magnetic field lines perturb radially. Associated azimuthal electric field perturbations.
-    \item Toroidal waves twist. Magnetic field lines perturb azimuthally. Associated radial electric field perturbations.
-    \item Poloidal waves rotate asymptotically to the toroidal mode. High-\azm poloidal waves have shorter lifetimes\cite{mann_1995,mann_1997,radoski_1974}.
-    \item Most observed waves are toroidal\cite{anderson_1990}.
-    \item Most poloidal waves are even modes\cite{hughes_1978,singer_1982,takahashi_1990}.
-    \item Toroidal frequencies are sharply defined in L. Poloidal show a more smeared-out dependence. \cite{engebretson_1986}
-    \item In this regime, wave polarization is rotated about \SI{90}{\degree} by the ionosphere\cite{nishida_1964_screening}. An east-west magnetic perturbation in space is observed as a north-south perturbation at Earth's surface.
-\end{itemize}
-
-Let's also talk about giant pulsations.
-
-\begin{itemize}
-    \item Strong, well-formed ground signatures. Tabulated by eye for a century\cite{birkeland_1901}.
-    \item Harmonic structure was a point of contention for decades, but recent multisatellite observations seem to be in agreement that they are odd harmonics, probably fundamental\cite{glassmeier_1999,hillebrand_1982,kokubun_1989,takahashi_2011}.
-    \item Poloidal Pc4s, peaked from postmidnight to the early morning\cite{chisham_1991,glassmeier_1980,rostoker_1979}.
-    \item A distinct break from mostly-toroidal, mostly-dayside Pc4s in general.
     \item Most common during times of low solar activity\cite{brekke_1987}.
-    \item Chirality flips based on latitude, even within a single event\cite{eleman_1967}.
+    \item Chirality flips based on latitude, even within a single event\cite{eleman_1967}. Equatorward is counterclockwise and poleward is clockwise.
+    \item Localized in $L$ and MLT\cite{anderson_1990}.
 \end{itemize}
+}
 
 Past models of the magnetosphere have been limited in their consideration of FLRs. Reasons include overly-simplified treatment of the ionospheric boundary, no consideration of the plasmapause, limited range in \azm, and the inability to compute ground signatures. The present work showcases a model which addresses these issues, providing a bird’s-eye view of the structure and evolution of FLRs.
 
 Using this model, the present work explores novel connections between several of the seemingly-disparate Pc4 properties listed above. Poloidal-to-toroidal rotation timescales are compared to dayside and nightside Joule dissipation timescales; the implications to Pc4 observations are considered. The strength and structure of ground signatures is investigated as functions of ionospheric and driving conditions. And the distinctive properties associated with giant pulsations are matched against those of fundamental poloidal Pc4s in general.
 
-Results are then validated against a survey of \about700 Pc4 observations using data collected by the Van Allen probes. In contrast to other ULF wave surveys (for example, \cite{dai_2015} and \cite{motoba_2015}), the present work classifies each event by both polarization and harmonic. This crucial aspect of the analysis is possible only because the Van Allen Probes measure both electric and magnetic field waveforms. No past mission has provided access to such a rich data set for ULF wave events in the inner magnetosphere.
+Results are then validated against a survey of 762 Pc4 observations using data collected by the Van Allen probes. In contrast to other ULF wave surveys (for example, \cite{dai_2015} and \cite{motoba_2015}), the present work classifies each event by both polarization and harmonic. This crucial aspect of the analysis is possible only because the Van Allen Probes measure both electric and magnetic field waveforms. No past mission has provided access to such a rich data set for ULF wave events in the inner magnetosphere.
 
 % ######################################################################
 % ################################################################ Model
@@ -262,7 +250,7 @@ Results are then validated against a survey of \about700 Pc4 observations using 
 
 \section{Numerical Model}
 
-\todo{You can get this code on GitHub!}
+\todo{You can get this code on GitHub! \texttt{https://github.com/UMN-Space-Physics} }
 
 Numerical results are obtained using Tuna, a new linear \Alfven wave code based on that described in \cite{lysak_2013}. Tuna models the evolution of three-dimensional electric and magnetic fields over a (two-dimensional) meridional slice of the magnetosphere. The code can colloquially be said to have two and a half (``tuna half'') dimensions.
 
@@ -418,25 +406,21 @@ Magnetic field values at the top of the atmosphere are used to compute electric 
 
 \section{Numerical Results}
 
-The present section discusses the numerical resuts shown in \cref{fig_brms,fig_energy,fig_layers_day,fig_layers_night,fig_ground_day,fig_ground_night}. In each figure, an lattice of plots shows a side-by-side coparison of an ensemble of runs conducted with Tuna.
+The present section discusses the numerical resuts shown in \cref{fig_brms,fig_energy,fig_layers_day,fig_layers_night,fig_ground_day,fig_ground_night}. In each figure, an lattice of plots shows a side-by-side comparison of an ensemble of runs conducted with Tuna.
 
-
-
-
-
-
-See \cref{fig_brms}
-
+\todo{
 \begin{itemize}
+    \item See \cref{fig_brms}
     \item At low \azm, all components of the magnetic field are comparable in magnitude.
     \item At high \azm, the compressional component weakens.
     \item Toroidal activity is sharply concentrated at resonant $L$.
     \item Poloidal activity is spread out in $L$. At high \azm, it just can't spread very far.
 \end{itemize}
+}
 
-See \cref{fig_energy}
-
+\todo{
 \begin{itemize}
+    \item See \cref{fig_energy}
     \item This figure mimics Figure 3 in \cite{mann_1995}
     \item All driving is poloidal. That any energy is in the toroidal mode shows rotation.
     \item The rotation seems to be one-way, as Mann suggested. High-\azm waves rotate slower, also consistent with Mann.
@@ -444,27 +428,30 @@ See \cref{fig_energy}
     \item On the nightside, dissipation is as fast as rotation. There is no accumulation of energy over multiple drive periods.
     \item Poloidal mode looks to be a significant source of (same-harmonic) toroidal waves on the dayside. On the nightside, energy dissipates too fast to rotate to the toroidal mode.
 \end{itemize}
+}
 
-See \cref{fig_layers_day}
-
+\todo{
 \begin{itemize}
+    \item See \cref{fig_layers_day}
     \item At low \azm, energy moves freely across field lines, even escaping the simulation domain. This makes it difficult to build up a strong toroidal resonance in any particular place.
     \item That clump at the top ($\azm = 1$, $L > 8$, poloidal) is probably nonphysical -- a third harmonic very close to the simulation boundary.
     \item As \azm increases, energy is less able to cross field lines. Maximum \azm, where the poloidal mode deposits all its energy on the same field line, is where the toroidal mode is strongest.
     \item (Would require an additional plot to show) If the drive frequency does not line up with the local eigenfrequency at high \azm, energy can't move across field lines to find a better match. Instead, the resonance is just weaker.
 \end{itemize}
+}
 
-See \cref{fig_layers_night}
-
+\todo{
 \begin{itemize}
+    \item See \cref{fig_layers_night}
     \item At low \azm, as on the dayside, energy moves freely across field lines and even escapes.
     \item At high \azm, poloidal-to-toroidal rotation is slow compared to dissipation timescales. This is not the case on the dayside.
     \item As a result, the strongest nightside toroidal activity is at moderate \azm -- but overall the poloidal mode is a worse toroidal source on the nightside than it is on the dayside.
 \end{itemize}
+}
 
-See \cref{fig_ground_day,fig_ground_night}
-
+\todo{
 \begin{itemize}
+    \item See \cref{fig_ground_day,fig_ground_night}
     \item At low \azm, ground signatures are weak because waves in space are weak.
     \item At high \azm, ground signatures are weak due to attenuation by the atmosphere.
     \item Ground signatures seem to be strongest at \azm of 16 to 32.
@@ -472,6 +459,7 @@ See \cref{fig_ground_day,fig_ground_night}
     \item The strongest peaks are in $B_\phi$, which corresponds to the poloidal mode.
     \item These properties match the usual description of a giant pulsation.
 \end{itemize}
+}
 
 The findings together suggest that the morphology of giant pulsations reveals relatively little about their origins.
 
@@ -485,7 +473,7 @@ The present results offer no explanation as to the tendency of giant pulsations 
 
 \section{Van Allen Probes Observations}
 
-The present section gives a survey of \about700 thirty-minute Pc4 events, each characterized in terms of both parity and polarization, and selected in a way that does not introduce an apparent bias in either property. No past study has so thoroughly disentangled the parity and polarization of these waves.
+The present section gives a survey of 762 thirty-minute Pc4 events, each characterized in terms of both parity and polarization, and selected in a way that does not introduce an apparent bias in either property. No past study has so thoroughly disentangled the parity and polarization of these waves.
 
 Events are selected from Van Allen Probe data collected between October 2012 and August 2015. Between the two probes, that's just over 2000 days of observation. The two probes are taken to be independent observers. A preliminary estimate shows that Pc4 events are sufficiently short-lived and narrow in MLT that the same event is rarely (\about\SI{1}{\percent}) observed by both probes.
 
@@ -563,7 +551,7 @@ Curiously, odd toroidal events are found to occur at a higher rate than even one
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_symh.pdf}
     \caption{
-    Note that the fit line is $\frac{ \SI{0.1}{\nT} }{f}$. On the vertical axis, $f$ is measured in inverse minutes. Note that the width of the Pc4 frequency band is roughly one inverse minute ($\frac{1}{ \SI{1}{\minute} } \about \SI{17}{\mHz}$).
+    Shown in red is $\frac{ \SI{0.1}{\nT} }{f}$. The vertical axis is scaled to inverse minutes. The width of the Pc4 frequency band (\SIrange{7}{25}{\mHz}) is about one inverse minute.
     }
     \label{fig_symh}
     \end{center}
@@ -575,7 +563,7 @@ Curiously, odd toroidal events are found to occur at a higher rate than even one
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_brms.pdf}
     \caption{
-        Each cell in the above figure shows root-mean-square magnetic field perturbations over the course of a \SI{300}{\s} run. The four columns show four different runs, with azimuthal modenumbers 1, 4, 16, and 64 respectively. The rows show poloidal, toroidal, and compressional magnetic field components. At low \azm, compressional activity is apparent by the fact that all three components of the magnetic perturbation are comparable in magnitude; as \azm increases, compressional activity diminishes. Poloidal waves are spread broadly in $L$ at low \azm, becoming guided only as large \azm prevents energy from moving across field lines. In contrast, toroidal waves are sharply defined in $L$ regardless of \azm.
+        Each cell in the above figure shows root-mean-square magnetic field perturbations over the course of a \SI{300}{\s} run. The four columns show four different runs, with azimuthal modenumbers 1, 4, 16, and 64 respectively. The rows show poloidal, toroidal, and compressional magnetic field components. At low \azm, compressional activity is apparent by the fact that all three components are comparable in magnitude; as \azm increases, compressional activity diminishes. Poloidal waves are spread broadly in $L$ at low \azm, becoming guided only as large \azm prevents energy from moving across field lines. In contrast, toroidal waves are sharply defined in $L$ regardless of \azm.
     }
     \label{fig_brms}
     \end{center}
@@ -611,7 +599,7 @@ Curiously, odd toroidal events are found to occur at a higher rate than even one
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_layers_night.pdf}
     \caption{
-        The above figure is analogous to \cref{fig_layers_night}, except that it shows runs carried out using a nightside ionospheric profile instead of dayside. Four runs are shown, each at a different \azm, and the rows show poloidal and toroidal energy density as a function of $L$ and time. In a general sense, the behavior matches that seen on the dayside: poloidal activity is broad in $L$ while toroidal waves appear only where resonant. The difference is in the wave magnitude. With dayside and nightside driving at the same magnitude, the response on the nightside is smaller by an order of magnitude due to the increased Joule dissipation.
+        The above figure is analogous to \cref{fig_layers_day}, except that it shows runs carried out using a nightside ionospheric profile instead of dayside. Four runs are shown, each at a different \azm, and the rows show poloidal and toroidal energy density as a function of $L$ and time. In a general sense, the behavior matches that seen on the dayside: poloidal activity is broad in $L$ while toroidal waves appear only where resonant. The difference is in the wave magnitude. With dayside and nightside driving at the same magnitude, the response on the nightside is smaller by an order of magnitude due to the increased Joule dissipation.
     }
     \label{fig_layers_night}
     \end{center}
@@ -671,7 +659,7 @@ Curiously, odd toroidal events are found to occur at a higher rate than even one
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_all.pdf}
     \caption{
-        The above figure shows the spatial distribution of all 708 observed Pc4 events. Counts are normalized by the amount of usable data in each bin. The value in the bottom-right corner is the mean of the rate in each bin, with the rate in each bin weighed by the area of that bin. Bins shown in white contain zero events.
+        The above figure shows the spatial distribution of all 762 observed Pc4 events. Counts are normalized by the amount of usable data in each bin. The value in the bottom-right corner is the mean of the rate in each bin, with the rate in each bin weighed by the area of that bin. Bins shown in white contain zero events.
     }
     \label{fig_all}
     \end{center}
@@ -683,7 +671,7 @@ Curiously, odd toroidal events are found to occur at a higher rate than even one
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_mode.pdf}
     \caption{
-        The above figure shows the spatial distribution for the same 708 events shown in \cref{fig_all}, partitioned by polarization and parity. The selection criteria ensure that both properties are known for each event. Event counts are normalized by thetime spent by the amount of usable data in each bin. Counts shown in the bottom-left corners do not sum to 708 because some events trigger on both the poloidal channel and the toroidal channel.
+        The above figure shows the spatial distribution for the same 762 events shown in \cref{fig_all}, partitioned by polarization and parity. The selection criteria ensure that both properties are known for each event. Event counts are normalized by the time spent by the amount of usable data in each bin. Events for which a wave is present in both the poloidal and toroidal channels is shown in both distributions; there are 54 such events. 
     }
     \label{fig_mode}
     \end{center}
