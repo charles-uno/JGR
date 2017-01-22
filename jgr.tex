@@ -204,7 +204,7 @@
 
 \begin{abstract}
 
-Field line resonances in the Pc4 range (\SIrange{7}{25}{\mHz}) serve to energize magnetospheric particles through drift-resonant interactions, carry energy from high to low altitude, induce currents in the magnetosphere, and accelerate particles into the atmosphere. Wave structure and polarization significantly impact the execution these roles. The present work showcases a new two and a half dimensional code, Tuna, ideally suited to model FLRs, with the ability to consider a broad range of azimuthal modenumbers, coupling between the poloidal, toroidal, and compressional modes, and arbitrary harmonic structure. Using Tuna, the interplay between Joule dissipation and poloidal-to-toroidal rotation is considered for Pc4 pulsations under both dayside and nightside conditions. An attempt is also made to demystify giant pulsations, a class of Pc4 noted for its distinctive ground signatures. Numerical results are supplemented by a survey of \about700 Pc4 pulsations using data from the Van Allen Probes, the first such survey to characterize each event by both polarization and harmonic. The combination of numerical and observational results suggests an explanation for the disparate distributions observed in poloidal and toroidal Pc4 events.
+Field line resonances (FLRs) in the Pc4 range (\SIrange{7}{25}{\mHz}) serve to energize magnetospheric particles through drift-resonant interactions, carry energy from high to low altitude, induce currents in the magnetosphere, and accelerate particles into the atmosphere. Wave structure and polarization significantly impact the execution these roles. The present work showcases a new two and a half dimensional code, Tuna, ideally suited to model FLRs, with the ability to consider a broad range of azimuthal modenumbers, coupling between the poloidal, toroidal, and compressional modes, and arbitrary harmonic structure. Using Tuna, the interplay between Joule dissipation and poloidal-to-toroidal rotation is considered for Pc4 pulsations under both dayside and nightside conditions. An effort is also made to incorporate giant pulsations, a subclass of Pc4 noted for its distinctive ground signatures, into the broader Pc4 morphology. Numerical results are supplemented by a survey of \about700 Pc4 pulsations using data from the Van Allen Probes, the first such survey to characterize each event by both polarization and harmonic. The combination of numerical and observational results suggests an explanation for the disparate distributions observed in poloidal and toroidal Pc4 events.
 
 \end{abstract}
 
@@ -216,29 +216,16 @@ Field line resonances in the Pc4 range (\SIrange{7}{25}{\mHz}) serve to energize
 
 \section{Introduction}
 
-Pc4s are interesting.
+Pc4 pulsations are magnetic pulsations with periods of a minute or two (\SIrange{7}{25}{\mHz}), corresponding to resonant oscillations of field lines with $4 \lesssim L \lesssim 7$. They are notable for their drift and drift-bounce resonanct interactions with trapped energetic particles\cite{southwood_1976}, which can accelerate those particles\cite{elkington_1999} and lead to radial diffusion\cite{elkington_2003}. Giant pulsations, a subclass of Pc4 pulsation, have been a topic of particular interest for over a century, due to their large, strikingly sinusoidal waveforms\cite{brekke_1987}.
 
-\begin{itemize}
-    \item Drift-resonant interactions with trapped energetic particles.
-    \item Radial diffusion.
-    \item Giant pulsations are mysterious and exciting.
-\end{itemize}
+A field line resonance (FLR) in the Pc4 range is subject to three mutually-independent classifications: harmonic number, azimuthal modenumber, and polarization.
 
-Pc4s can be classified in terms of their harmonic numbers.
+Harmonic number is a measure of FLR wavelength along the geomagnetic field line. First-harmonic FLRs are associated with drift resonance, while the second harmonic is associated with drift-bounce resonance\cite{dai_2013,poulter_1983}. The wavelength of a second-harmonic FLR is equal to the length of its magnetic field line; it exhibits two antinodes (respectively, nodes) in the magnetic (electric) perturbation, with magnentic nodes (electric antinodes) at the northern and southern foot points and at the equator. A first-harmonic (also called fundamental-mode) FLR has a wavelength twice that large, with a single magnetic (electric) antinode (node) at the equator, and magnetic nodes (electric antinodes) only at the foot points. Harmonic can in principle be determined from a wave's frequency; however, disagreements can arise due to uncertainty in the \Alfven speed profile along flux tubes\cite{takahashi_2013}. Unambiguous classification of an event's harmonic requires two measurements: magnetometer measurements on conjugate foot points in the northern and southern hemispheres, a measurement on the ground and a simultaneous spacecraft measurement, or a spacecraft measurement which resolves both electric and magnetic field\cite{dai_2015} -- which has only recently become possible\cite{angelopoulos_2008,stratton_2012}.
 
-\begin{itemize}
-    \item First harmonic is for drift resonance; second harmonic is for drift-bounce resonance\cite{dai_2013,poulter_1983}.
-    \item You can sorta tell them apart by frequency, but there are disagreements\cite{takahashi_2013}. Mostly you need two observations -- satellite plus ground, or E and B on the same machine\cite{dai_2015}, like THEMIS\cite{angelopoulos_2008} or the Van Allen Probes\cite{stratton_2012}.
-\end{itemize}
+Azimuthal modenumber corresponds to wave structure around Earth's equator. One wavelength of a wave with modenumber \azm spans $\frac{24}{\azm}$ hours in MLT. Small-\azm ($\azm \lesssim 10$) waves are typically driven by broadband solar wind conditions\cite{degeling_2014,hao_2014,zong_2009,chen_1974,liu_2011,southwood_1974}, and are compressional (the field-aligned and compressional wave components are coupled, allowing propagation across field lines). On the other hand, FLRs with large azimuthal modenumber originate within the magnetosphere via resonant interactions with trapped particles. Large-\azm waves are noncompressional, so propagation is evanescent across magnetic field lines\cite{cummings_1969,radoski_1974}. Large-\azm waves are less likely to be observed by ground magnetometers due to attenuation by the ionosphere\cite{hughes_1976,wright_1999,yeoman_2001}.
 
-They can also be classified in terms of their azimuthal modenumber.
 
-\begin{itemize}
-    \item One wavelength of a wave with modenumber \azm spans $\frac{24}{\azm}$ hours in MLT.
-    \item Small \azm typically driven by broadband solar wind behavior\cite{degeling_2014,hao_2014,zong_2009,chen_1974,liu_2011,southwood_1974}. The waves are compressional -- they can move across magnetic field lines.
-    \item Large \azm is driven by resonant interactions with trapped particles -- the waves are not compressional, so propagation is evanescent across field lines\cite{cummings_1969,radoski_1974}.
-    \item Ground observations depend on \azm. At large \azm, a wave's ground signature is attenuated by the ionosphere\cite{hughes_1976,wright_1999,yeoman_2001}.
-\end{itemize}
+
 
 They can also be classified in terms of their polarization.
 
@@ -265,7 +252,7 @@ Let's also talk about giant pulsations.
 
 Past models of the magnetosphere have been limited in their consideration of FLRs. Reasons include overly-simplified treatment of the ionospheric boundary, no consideration of the plasmapause, limited range in \azm, and the inability to compute ground signatures. The present work showcases a model which addresses these issues, providing a bird’s-eye view of the structure and evolution of FLRs.
 
-Using this model, the present work explores novel connections between several of the seemingly-disparate Pc4 properties listed above. Poloidal-to-toroidal rotation timescales are compared to dayside and nightside Joule dissipation timescales; the implications to Pc4 observations are considered. The strength and structure of ground signatures is investigated as function of ionospheric and driving conditions. And the distinctive properties associated with giant pulsations are matched against those of fundamental poloidal Pc4s in general.
+Using this model, the present work explores novel connections between several of the seemingly-disparate Pc4 properties listed above. Poloidal-to-toroidal rotation timescales are compared to dayside and nightside Joule dissipation timescales; the implications to Pc4 observations are considered. The strength and structure of ground signatures is investigated as functions of ionospheric and driving conditions. And the distinctive properties associated with giant pulsations are matched against those of fundamental poloidal Pc4s in general.
 
 Results are then validated against a survey of \about700 Pc4 observations using data collected by the Van Allen probes. In contrast to other ULF wave surveys (for example, \cite{dai_2015} and \cite{motoba_2015}), the present work classifies each event by both polarization and harmonic. This crucial aspect of the analysis is possible only because the Van Allen Probes measure both electric and magnetic field waveforms. No past mission has provided access to such a rich data set for ULF wave events in the inner magnetosphere.
 
@@ -431,6 +418,13 @@ Magnetic field values at the top of the atmosphere are used to compute electric 
 
 \section{Numerical Results}
 
+The present section discusses the numerical resuts shown in \cref{fig_brms,fig_energy,fig_layers_day,fig_layers_night,fig_ground_day,fig_ground_night}. In each figure, an lattice of plots shows a side-by-side coparison of an ensemble of runs conducted with Tuna.
+
+
+
+
+
+
 See \cref{fig_brms}
 
 \begin{itemize}
@@ -454,8 +448,8 @@ See \cref{fig_energy}
 See \cref{fig_layers_day}
 
 \begin{itemize}
-    \item At low \azm, energy moves freely across field lines, even escaping the simulation domain. This makes it difficult to build up a string toroidal resonance in any particular place.
-    \item That clump at the top is probably nonphysical -- a third harmonic very close to the simulation boundary.
+    \item At low \azm, energy moves freely across field lines, even escaping the simulation domain. This makes it difficult to build up a strong toroidal resonance in any particular place.
+    \item That clump at the top ($\azm = 1$, $L > 8$, poloidal) is probably nonphysical -- a third harmonic very close to the simulation boundary.
     \item As \azm increases, energy is less able to cross field lines. Maximum \azm, where the poloidal mode deposits all its energy on the same field line, is where the toroidal mode is strongest.
     \item (Would require an additional plot to show) If the drive frequency does not line up with the local eigenfrequency at high \azm, energy can't move across field lines to find a better match. Instead, the resonance is just weaker.
 \end{itemize}
@@ -491,7 +485,7 @@ The present results offer no explanation as to the tendency of giant pulsations 
 
 \section{Van Allen Probes Observations}
 
-The present chapter gives a survey of \about700 thirty-minute Pc4 events, each characterized in terms of both parity and polarization, and selected in a way that does not introduce an apparent bias in either property. No past study has so thoroughly disentangled the parity and polarization of these waves.
+The present section gives a survey of \about700 thirty-minute Pc4 events, each characterized in terms of both parity and polarization, and selected in a way that does not introduce an apparent bias in either property. No past study has so thoroughly disentangled the parity and polarization of these waves.
 
 Events are selected from Van Allen Probe data collected between October 2012 and August 2015. Between the two probes, that's just over 2000 days of observation. The two probes are taken to be independent observers. A preliminary estimate shows that Pc4 events are sufficiently short-lived and narrow in MLT that the same event is rarely (\about\SI{1}{\percent}) observed by both probes.
 
