@@ -452,12 +452,9 @@ An example event, showing electric and magnetic field measurements as well as re
 The poloidal and toroidal channels are independently checked for Pc4 waves. For each channel, a Gaussian profile is fit to the magnitude of the Poynting flux, $|\dft{S}\arg{\omega}|$. If the fit fails to converge, or if the peak of the Gaussian does not fall within \SI{5}{\mHz} of the peak value of \dft{S}, the event is discarded. Events are also discarded if their frequencies fall outside the Pc4 frequency range (\SIrange{7}{25}{\mHz}) or if their amplitudes fall below \SI{0.01}{\mW/\m\squared} (out of consideration for instrument sensitivity). The magnitude threshold is set in Poynting flux instead of magnetic field (which is more typical) in an effort to reduce bias in event selection. When events are selected based on the magnitude of the wave magnetic field, first-harmonic waves become more difficult to detect, due to their magnetic field node at the equator\cite{dai_2015}.
 
 Events are discarded if their parity is ambiguous. The electric field and the magnetic field must be coherent at a level of 0.9 or better, judged at the discrete Fourier transform point closest to the peak of the Gaussian fit. Any event within \SI{3}{\degree} of the magnetic equator is also not used. In order to distinguish an odd mode from an even mode\footnote{
-The techniques used in the present work do not make an explicit distinction between first (second) harmonics and higher odd (even) harmonics. That said, higher harmonics are not expected to be resonant at such small $L$, so it is reasonable to assume that odd events are mostly first harmonics and even events are mostly second harmonics. \todo{Need a citation for ``higher harmonics don't live at such small $L$''?}
-}, it's necessary to know whether the observation is made north or south of the equator.
+The techniques used in the present work do not make an explicit distinction between first (second) harmonics and higher odd (even) harmonics. That said, higher harmonics are comparably rare in the inner magnetosphere, so it is reasonable to assume that odd events are mostly first harmonics and even events are mostly second harmonics.}, it's necessary to know whether the observation is made north or south of the equator.
 
 A visual inspection of events shows that those with broad ``peaks'' in their spectra are typically bad fits of noisy or multiharmonic data. A threshold is set at a FWHM of \SI{3}{\mHz} (equally, a standard deviation of \SI{1.27}{\mHz}). Any event with a Gaussian fit broader than that is discarded.
-
-%\todo{This feels like a LOT of talk about event selection. Aaron says: It's important to lay out methodology. If it's getting too verbose, put it in an appendix.}
 
 Coarsely speaking, event distributions (shown in \cref{fig_all,fig_mode}) are found to be consistent with past surveys. Toroidal events dominate overall, and are primarily seen on the morning side. Poloidal events are spread broadly in MLT, with a peak near noon and distinctive odd harmonics in the early morning. From there, the simultaneous consideration of harmonic and polarization, combined with the numerical results above, offers significant insight.
 
@@ -469,7 +466,7 @@ As a corrolary, the distribution of odd poloidal events is found to closely rese
 
 Curiously, odd toroidal events are found to occur at a higher rate than even ones, while the opposite is true for poloidal events. This disparity may offer clues to the source of these waves, or hint at a harmonic dependence in the rate of poloidal-to-toroidal rotation.
 
-\todo{Do we want to get into event phase? Scott says: Ask Bob. Aaron says: If you want to get into phase, move details to an appendix.}
+%\todo{Do we want to get into event phase? Scott says: Ask Bob. Aaron says: If you want to get into phase, move details to an appendix.}
 
 % ######################################################################
 % ########################################################### Discussion
