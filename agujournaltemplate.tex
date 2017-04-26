@@ -296,11 +296,206 @@ Where $\Psi_E$ and $\Psi_I$ are the values of $\Psi$ at $R_E$ (Earth's surface) 
 
 Magnetic field values at the top of the atmosphere are used to compute electric field boundary conditions via \cref{jump_condition}. Those at Earth's surface are output, suitable for comparison with magnetometer data.
 
+% ######################################################################
+
+\section{Numerical Results}
+
+The present section discusses the numerical resuts shown in \cref{fig_brms,fig_energy,fig_layers_day,fig_layers_night,fig_ground_day,fig_ground_night}. In each figure, an lattice of plots shows a side-by-side comparison of an ensemble of runs conducted with Tuna.
+
+In \cref{fig_brms}, magnetic field strength distributions are shown for four \SI{300}{\second} runs conducted with Tuna using a dayside ionospheric profile and \SI{22}{\mHz} driving. Each column shows a different value of $m$ (1, 4, 16, and 64), while the rows show RMS poloidal, toroidal, and compressional magnetic field strengths. At low $m$ (left), the three components are comparable in magnitude; as $m$ increases (to the right), the compressional component becomes appreciably weaker and the distribution of energy appears more guided. Toroidal wave activity is concentrated near resonant $L$ shells, while poloidal activity is spread more broadly -- particularly at low $m$.
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=\textwidth]{figures/fig_brms.pdf}
+    \caption{
+        Each cell in the above figure shows root-mean-square magnetic field perturbations over the course of a \SI{300}{\s} run. The four columns show four different runs, with azimuthal modenumbers 1, 4, 16, and 64 respectively. The rows show poloidal, toroidal, and compressional magnetic field components. At low $m$, compressional activity is apparent by the fact that all three components are comparable in magnitude; as $m$ increases, compressional activity diminishes. Poloidal waves are spread broadly in $L$ at low $m$, becoming guided only as large $m$ prevents energy from moving across field lines. In contrast, toroidal waves are sharply defined in $L$ regardless of $m$.
+    }
+    \label{fig_brms}
+    \end{center}
+\end{figure}
+
+Those same four runs are shown in the top row of \cref{fig_energy}, resolved in time rather than in space. The total energy in the toroidal wave is shown in red, and the total energy in the poloidal wave is shown in blue. The second row is analogous, but uses the nightside ionospheric profile and drives at \SI{16}{\mHz} (the ionospheric profile significantly affects the ionosphere's Alfve\'n speed, and thus resonant frequencies). Each subplot is analogous to Figure 3 in \citep{mann_1995}.
+
+Since all driving is injected into the poloidal mode, the presence of any toroidal wave shows that energy rotates; the rotation is clearly faster for runs with higher $m$ values; and the rotation seems to be asymptotic, rather than oscillatory. These properties are all consistent with \citep{mann_1995}.
+
+Whereas past work made use of an initial wave and a perfectly-conducting boundary, the present work leverages ongoing driving and a realistic, height-resolved conductivity profile. In particular, \cref{fig_energy} allows a comparison of energy accumulation on the dayside and on the nightside in response to the same energy input. On the dayside, where conductivity is high, the toroidal mode grows in magnitude over the course of many drive periods. Conversely, on the nightside, the driving and dissipation timescales are comparable, so the system quickly comes to a steady state. This suggests that poloidal waves are effective drivers of (same-harmonic) toroidal waves on the dayside, and are less effective as drivers of nightside toroidal activity.
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=\textwidth]{figures/fig_energy.pdf}
+    \caption{
+        Each cell above shows integrated poloidal (blue) and toroidal (red) energy as a function of time for a single run. The top row shows runs using a dayside ionospheric profile (driven at \SI{22}{\mHz}), and the bottom row nightside (driven at \SI{16}{\mHz}). Driving is purely poloidal, and energy rotates over time to the toroidal mode. On the dayside, it's clear that energy rotates faster when $m$ is smaller, consistent with the findings of \citep{mann_1995}. On the nightside, the dissipation timescale is comparable to the rotation timescale, so there is no long-term accumulation of energy in either mode.
+    }
+    \label{fig_energy}
+    \end{center}
+\end{figure}
+
+Another view of the dayside (\cref{fig_energy} top row) and nightside (\cref{fig_energy} bottom row) runs is shown in \cref{fig_layers_day,fig_layers_night} respectively.
+
+Time and $L$ are shown on the horizontal and vertical axes; contours indicate mean energy density over that $L$-shell.
+
+On the dayside (\cref{fig_layers_day}), at low $m$, energy is able to move freely across magnetic field lines, even escaping the simulation domain. Poloidal energy is not localized for long enough to build up a strong resonance in any particular place, or for much energy to rotate to the toroidal mode. (Note that the buildup of poloidal energy at $m = 1$, $L > 8$ is likely nonphysical, due to a third harmonic very close to the simulation boundary.) As $m$ increases, energy is less able to cross field lines; both toroidal and poloidal resonances are strongest when $m$ is highest.
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=\textwidth]{figures/fig_layers_day.pdf}
+    \caption{
+        Above are the same runs shown in the top row of \cref{fig_energy}; the runs are the same except that $m$ increases to the right. Rather than show the energy integrated over the whole simulation domain, the above figure shows energy density, with time on the horizontal axis and $L$ on the vertical axis. The top and bottom rows show poloidal and toroidal energy distributions respectively. Toroidal activity is shown to be sharply concentrated at resonant $L$ shells; it's strongest at high $m$ because that's where energy rotates most effectively from the poloidal mode. Poloidal waves are spread broadly in $L$. At low $m$, some energy escapes the simulation domain entirely. Poloidal waves appear sharp only when high $m$ prevents energy from spreading.
+    }
+    \label{fig_layers_day}
+    \end{center}
+\end{figure}
 
 
+The behavior on the nightside (\cref{fig_layers_night}) is in several ways similar to that on the dayside, but the result looks much different due to the lower ionospheric conductivity. At low $m$, energy moves freely in $L$, even escaping the simulation. At high $m$ waves are guided, allowing energy to rotate from the poloidal mode into a localized toroidal mode. However, due to the fast dissipation timescale, the strongest toroidal mode on the nightside is not at $m = 64$, where guiding is strongest, but at $m = 16$, where the strength of the guiding strikes a balance with the rate of poloidal-to-toroidal rotation.
 
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=\textwidth]{figures/fig_layers_night.pdf}
+    \caption{
+        The above figure is analogous to \cref{fig_layers_day}, except that it shows runs carried out using a nightside ionospheric profile instead of dayside. Four runs are shown, each at a different $m$, and the rows show poloidal and toroidal energy density as a function of $L$ and time. In a general sense, the behavior matches that seen on the dayside: poloidal activity is broad in $L$ while toroidal waves appear only where resonant. The difference is in the wave magnitude. With dayside and nightside driving at the same magnitude, the response on the nightside is smaller by an order of magnitude due to the increased Joule dissipation.
+    }
+    \label{fig_layers_night}
+    \end{center}
+\end{figure}
 
+A final angle on those same eight simulations is shown in \cref{fig_ground_day,fig_ground_night}: their magnetic signatures at Earth's surface. Due to the effect of the ionosphere, note that $B_\phi$ corresponds to the poloidal mode, and $B_\theta$ to the toroidal mode. Maximum amplitude is indicated wherever it exceeds \SI{3}{\nT}.
 
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=\textwidth]{figures/fig_ground_day.pdf}
+    \caption{
+        The magnetic ground signatures are shown for the same runs as in previous figures. Ground signatures at low $m$ are weak because the waves in space are weak. Ground signatures at high $m$ are attenuated before reaching ground magnetometers. The two effects combine to create a maximum at $m \sim 16$. The maximum ground signatures consistently appear in the east-west magnetic field component, corresponding to the poloidal mode. Careful examination shows furthermore that the events are clockwise to an observer above $\sim\SI{65}{\degree}$ and counterclockwise to an observer below. All of these properties are commonly ascribed to giant pulsations.
+    }
+    \label{fig_ground_day}
+    \end{center}
+\end{figure}
+
+At low $m$, ground signatures are weak and diffuse in latitude because the waves in space are weak and diffuse. At high $m$, ground signatures are more sharply defined, but are also attenuated by the atmosphere. The strongest ground signatures are visible at $m = 16$ (note that further investigation, not shown, finds that ground signatures at $m = 32$ are comparable in strength to those at $m = 16$, and those at $m = 8$ are not). The strongest peaks are in $B_\phi$, corresponding to the poloidal mode. Furthermore, the events display a chirality flip between their top and bottom halves; this is particularly apparent on the nightside. The phase of $B_\theta$ leads that of $B_\phi$ at high latitude, and lags it at low latitude.
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=\textwidth]{figures/fig_ground_night.pdf}
+    \caption{
+        Above are the ground signatures for the four nightside runs. As on the dayside, shown in \cref{fig_ground_day}, magnetic fields at Earth's surface are strongest when $m \sim 16$, and peak signals correspond to the poloidal mode. Compared to the dayside, ground signatures on the nightside are weaker, and the chirality shift (clockwise to the north and counterclockwise to the south) is much clearer.
+    }
+    \label{fig_ground_night}
+    \end{center}
+\end{figure}
+
+The findings together suggest that the morphology of giant pulsations reveals relatively little about their origins. One can consider a hypothetical magnetosphere subject to constant driving: broadband in frequency, broadband in modenumber, just outside the plasmapause. Low-$m$ poloidal waves will quickly propagate away, contributing little energy to the toroidal mode. High-$m$ waves will resonate in place, accumulating energy over time, and give rise to ``multiharmonic toroidal waves'' (per \citep{takahashi_2011}); Fourier components that do not match the local eigenfrequency will accumulate energy over just a few wave periods before reaching asymptotic values. Waves with very high modenumbers will be attenuated by the ionosphere. The response on the ground will be counterclockwise at low latitude, clockwise at high latitude, peaked at modenumbers of 16 to 32, and mostly east-west polarized. In other words, the measurements will look very much like a giant pulsation.
+
+The present results offer no explanation as to the tendency of giant pulsations to drift azimuthally, or to appear pre-dawn in MLT --- though the latter is addressed by the observational results in below.
+
+% ######################################################################
+
+\section{Van Allen Probes Observations}
+
+The present section gives a survey of 762 thirty-minute Pc4 events, each characterized in terms of both parity and polarization, and selected in a way that does not introduce an apparent bias in either property. No past study has so thoroughly disentangled the parity and polarization of these waves.
+
+Events are selected from Van Allen Probe data collected between October 2012 and August 2015. Between the two probes, that's just over 2000 days of observation. The two probes are taken to be independent observers. A preliminary estimate shows that Pc4 events are sufficiently short-lived and narrow in MLT that the same event is rarely ($\sim\SI{1}{\percent}$) observed by both probes.
+
+%\todo{Per Aaron: ``Level 3" doesn't have any meaning to most scientists. Be more specific about what quantities you're using}
+
+Electric and magnetic field data are collected using the probes' EFW\citep{wygant_2013} and EMFISIS\citep{kletzing_2013} instruments respectively. Level 3 (inertial) values are used, averaged over the $\sim\SI{11}{\second}$ probe spin period. Three-dimensional electric field data is obtained by using the $\underline{E} \cdot \underline{B} = 0$ assumption. This method is reliable only when there is a significant offset between the magnetic field and the probe's spin plane. Data for which the spin plane and the magnetic field fall within \SI{15}{\degree} of each other -- about half -- is discarded, potentially introducing a sampling bias with respect to MLT and/or geomagnetic conditions. The spatial distribution of three-dimensional electric and magnetic fields data is shown in \cref{fig_pos}. The data set includes about one and a half precessions around Earth, meaning there is twice as much sampling (at apogee) of the nightside as there is on the dayside.
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=\textwidth]{figures/fig_pos.pdf}
+    \caption{
+        The above figure shows the distribution of data collected by the Van Allen Probes for which 3D electric and magnetic fields are available. (When the probe's axis aligns too closely with the magnetic field, the 3D electric field cannot be determined reliably.) Coverage is lopsided because the probes had completed one and a half precessions around Earth; that is, the nightside is double-sampled at apogee. Coverage is good outside $L\sim4$; note that each day of sampling is broken down into 48 half-hour events.
+    }
+    \label{fig_pos}
+    \end{center}
+\end{figure}
+
+Field measurements are transformed into the same dipole coordinates used above to describe the numerical model. The $z$ axis is set to align with the background magnetic field, which is estimated using a ten-minute running average of the magnetic field measurements. The $y$ axis is set parallel to $\hat{z} \times \underline{r}$, where $\underline{r}$ is the probe's geocentric position vector. The $x$ axis is then defined per $\hat{x} \equiv \hat{y} \times \hat{z}$. This scheme guarantees that the axes are right-handed and pairwise orthogonal\citep{liu_2009}.
+
+The $\sim1000$ days of usable data are considered half an hour at a time, which gives a frequency resolution of $\sim\SI{0.5}{\mHz}$ in the discrete Fourier transform. Spectra are computed for all six field components: $\overset{\sim}{B_x}$, $\overset{\sim}{B_y}$, $\overset{\sim}{B_z}$, $\overset{\sim}{E_x}$, $\overset{\sim}{E_y}$, and $\overset{\sim}{E_z}$. The background
+magnetic field is subtracted before transforming the magnetic field components, leaving only the perturbation along each axis. A DC offset is also applied to each waveform so that its mean over the event is zero.
+
+Poynting flux along the field is computed from the electric and magnetic field transforms. A factor of $\left( \frac{r}{R_I} \right)^3$ is applied to compensate for the compression in the flux tube, giving the Poynting flux as it would be measured at the ionosphere, in order to mitigate bias due to measurement position. Poloidal and toroidal Poynting flux are given by:
+\begin{linenomath*}
+\begin{align}
+    \overset{\sim}{S_P} &\equiv -\left( \frac{r}{R_I} \right)^3\frac{1}{\mu_0} \overset{\sim}{E_y} \overset{\sim}{B_x^*} &
+    \overset{\sim}{S_T} &\equiv  \left( \frac{r}{R_I} \right)^3\frac{1}{\mu_0} \overset{\sim}{E_x} \overset{\sim}{B_y^*}
+\end{align}
+\end{linenomath*}
+
+An example event, showing electric and magnetic field measurements as well as real and imaginary Poynting flux spectra, is shown in \cref{fig_event}.
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=\textwidth]{figures/fig_event.pdf}
+    \caption{
+        An example half-hour event is shown. On the left are electric and magnetic field measurements. On the right are the real and imaginary components of the corresponding Poynting flux spectra. The black dotted line shows a Gaussian fit of the Poynting flux magnitude. A $\sim\SI{3}{\mHz}$ magnetic oscillation is visible in the poloidal channel, as is an electric field oscillation at $\sim\SI{10}{\mHz}$; peaks appear at both frequencies in the corresponding spectrum, but no poloidal event is selected because the oscillations are not coherent. In the toroidal channel, a wave is evident at \SI{10.3}{\mHz}.
+    }
+    \label{fig_event}
+    \end{center}
+\end{figure}
+
+The poloidal and toroidal channels are independently checked for Pc4 waves. For each channel, a Gaussian profile is fit to the magnitude of the Poynting flux, $|\overset{\sim}{S}\arg{\omega}|$. If the fit fails to converge, or if the peak of the Gaussian does not fall within \SI{5}{\mHz} of the peak value of $\overset{\sim}{S}$, the event is discarded. Events are also discarded if their frequencies fall outside the Pc4 frequency range (\SIrange{7}{25}{\mHz}) or if their amplitudes fall below \SI{0.01}{\mW/\m\squared} (out of consideration for instrument sensitivity). The magnitude threshold is set in Poynting flux instead of magnetic field (which is more typical) in an effort to reduce bias in event selection. When events are selected based on the magnitude of the wave magnetic field, first-harmonic waves become more difficult to detect, due to their magnetic field node at the equator\citep{dai_2015}.
+
+Events are discarded if their parity is ambiguous. The electric field and the magnetic field must be coherent at a level of 0.9 or better, judged at the discrete Fourier transform point closest to the peak of the Gaussian fit. Any event within \SI{3}{\degree} of the magnetic equator is also not used. In order to distinguish an odd mode from an even mode\footnote{
+The techniques used in the present work do not make an explicit distinction between first (second) harmonics and higher odd (even) harmonics. That said, higher harmonics are comparably rare in the inner magnetosphere, so it is reasonable to assume that odd events are mostly first harmonics and even events are mostly second harmonics.}, it's necessary to know whether the observation is made north or south of the equator.
+
+A visual inspection of events shows that those with broad ``peaks'' in their spectra are typically bad fits of noisy or multiharmonic data. A threshold is set at a FWHM of \SI{3}{\mHz} (equally, a standard deviation of \SI{1.27}{\mHz}). Any event with a Gaussian fit broader than that is discarded.
+
+Coarsely speaking, event distributions (shown in \cref{fig_all,fig_mode}) are found to be consistent with past surveys. Toroidal events dominate overall, and are primarily seen on the morning side. Poloidal events are spread broadly in MLT, with a peak near noon and distinctive odd harmonics in the early morning. From there, the simultaneous consideration of harmonic and polarization, combined with the numerical results above, offers significant insight.
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=\textwidth]{figures/fig_all.pdf}
+    \caption{
+        The above figure shows the spatial distribution of all 762 observed Pc4 events. Counts are normalized by the amount of usable data in each bin. The value in the bottom-right corner is the mean of the rate in each bin, with the rate in each bin weighed by the area of that bin. Bins shown in white contain zero events.
+    }
+    \label{fig_all}
+    \end{center}
+\end{figure}
+
+The near-noon peak of poloidal Pc4 events is shown to be due to even events (a majority subset). Odd poloidal events occur preferentially near midnight and across the morning side. Toroidal events are mostly odd, and it is specifically the odd toroidal events which occur on the morningside, while even toroidal events peak near noon.
+
+The spatial distribution of even poloidal events looks much like the spatial distribution of even toroidal events; both distributions peak near noon, and both prefer the evening side to the morning side. The primary difference between them is that the toroidal events are more sharply peaked near noon, while the poloidal events spread more broadly across the afternoon and evening. Similarly, odd poloidal and odd toroidal events exhibit similar distributions, with the toroidal distribution skewed slightly dayward. This is consistent (per the above numerical results) with poloidal events as an effective source for (same-parity) toroidal events on the dayside, and a less-effective source on the nightside.
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=\textwidth]{figures/fig_mode.pdf}
+    \caption{
+        The above figure shows the spatial distribution for the same 762 events shown in \cref{fig_all}, partitioned by polarization and parity. The selection criteria ensure that both properties are known for each event. Event counts are normalized by the time spent by the amount of usable data in each bin. Events for which a wave is present in both the poloidal and toroidal channels is shown in both distributions; there are 54 such events.
+    }
+    \label{fig_mode}
+    \end{center}
+\end{figure}
+
+As a corrolary, the distribution of odd poloidal events is found to closely resemble the distribution of giant pulsations: midnight and morning. This (consistent with the numerical results) suggests that the distinctive properties attributed to giant pulsations are in fact shared by odd poloidal Pc4s overall.
+
+Curiously, odd toroidal events are found to occur at a higher rate than even ones, while the opposite is true for poloidal events. This disparity may offer clues to the source of these waves, or hint at a harmonic dependence in the rate of poloidal-to-toroidal rotation.
+
+%\todo{Do we want to get into event phase? Scott says: Ask Bob. Aaron says: If you want to get into phase, move details to an appendix.}
+
+% ######################################################################
+
+\section{Discussion}
+
+The present work discusses the development of Tuna, a numerical model created with Pc4s in mind. Using Tuna, Pc4s are modeled across varying frequencies, azimuthal modenumbers, and ionospheric conductivity profiles, suggesting novel connections between several properties. Numerical results are complemented by a survey of Pc4 events measured by the Van Allen Probes.
+
+Numerical work suggests that poloidal Pc4s rotate to the toroidal mode on timescales comparable to the oscillation period, suggesting poloidal waves as a significant source for toroidal waves. On the nightside, the dissipation timescale is comparable to the oscillation period as well, so much poloidal energy is lost before rotating to the toroidal mode.
+
+Numerical results also suggest that the distinctive ground signatures attributed to giant pulsations may be features of first-harmonic poloidal Pc4s overall. Generic first harmonic poloidal waves are shown to exhibit peak ground signatures around ${m = 16}$, which are sharply peaked at auroral latitudes, and which occur preferrentially during times of quiet solar activity.
+
+The present results are limited to a first-harmonic, sinusoidal, poloidal driver; however, Tuna has the capacity to deliver more interesting driving waveforms as well, and higher harmonics could be added with trivial modifications to the code.
+
+% -----------------------------------------------------------------------------
+
+Using data from the Van Allen Probes EMFISIS and EMF instruments, a survey of 762 half-hour Pc4 events is presented, with each event classified by both polarization and harmonic.
+
+Odd poloidal events are shown to be concentrated from midnight through the morning --- as with the numerical results, it seems that giant pulsations are unusual when compared to Pc4s overall, but not compared to odd poloidal Pc4s specifically.
+
+Odd toroidal events exhibit a similar distribution to odd poloidal events, but are skewed dayward across the morningside. The same is true for even events: even poloidal events peak at noon and are spread across the evening side, while even toroidal events peak at noon and are far less spread. These distributions are consistent with the poloidal mode as a significant source for same-harmonic toroidal events, particularly on the dayside, as suggested by the numerical results.
+
+Overall, poloidal and toroidal events exhibit disparate distributions because poloidal events are primarily even, while toroidal events are mostly odd; the cause is not apparent.
+
+The body of Pc4 events available in Van Allen Probe data is growing over time. After the probes complete their second precession, event statistics on the dayside should improve considerably. Furthermore, the present work considers the two Van Allen Probes to be independent observers, but future work could look into the few Pc4 events which are observed simultaneously (or in quick succession) by both probes.
 
 %% Example \citet and \citep:
 %  ...as shown by \citet{Boug10}, \citet{Buiz07}, \citet{Fra10},
@@ -311,200 +506,25 @@ Magnetic field values at the top of the atmosphere are used to compute electric 
 
 %  ...has been shown \citep [e.g.,][]{Boug10,Buiz07,Fra10}.
 
+% ######################################################################
 
+\appendix
 
+\section{Appendix}
 
+The source code for Tuna is available at \texttt{https://github.com/UMN-Space-Physics}, as are the scripts used to download, process, and plot Van Allen Probes data.
+
+% ######################################################################
+
+\acknowledgments
+
+\section{Acknowledgements}
+
+This work was aided by discussions with Cynthia Cattell, Tom Jones, Lindsay Glesener, Yan Song, and Sheng Tian. Funding came from the Office of the Vice President for Research at the University of Minnesota, as well as NSF grant AGS-1405383 and NASA grant NNX12AD14G. Supercomputer resources were provided by the Minnesota Supercomputing Institute. Travel support was provided in part by GEM.
 
 % ######################################################################
 
 \bibliography{bibliography.bib}
-
-
-%Text here ===>>>
-
-%%
-
-%  Numbered lines in equations:
-%  To add line numbers to lines in equations,
-%  \begin{linenomath*}
-%  \begin{equation}
-%  \end{equation}
-%  \end{linenomath*}
-
-
-
-%% Enter Figures and Tables near as possible to where they are first mentioned:
-%
-% DO NOT USE \psfrag or \subfigure commands.
-%
-% Figure captions go below the figure.
-% Table titles go above tables;  other caption information
-%  should be placed in last line of the table, using
-% \multicolumn2l{$^a$ This is a table note.}
-%
-%----------------
-% EXAMPLE FIGURE
-%
-% \begin{figure}[h]
-% \centering
-% when using pdflatex, use pdf file:
-% \includegraphics[width=20pc]{figsamp.pdf}
-%
-% when using dvips, use .eps file:
-% \includegraphics[width=20pc]{figsamp.eps}
-%
-% \caption{Short caption}
-% \label{figone}
-%  \end{figure}
-%
-% ---------------
-% EXAMPLE TABLE
-%
-% \begin{table}
-% \caption{Time of the Transition Between Phase 1 and Phase 2$^{a}$}
-% \centering
-% \begin{tabular}{l c}
-% \hline
-%  Run  & Time (min)  \\
-% \hline
-%   $l1$  & 260   \\
-%   $l2$  & 300   \\
-%   $l3$  & 340   \\
-%   $h1$  & 270   \\
-%   $h2$  & 250   \\
-%   $h3$  & 380   \\
-%   $r1$  & 370   \\
-%   $r2$  & 390   \\
-% \hline
-% \multicolumn{2}{l}{$^{a}$Footnote text here.}
-% \end{tabular}
-% \end{table}
-
-%% SIDEWAYS FIGURE and TABLE
-% AGU prefers the use of {sidewaystable} over {landscapetable} as it causes fewer problems.
-%
-% \begin{sidewaysfigure}
-% \includegraphics[width=20pc]{figsamp}
-% \caption{caption here}
-% \label{newfig}
-% \end{sidewaysfigure}
-%
-%  \begin{sidewaystable}
-%  \caption{Caption here}
-% \label{tab:signif_gap_clos}
-%  \begin{tabular}{ccc}
-% one&two&three\\
-% four&five&six
-%  \end{tabular}
-%  \end{sidewaystable}
-
-%% If using numbered lines, please surround equations with \begin{linenomath*}...\end{linenomath*}
-%\begin{linenomath*}
-%\begin{equation}
-%y|{f} \sim g(m, \sigma),
-%\end{equation}
-%\end{linenomath*}
-
-%%% End of body of article
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Optional Appendix goes here
-%
-% The \appendix command resets counters and redefines section heads
-%
-% After typing \appendix
-%
-%\section{Here Is Appendix Title}
-% will show
-% A: Here Is Appendix Title
-%
-%\appendix
-%\section{Here is a sample appendix}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Optional Glossary, Notation or Acronym section goes here:
-%
-%%%%%%%%%%%%%%
-% Glossary is only allowed in Reviews of Geophysics
-%  \begin{glossary}
-%  \term{Term}
-%   Term Definition here
-%  \term{Term}
-%   Term Definition here
-%  \term{Term}
-%   Term Definition here
-%  \end{glossary}
-
-%
-%%%%%%%%%%%%%%
-% Acronyms
-%   \begin{acronyms}
-%   \acro{Acronym}
-%   Definition here
-%   \acro{EMOS}
-%   Ensemble model output statistics
-%   \acro{ECMWF}
-%   Centre for Medium-Range Weather Forecasts
-%   \end{acronyms}
-
-%
-%%%%%%%%%%%%%%
-% Notation
-%   \begin{notation}
-%   \notation{$a+b$} Notation Definition here
-%   \notation{$e=mc^2$}
-%   Equation in German-born physicist Albert Einstein's theory of special
-%  relativity that showed that the increased relativistic mass ($m$) of a
-%  body comes from the energy of motion of the body—that is, its kinetic
-%  energy ($E$)—divided by the speed of light squared ($c^2$).
-%   \end{notation}
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  ACKNOWLEDGMENTS
-%
-% The acknowledgments must list:
-%
-% •	All funding sources related to this work from all authors
-%
-% •	Any real or perceived financial conflicts of interests for any
-%	author
-%
-% •	Other affiliations for any author that may be perceived as
-% 	having a conflict of interest with respect to the results of this
-% 	paper.
-%
-% •	A statement that indicates to the reader where the data
-% 	supporting the conclusions can be obtained (for example, in the
-% 	references, tables, supporting information, and other databases).
-%
-% It is also the appropriate place to thank colleagues and other contributors.
-% AGU does not normally allow dedications.
-
-
-\acknowledgments
- = enter acknowledgments here =
-
-
-%% ------------------------------------------------------------------------ %%
-%% Citations
-
-% Please use ONLY \citet and \citep for reference citations.
-% DO NOT use other cite commands (e.g., \cite, \citeyear, \nocite, \citealp, etc.).
-
-
-%% Example \citet and \citep:
-%  ...as shown by \citet{Boug10}, \citet{Buiz07}, \citet{Fra10},
-%  \citet{Ghel00}, and \citet{Leit74}.
-
-%  ...as shown by \citep{Boug10}, \citep{Buiz07}, \citep{Fra10},
-%  \citep{Ghel00, Leit74}.
-
-%  ...has been shown \citep [e.g.,][]{Boug10,Buiz07,Fra10}.
 
 
 
