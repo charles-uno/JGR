@@ -149,7 +149,7 @@ Tuna's grid follows the modified dipole coordinates described in \citet{lysak_20
 
 Here, $R$ is the geocentric radius of the ionospheric boundary, taken to be at $R_E + \SI{100}{\km}$, $\theta_0$ is the invariant colatitude, and $r$, $\theta$, and $\phi$ are the usual spherical coordinates.
 
-A thorough discussion of these coordinates, and explicit forms for the resulting basis vectors and metric tensor components can be found in \citet{lysak_2004}. At present, it is sufficient to note that the coordinates are nonorthogonal, and thus have covariant and contravariant basis vectors (${\underline{e}_i \equiv \frac{\partial u^i}{\partial \underline{r}}}$ and ${\underline{e}^i \equiv \frac{\partial \underline{r}}{\partial u^i}}$ respectively) that do not line up with one another. However, both the covariant and contravariant basis vectors are important to the model.
+A thorough discussion of these coordinates, and explicit forms for the resulting basis vectors and metric tensor components can be found in \citet{lysak_2004}. At present, it is sufficient to note that the coordinates are nonorthogonal, and thus have covariant and contravariant basis vectors (${\underline{e}_i \equiv \frac{\partial u^i}{\partial \underline{r}}}$ and ${\underline{e}^i \equiv \frac{\partial \underline{r}}{\partial u^i}}$ respectively) that are not parallel to one another. However, both the covariant and contravariant basis vectors are important to the model.
 
 The basis vectors $\underline{e}^1$, $\underline{e}^2$, and $\underline{e}_3$ are parallel to the usual dipole coordinates, as shown in \cref{to_dipole}, which is the natural basis for the conductivity and dielectric tensors.
 \begin{linenomath*}
@@ -175,15 +175,15 @@ In addition, at the ionospheric boundary, $\underline{e}_1$, $\underline{e}_2$, 
 
 As a result, Tuna's grid is aligned everywhere to the zeroth-order dipole magnetic field, while also supporting a fixed-altitude ionospheric boundary.
 
-The results shown in the present work use a grid of 150 values in $u^1$ (150 field lines) and 350 values in $u^3$ (350 grid points per field line). Spacing is on the order of \SI{10}{\km} near the ionosphere and \SI{1000}{\km} at the equator of the outermost field line. The inner boundary is placed at $L = 2$, and the outer boundary at $L = 10$. The time step is determined from the smallest Alfve\'n crossing time, scaled down by a Courant factor of \num{0.1}. Typically, $\delta \! t \sim \SI{10}{\us}$.
+The results shown in the present work use a grid of 150 values in $u^1$ (150 field lines) and 350 values in $u^3$ (350 grid points per field line). Spacing is on the order of \SI{10}{\km} near the ionosphere and \SI{1000}{\km} at the equator of the outermost field line. The inner boundary is placed at $L = 2$, and the outer boundary at $L = 10$. The time step is determined from the smallest zone crossing time for an Alfve\'n wave, scaled down by a Courant factor of \num{0.1}. Typically, $\delta \! t \sim \SI{10}{\us}$.
 
 % ======================================================================
 
 Like the similar models of \citet{lysak_2013} and \citet{waters_2013}, Tuna can be driven via compression of the simulation's outer boundary -- typically taken as a proxy for solar wind activity. However, the shear and compressional Alfve\'n modes decouple at high $m$, preventing such waves from propagating across magnetic field lines. In order to model noncompressional Pc4 activity at $L\sim5$, it is necessary to inject energy at $L\sim5$.
 
-To this end, Tuna also allows simulations to be driven via modulation of the ring current, a proxy for substorm injection events. For the runs shown, the driving current is spread over a cross section of $\sim\SI{1}{R_E}^2$, centered just outside the plasmapause and just off the equator. In effect, the energy is delivered into a first-harmonic poloidal wave.
+To this end, Tuna also allows simulations to be driven via modulation of the ring current, a proxy for substorm injection events. For the runs shown, the driving current is spread over a cross section of $\sim\SI{1}{R_E}^2$, centered just outside the plasmapause and just off the equator. In effect, the symmetry in the driver preferentially excites a first-harmonic poloidal wave.
 
-The magnitude of the driving current is estimated from a discrete Fourier transform of the Sym-H storm index during the June 1, 2013 storm. Sym-H is tabulated once per minute, which is too slow to capture activity in the Pc4 band directly. However, a fit of the pink noise spectrum, shown in \cref{fig_symh}, suggests that activity in the Pc4 range could plausibly give rise to a field at Earth's surface on the order of \SI{e-2}{\nT}.
+The magnitude of the driving current is estimated from a discrete Fourier transform of the Sym-H storm index during the June 1, 2013 storm. Sym-H is tabulated once per minute, which is too slow to capture activity in the Pc4 band directly. However, a fit of the pink noise spectrum, shown in \cref{fig_symh}, suggests that activity in the Pc4 range could give rise to a field at Earth's surface on the order of \SI{e-2}{\nT}.
 
 This corresponds to a ring current perturbation on the order of \SI{1}{\mega\A}, or $\sim\SI{e-4}{\uA/\m\squared}$ spread over $\sim\SI{1}{\RE}^2$. For the runs shown in the present work, the driving current is azimuthally directed, and its magnitude varies sinusoidally.
 
@@ -191,7 +191,7 @@ This corresponds to a ring current perturbation on the order of \SI{1}{\mega\A},
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_symh.pdf}
     \caption{
-    Shown in red is $\frac{ \SI{0.1}{\nT} }{f}$. The vertical axis is scaled to inverse minutes. The width of the Pc4 frequency band (\SIrange{7}{25}{\mHz}) is about one inverse minute.
+    The left frame shows the Sym-H storm index during the June 2013 storm. On the right is the Fourier transform of that index, scaled to \si{nT}-minutes, along with a fit of the pink noise spectrum, $\frac{ \SI{0.1}{\nT} }{f}$, shown in red. The width of the Pc4 frequency band (\SIrange{7}{25}{\mHz}) is about one inverse minute, suggesting Pc4 contribution to Sym-H of about \SI{e-2}{\nT} at Earth's surface. This suggests \SI{1}{\mega\A} as an appropriate scale for ring current perturbations in the Pc4 range. 
     }
     \label{fig_symh}
     \end{center}
