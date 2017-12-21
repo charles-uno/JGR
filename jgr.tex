@@ -10,6 +10,21 @@
 % Aaron Breneman -- awbrenem@gmail.com
 % Scott Thaller -- thaller@physics.umn.edu
 
+% TODO
+
+% Clean up informal language.
+% De-emphasize FLRs; we are talking about magnetic pulsations more broadly.
+% Maybe write out the equations explicitly, rather than just pointing to Bob's paper? Leapfrog method, Yee grid.
+% Perhaps a better way of quantifying mode conversion, like d(lod energy)/dt?
+% Add quantitative description of dissipation timescales.
+% Make more clear that driving is ongoing?
+% More, clearer descriptions/citations for the ionospheric profiles.
+% Paraphrase stuff from Bob about existing ULF modeling, context.
+% Citation for Pc4 pulsations being limited to L=4 to 7.
+
+% Maybe use a better color scheme in the plots? (done?)
+% Explicitly justify Tuna over other models -- see proposal from Bob. (done?)
+
 % ######################################################################
 
 % To submit your paper:
@@ -104,9 +119,13 @@ Results are then compared to a survey of 762 Pc4 observations using data collect
 
 \section{Numerical Model}
 
-Numerical results are obtained using Tuna, a new linear Alfve\'n wave code based on that described in \citet{lysak_2013}. Tuna models the evolution of three-dimensional electric and magnetic fields over a (two-dimensional) meridional slice of the magnetosphere. The code can colloquially be said to have two and a half (``tuna half'') dimensions.
+Numerical results are obtained using Tuna, a new linear Alfve\'n wave code based on that described in \citet{lysak_2013}. Tuna models a (two-dimensional) meridional slice of the magnetosphere, but evaluates Maxwell's equations in all three dimensions. Colloquially, Tuna can be said to have two and a half (``tuna half'') dimensions.
 
-For the purpose of evaluating derivatives in the azimuthal direction, fields are taken to vary as $\exp \left(i m \phi\right)$ for fixed azimuthal modenumber $m$. Since azimuthal derivatives are replaced by a factor of $i m$, fields are complex-valued. This assumption is easily justified in the case of Pc4 pulsations, which are typically localized in MLT\citep{anderson_1990,dai_2015,engebretson_1992,liu_2009}.
+The two-dimensional grid allows Tuna to consider a realistic ionosphere, which is prohibitively expensive for a true three-dimensional code. The three-dimensional derivatives allow Tuna to capture wave behavior in the azimuthal direction, which is invisible to traditional two-dimensional models.
+
+There is no grid spacing in the azimuthal direction, so azimuthal derivatives are evaluated by taking all fields to vary as $\exp \left(i m \phi\right)$ for fixed azimuthal modenumber $m$. In Maxwell's equations, $\frac{\partial}{\partial \phi}$ is simply replaced by $i m$. Fields are complex-valued as a result, with the imaginary component corresponding to a phase shift in the azimuthal direction compared to the real component.
+
+The assumption of a fixed $\exp \left(i m \phi\right)$ neglects the potentially-significant differences between the dayside and nightside magnetospheres. However, those differences are of little concern when modeling Pc4 pulsations, since they are typically localized in MLT\citep{anderson_1990,dai_2015,engebretson_1992,liu_2009}.
 
 % ======================================================================
 
@@ -191,7 +210,7 @@ This corresponds to a ring current perturbation on the order of \SI{1}{\mega\A},
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_symh.pdf}
     \caption{
-    The left frame shows the Sym-H storm index during the June 2013 storm. On the right is the Fourier transform of that index, scaled to \si{nT}-minutes, along with a fit of the pink noise spectrum, $\frac{ \SI{0.1}{\nT} }{f}$, shown in red. The width of the Pc4 frequency band (\SIrange{7}{25}{\mHz}) is about one inverse minute, suggesting Pc4 contribution to Sym-H of about \SI{e-2}{\nT} at Earth's surface. This suggests \SI{1}{\mega\A} as an appropriate scale for ring current perturbations in the Pc4 range. 
+    The left frame shows the Sym-H storm index during the June 2013 storm. On the right is the Fourier transform of that index, scaled to \si{nT}-minutes, along with a fit of the pink noise spectrum, $\frac{ \SI{0.1}{\nT} }{f}$, shown in red. The width of the Pc4 frequency band (\SIrange{7}{25}{\mHz}) is about one inverse minute, suggesting Pc4 contribution to Sym-H of about \SI{e-2}{\nT} at Earth's surface. This suggests \SI{1}{\mega\A} as an appropriate scale for ring current perturbations in the Pc4 range.
     }
     \label{fig_symh}
     \end{center}
@@ -428,7 +447,7 @@ An example event, showing electric and magnetic field measurements as well as re
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_event.pdf}
     \caption{
-        An example half-hour event is shown. On the left are electric and magnetic field measurements. On the right are the real and imaginary components of the corresponding Poynting flux spectra. The black dotted line shows a Gaussian fit of the Poynting flux magnitude. A $\sim\SI{3}{\mHz}$ magnetic oscillation is visible in the poloidal channel, as is an electric field oscillation at $\sim\SI{10}{\mHz}$; peaks appear at both frequencies in the corresponding spectrum, but no poloidal event is selected because the oscillations are not coherent. In the toroidal channel, a wave is evident at \SI{10.3}{\mHz}.
+        An example half-hour event is shown. On the left are electric and magnetic field measurements. On the right are the real and imaginary components of the corresponding Poynting flux spectra. The black dotted line shows a Gaussian fit of the Poynting flux magnitude. A toroidal wave is evident at \SI{10.3}{\mHz}. The poloidal channel also shows activity near \SI{10}{\mHz}; however, no poloidal event is selected due to the comparably-strong oscillation at \SI{3}{\mHz}. The \SI{3}{\mHz} oscillation is an artifact of a thruster firing roughly 12 hours earlier.
     }
     \label{fig_event}
     \end{center}
