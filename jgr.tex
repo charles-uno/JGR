@@ -17,11 +17,11 @@
 % Maybe write out the equations explicitly, rather than just pointing to Bob's paper? Leapfrog method, Yee grid.
 % Perhaps a better way of quantifying mode conversion, like d(lod energy)/dt?
 % Add quantitative description of dissipation timescales.
-% Make more clear that driving is ongoing?
 % More, clearer descriptions/citations for the ionospheric profiles.
 % Paraphrase stuff from Bob about existing ULF modeling, context.
 % Citation for Pc4 pulsations being limited to L=4 to 7.
 
+% Make more clear that driving is ongoing? (done?)
 % Maybe use a better color scheme in the plots? (done?)
 % Explicitly justify Tuna over other models -- see proposal from Bob. (done?)
 
@@ -191,7 +191,6 @@ In addition, at the ionospheric boundary, $\underline{e}_1$, $\underline{e}_2$, 
 \end{align}
 \end{linenomath*}
 
-
 As a result, Tuna's grid is aligned everywhere to the zeroth-order dipole magnetic field, while also supporting a fixed-altitude ionospheric boundary.
 
 The results shown in the present work use a grid of 150 values in $u^1$ (150 field lines) and 350 values in $u^3$ (350 grid points per field line). Spacing is on the order of \SI{10}{\km} near the ionosphere and \SI{1000}{\km} at the equator of the outermost field line. The inner boundary is placed at $L = 2$, and the outer boundary at $L = 10$. The time step is determined from the smallest zone crossing time for an Alfve\'n wave, scaled down by a Courant factor of \num{0.1}. Typically, $\delta \! t \sim \SI{10}{\us}$.
@@ -204,7 +203,7 @@ To this end, Tuna also allows simulations to be driven via modulation of the rin
 
 The magnitude of the driving current is estimated from a discrete Fourier transform of the Sym-H storm index during the June 1, 2013 storm. Sym-H is tabulated once per minute, which is too slow to capture activity in the Pc4 band directly. However, a fit of the pink noise spectrum, shown in \cref{fig_symh}, suggests that activity in the Pc4 range could give rise to a field at Earth's surface on the order of \SI{e-2}{\nT}.
 
-This corresponds to a ring current perturbation on the order of \SI{1}{\mega\A}, or $\sim\SI{e-4}{\uA/\m\squared}$ spread over $\sim\SI{1}{\RE}^2$. For the runs shown in the present work, the driving current is azimuthally directed, and its magnitude varies sinusoidally.
+This corresponds to a ring current perturbation on the order of \SI{1}{\mega\A}, or $\sim\SI{e-4}{\uA/\m\squared}$ spread over $\sim\SI{1}{\RE}^2$. For the runs shown in the present work, the driving current is azimuthally directed, and its magnitude varies sinusoidally throughout the duration of the run.
 
 \begin{figure}
     \begin{center}
@@ -274,7 +273,7 @@ For the sake of brevity, the present work does not expand the terms of \cref{amp
 
 Dirichlet and Neumann conditions are applied to the electric and magnetic fields respectively at the inner and outer boundaries; that is, $\underline{E}$ goes to zero at the boundary, as does the spatial derivative of $\underline{B}$. Results of the present work are robust under an exchange of the two.
 
-Between the top of the neutral atmosphere and the bottom of the ionosphere, the model includes a thin, horizontal current sheet representing the ionosphere's $E$ layer\citep{lysak_2004}. By integrating Amp\`ere's law over the layer, it can be shown\citep{fujita_1988} that the horizontal electric field values at the edge of the grid are determined by the jump in the horizontal magnetic fields:
+Between the top of the neutral atmosphere and the bottom of the ionosphere, the model includes a thin, horizontal current sheet at an altitude of \SI{100}{\km} representing the ionosphere's $E$ layer\citep{lysak_2004}. By integrating Amp\`ere's law over the layer, it can be shown\citep{fujita_1988} that the horizontal electric field values at the edge of the grid are determined by the jump in the horizontal magnetic fields:
 \begin{linenomath*}
 \begin{align}
   \label{jump_condition}
@@ -314,7 +313,7 @@ Magnetic field values at the top of the atmosphere are used to compute electric 
 
 The present section discusses the numerical resuts shown in \cref{fig_brms,fig_energy,fig_layers_day,fig_layers_night,fig_ground_day,fig_ground_night}. In each figure, an lattice of plots shows a side-by-side comparison of an ensemble of runs conducted with Tuna.
 
-In \cref{fig_brms}, the distributions of magnetic field perturbations are shown for four \SI{300}{\second} runs conducted with Tuna using a dayside ionospheric profile and \SI{22}{\mHz} driving. Each column shows a different value of $m$ (1, 4, 16, and 64), while the rows show RMS poloidal, toroidal, and compressional magnetic field strengths. At low $m$ (left), the three components are comparable in magnitude; as $m$ increases (to the right), the compressional component becomes appreciably weaker and the distribution of energy appears more guided. Toroidal wave activity is concentrated near resonant $L$ shells, while poloidal activity is spread more broadly -- particularly at low $m$.
+In \cref{fig_brms}, the distributions of magnetic field perturbations are shown for four \SI{300}{\second} runs conducted with Tuna using a dayside ionospheric profile and \SI{22}{\mHz} driving throughout the duration of the run. Each column shows a different value of $m$ (1, 4, 16, and 64), while the rows show RMS poloidal, toroidal, and compressional magnetic field strengths. At low $m$ (left), the three components are comparable in magnitude; as $m$ increases (to the right), the compressional component becomes appreciably weaker and the distribution of energy appears more guided. Toroidal wave activity is concentrated near resonant $L$ shells, while poloidal activity is spread more broadly -- particularly at low $m$.
 
 \begin{figure}
     \begin{center}
@@ -343,7 +342,7 @@ Whereas past work made use of an initial wave and a perfectly-conducting boundar
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_energy.pdf}
     \caption{
-        Each cell above shows integrated poloidal (blue) and toroidal (red) energy as a function of time for a single run. The top row shows runs using a dayside ionospheric profile (driven at \SI{22}{\mHz}), and the bottom row nightside (driven at \SI{16}{\mHz}). Driving is purely poloidal, and energy converts over time to the toroidal mode. On the dayside, it is clear that energy converts faster when $m$ is smaller, consistent with the findings of \citet{mann_1995}. On the nightside, the dissipation timescale is comparable to the conversion timescale, so there is no long-term accumulation of energy in either mode.
+        Each cell above shows integrated poloidal (blue) and toroidal (red) energy as a function of time for a single run. The top row shows runs using a dayside ionospheric profile (driven at \SI{22}{\mHz}), and the bottom row nightside (driven at \SI{16}{\mHz}). Driving is purely poloidal, and energy converts over time to the toroidal mode. On the dayside, it is clear that energy converts faster when $m$ is smaller, consistent with the findings of \citet{mann_1995}. On the nightside, the dissipation timescale is comparable to the conversion timescale; despite the fact that energy is continuously injected into the system via the driving current, there is no long-term accumulation of energy in the toroidal or poloidal mode.
     }
     \label{fig_energy}
     \end{center}
@@ -372,7 +371,7 @@ The behavior on the nightside (\cref{fig_layers_night}) is in several ways simil
     \begin{center}
     \includegraphics[width=\textwidth]{figures/fig_layers_night.pdf}
     \caption{
-        The above figure is analogous to \cref{fig_layers_day}, except that it shows runs carried out using a nightside ionospheric profile instead of dayside. Four runs are shown, each at a different $m$, and the rows show poloidal and toroidal energy density as a function of $L$ and time. In a general sense, the behavior matches that seen on the dayside: poloidal activity is broad in $L$ while toroidal waves appear only where resonant. The difference is in the wave magnitude. With dayside and nightside driving at the same magnitude, the response on the nightside is smaller by an order of magnitude due to the increased Joule dissipation.
+        The above figure is analogous to \cref{fig_layers_day}, except that it shows runs carried out using a nightside ionospheric profile instead of dayside. Four runs are shown, each at a different $m$, and the rows show poloidal and toroidal energy density as a function of $L$ and time. In a general sense, the behavior matches that seen on the dayside: poloidal activity is broad in $L$ while toroidal waves appear only where resonant. The difference is in the wave magnitude. The ongoing driving current is the same between the dayside and nightside runs, but the response on the nightside is smaller by an order of magnitude due to increased Joule dissipation.
     }
     \label{fig_layers_night}
     \end{center}
