@@ -19,8 +19,8 @@
 % Add quantitative description of dissipation timescales.
 % More, clearer descriptions/citations for the ionospheric profiles.
 % Paraphrase stuff from Bob about existing ULF modeling, context.
-% Citation for Pc4 pulsations being limited to L=4 to 7.
 
+% Citation for Pc4 pulsations being limited to L=4 to 7. (done)
 % Make more clear that driving is ongoing? (done?)
 % Maybe use a better color scheme in the plots? (done?)
 % Explicitly justify Tuna over other models -- see proposal from Bob. (done?)
@@ -81,16 +81,16 @@
 % ######################################################################
 
 \begin{abstract}
-Field line resonances (FLRs) in the Pc4 range (\SIrange{7}{25}{\mHz}) serve to energize magnetospheric particles through drift-resonant interactions, carry energy from high to low altitude, induce currents in the magnetosphere, and scatter particles into the atmosphere. Wave structure and polarization significantly impact these behaviors. The present work showcases a new two and a half dimensional code, Tuna, ideally suited to model FLRs, with the ability to consider a broad range of azimuthal modenumbers, coupling between the poloidal, toroidal, and compressional modes, and arbitrary harmonic structure. Using Tuna, the interplay between Joule dissipation and poloidal-to-toroidal conversion is considered for Pc4 pulsations under both dayside and nightside conditions. An effort is also made to incorporate giant pulsations, a subclass of Pc4 noted for its distinctive ground signatures, into the broader Pc4 morphology. Numerical results are supplemented by a survey of 762 Pc4 pulsation events using data from the Van Allen Probes, the first such survey to characterize each event by both polarization and harmonic. The combination of numerical and observational results suggests an explanation for the disparate spatial distributions observed in poloidal and toroidal Pc4 events.
+Resonant oscillations in the Pc4 range (\SIrange{7}{25}{\mHz}) serve to energize magnetospheric particles through drift-resonant interactions, carry energy from high to low altitude, induce currents in the magnetosphere, and scatter particles into the atmosphere. Wave structure and polarization significantly impact these behaviors. The present work showcases a new two and a half dimensional code, Tuna, ideally suited to model such waves, with the ability to consider a broad range of azimuthal modenumbers, coupling between the poloidal, toroidal, and compressional modes, and arbitrary harmonic structure. Using Tuna, the interplay between Joule dissipation and poloidal-to-toroidal conversion is considered for Pc4 pulsations under both dayside and nightside conditions. An effort is also made to incorporate giant pulsations, a subclass of Pc4 noted for its distinctive ground signatures, into the broader Pc4 morphology. Numerical results are supplemented by a survey of 762 Pc4 pulsation events using data from the Van Allen Probes, the first such survey to characterize each event by both polarization and harmonic. The combination of numerical and observational results suggests an explanation for the disparate spatial distributions observed in poloidal and toroidal Pc4 events.
 \end{abstract}
 
 % ######################################################################
 
 \section{Introduction}
 
-Pc4 pulsations are magnetic pulsations with periods of a minute or two (\SIrange{7}{25}{\mHz}), corresponding to resonant oscillations of field lines with $4 \lesssim L \lesssim 7$. They are notable for their drift and drift-bounce resonant interactions with trapped energetic particles\citep{southwood_1976}, which can accelerate those particles\citep{elkington_1999} and lead to radial diffusion\citep{elkington_2003}. Giant pulsations, a subclass of Pc4 pulsation, have been a topic of particular interest for over a century, due to their large, strikingly sinusoidal waveforms\citep{brekke_1987}.
+Pc4 pulsations are magnetic pulsations with periods of a minute or two (\SIrange{7}{25}{\mHz}), corresponding to field line resonances (FLRs) at $4 \lesssim L \lesssim 7$\citep[and references therein]{anderson_1990}. These FLRs are notable for their drift and drift-bounce resonant interactions with trapped energetic particles\citep{southwood_1976}, which can accelerate those particles\citep{elkington_1999} and lead to radial diffusion\citep{elkington_2003}. Giant pulsations, a subclass of Pc4 pulsation, have been a topic of particular interest for over a century, due to their large, strikingly sinusoidal waveforms\citep{brekke_1987}.
 
-A field line resonance (FLR) in the Pc4 range is subject to three mutually-independent classifications: harmonic number, azimuthal modenumber, and polarization.
+A FLR in the Pc4 range is subject to three mutually-independent classifications: harmonic number, azimuthal modenumber, and polarization.
 
 Harmonic number is a measure of FLR wavelength along the geomagnetic field line. First-harmonic FLRs are associated with drift resonance, while the second harmonic is associated with drift-bounce resonance\citep{dai_2013,poulter_1983}. In the limit of high conductivity, the wavelength of a second-harmonic FLR is equal to the length of its magnetic field line; it exhibits two nodes (antinodes) in the magnetic (electric) perturbation, with magnentic antinodes (electric nodes) at the northern and southern foot points and at the equator. A first-harmonic (also called fundamental-mode) FLR has a wavelength twice that long, with a single magnetic (electric) node (antinode) at the equator, and magnetic antinodes (electric nodes) only at the foot points. Harmonic can in principle be determined from a wave's frequency; however, disagreements can arise due to uncertainty in the Alfv\'en speed profile along flux tubes\citep{takahashi_2013}. Unambiguous classification of an event's harmonic requires two measurements, which can be achieved in several different ways: ground-based measurements can be taken at conjugate field line foot points, a ground measurement can be complimented by a simultaneous in situ measurement, or a single spacecraft can collect both electric and magnetic field data\citep{dai_2015}. The third approach has only recently become possible, via the THEMIS\citep{angelopoulos_2008} and Van Allen Probes\citep{stratton_2012} missions.
 
@@ -102,7 +102,7 @@ It is further notable that the ultra-low frequency regime, wave polarization is 
 
 Among magnetic pulsations in the Pc4 frequency range, giant pulsations are of particular interest. These ground signatures are strong and well-formed, so much so that they have been tabulated by eye for over a century\citep{birkeland_1901}. The harmonic structure of giant pulsations was a point of contention for decades, but recent multisatellite observations suggest that they are first harmonics\citep{glassmeier_1999,hillebrand_1982,kokubun_1989,takahashi_2011}. Giant pulsations are poloidally polarized, and are most prevalent in the early morning\citep{chisham_1991,glassmeier_1980,rostoker_1979}, a distinct break from Pc4s in general which are mostly toroidal with a peak near noon\citep{anderson_1990}. Giant pulsations are most common during times of low solar activity\citep{brekke_1987}. They are noted for their localization in both $L$ and MLT\citep{anderson_1990}. And they exhibit a distinctive polarization flip by latitude, even within a single event: poleward ground signatures are counterclockwise, while those closer to the equator are clockwise\citep{eleman_1967}.
 
-Past models of the magnetosphere have been limited in their consideration of FLRs. Reasons include overly-simplified treatment of the ionospheric boundary, no consideration of the plasmapause, limited range in $m$, and the inability to compute ground signatures. The present work showcases a model which addresses these issues, providing a bird's-eye view of the structure and evolution of FLRs.
+Past models of the magnetosphere have been limited in their consideration of FLRs, largely due to simplifying assumptions made near the atmospheric boundary: simplified handling of the ionosphere, no consideration of the plasmapause, the inability to compute ground signatures, limited range in $m$, and so on. The present work showcases a new model which addresses those issues, providing a realistic view of the structure and evolution of FLRs.
 
 Using this model, the present work explores novel connections between several of the seemingly-disparate Pc4 properties listed above. Poloidal-to-toroidal conversion timescales are compared to dayside and nightside Joule dissipation timescales; the implications to Pc4 observations are considered. The strength and structure of ground signatures is investigated as functions of ionospheric and driving conditions. And the distinctive properties associated with giant pulsations are matched against those of fundamental poloidal Pc4s in general.
 
@@ -119,6 +119,66 @@ Results are then compared to a survey of 762 Pc4 observations using data collect
 
 \section{Numerical Model}
 
+
+
+
+
+
+
+
+
+
+
+FROM BOB. PARAPHRASE THIS:
+
+
+
+
+
+Global MHD models
+driving by dynamic pressure variations in the solar wind
+Claudepierre, Ream and Shi have looked at ULF waves in global MHD models, but have trouble going above 20mHz. Attenuation due to the grid.
+
+
+transient behavior of a system rather than long-term evolution. 5-10 minutes is typical for codes focused on MI coupling. Linearized maxwell's equations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+These examples illustrate the importance of understanding the dynamics of ULF waves in the magnetosphere.  The dynamics of the magnetosphere as a whole has generally been described with global MHD models.  Claudepierre et al. (2009, 2010) have used the Lyon-Fedder-Mobarry (LFM) model (Lyon et al., 2004; Merkin and Lyon, 2010) to investigate ULF waves driven by a sinusoidal dynamic pressure variation in the solar wind.  Their results suggest that there was a fundamental cavity resonance near 10 mHz for the parameters in their simulation.  However, they note an important limitation of the model, in that fluctuations at frequencies higher than about 20 mHz were attenuated due to the limited spatial resolution.  Ream et al. (2013, 2015) modeled the Pi2 waves generated by flow bursts in the tail in the 6-16 mHz range.  By comparing two different global MHD models, they investigated the influence of the ionospheric conductivity, showing that the flows were slowed more for high conductivity than for low conductivity.  Furthermore, Shi et al. (2013, 2014) studied the magnetospheric response to a sudden impulse, noting that 3 out of 13 cases studied showed evidence for field line resonance.
+
+However, global MHD models are limited in how well they treat ULF waves, particularly those at higher frequencies.  As noted above, waves with frequencies greater than about 20 mHz are attenuated due to the spatial resolution of the codes.  In addition, most global MHD models  place the inner (ionospheric) boundary at a radial distance of about 3 RE with a spatial resolution of a few hundred kilometers mapped to the ionosphere (e.g., Slinker et al., 2001; Raeder et al., 2001; Lyon et al., 2004; Merkin and Lyon, 2010).  Thus, there is a spatial gap between the low-altitude boundary of most global MHD models and the altitude of the ionosphere, which limits the ability of such codes to describe observations in the ionosphere (e.g., radar observations of convection) and in low Earth orbit (e.g., Lühr et al., 2016).  In these models, the electric field in the ionosphere is assumed to be electrostatic, an assumption that can be violated, particularly at higher frequencies where shear Alfvén waves in the Pi1 and Pc1 frequency range can mode convert into fast mode waves that can propagate across field lines in the ionospheric waveguide.
+
+It is difficult to extend global MHD models to lower altitudes.  One reason is that the Alfvén speed can become very high in this region, approaching the speed of light (the Alfvén speed is 105 km/s for a magnetic field of 0.05 G and a density of 1 cm–3, typical parameters in the auroral acceleration region).  Since the time step of MHD models is limited by the Courant condition, which states that any signal can travel no more than one spatial cell in one time step, such wave speeds would require unacceptably low values for the time step.  Indeed models such as the Lyon-Fedder-Mobarry (LFM) model use a ``Boris correction'' (e.g., Lyon et al., 2004) to limit wave speeds which limits the ability of such codes to model waves in the inner magnetosphere.  According to the OpenGGCM model description on the CCMC web page, "As a consequence [of the Boris correction] wave propagation in the inner magnetosphere is artificially slowed."
+
+To overcome these difficulties, many researchers have developed more localized models of magnetosphere-ionosphere (M-I) coupling that can run at a higher spatial and temporal resolution than the full global models to capture the narrow spatial scales and fast time scales associated with many low-altitude processes (e.g., Mallinckrodt and Carlson, 1978; Goertz and Boswell, 1979; Lysak and Dum, 1983; Zhu and Kan, 1990; Rankin et al., 1994, 1999; Streltsov and Lotko, 1995, 1999, 2003; Lotko et al., 1998; Rankin and Tikhonchuk, 1998; Lysak, 1997, 1999, 2004; Lysak and Song, 2001, 2006; L. Zhu et al., 2000; H. Zhu et al., 2001; Streltsov et al., 2002; Otto et al., 2003).  These models are well suited to describing the evolution of MHD waves in the auroral zone.
+
+In order to describe magnetosphere-ionosphere coupling on a more global scale, models based on the linearized MHD equations have been developed (Lee and Lysak, 1989, 1990, 1991a,b, 1994, 1999; Lysak and Lee, 1992; Song et al., 1994; Lysak et al., 1994, 2013, 2015; Song and Lysak, 2006; Lysak, 1997, 1999, 2004; Lee et al., 1995, 2000, 2004; Lysak and Song, 2001, 2004, 2006, 2011; Woodroffe and Lysak, 2012; Waters et al., 2013; McEachern, 2016).  The most recent version of this model is a three-dimensional model that covers the region from L = 1.5 to L =10 and with the lower boundary at an altitude of 100 km. The primary objective of the research proposed here is to generalize this model to more realistic configurations and to apply it to help understand the dynamics of the magnetosphere at ULF frequencies.  It should be recognized that this type of model is limited in its description of solar wind-magnetosphere coupling processes; however, it is more complete than global MHD at describing magnetosphere-ionosphere coupling, particularly at higher frequencies in the ULF band.  Because of the high spatial resolution necessary to model the ionosphere accurately, these models generally are run for 5-10 minutes of simulated time.  Thus, the model results describe the transient behavior of the magnetosphere-ionosphere system rather than its long-term evolution.
+
+
+(END PARAPHRASE)
+
+
+
+
+
+
+
+
 Numerical results are obtained using Tuna, a new linear Alfve\'n wave code based on that described in \citet{lysak_2013}. Tuna models a (two-dimensional) meridional slice of the magnetosphere, but evaluates Maxwell's equations in all three dimensions. Colloquially, Tuna can be said to have two and a half (``tuna half'') dimensions.
 
 The two-dimensional grid allows Tuna to consider a realistic ionosphere, which is prohibitively expensive for a true three-dimensional code. The three-dimensional derivatives allow Tuna to capture wave behavior in the azimuthal direction, which is invisible to traditional two-dimensional models.
@@ -129,7 +189,9 @@ The assumption of a fixed $\exp \left(i m \phi\right)$ neglects the potentially-
 
 % ======================================================================
 
-Empirical profiles are used for the conductivity tensor $\underline{\underline{\sigma}}$ and the dielectric tensor $\underline{\underline{\epsilon}}$. The conductivity tensor $\underline{\underline{\sigma}}$ comes from values tabulated in \citet{kelley_1989}, and modified per \citet{lysak_2013} to take into account the loading of oxygen ions near the atmosphere. The dielectric tensor $\underline{\underline{\epsilon}}$ gives characteristic velocity $c$ along the magnetic field line and $v_A$ in the perpendicular direction, where $c$ is the speed of light and the Alfve\'n speed $v_A$ is defined per
+Four different ionospheric profiles are used for the conductivity tensor $\underline{\underline{\sigma}}$ and the dielectric tensor $\underline{\underline{\epsilon}}$: active dayside, active nightside, quiet dayside, and quiet nightside. Profiles come from \citet{lysak_2013}; they are based on empyrical values tabulated in \citet{kelley_1989}, modified to take into account the loading of oxygen ions near the atmosphere.
+
+The dielectric tensor gives characteristic velocity $c$ along the magnetic field line and $v_A$ in the perpendicular direction, where $c$ is the speed of light and the Alfve\'n speed $v_A$ is defined per
 
 \begin{linenomath*}
 \begin{align}
@@ -140,9 +202,7 @@ Empirical profiles are used for the conductivity tensor $\underline{\underline{\
 \end{align}
 \end{linenomath*}
 
-In \cref{def_va}, $B$ is the magnitude of the zeroth-order magnetic field, taken to be an ideal dipole field with magnitude \SI{3.1e4}{\nT} at the equator at Earth's surface. The density profile is modeled as the sum of
-
-two distributions: a plasmasphere profile (\SI{e4}{\percc} at the ionosphere, with a sharp drop at $L = 4$), and an ``auroral'' profile (\SI{10}{\percc} at the ionosphere, falling off as $\frac{1}{r}$). Four different physical parameter profiles are used for conductivity and Alfve\'n speed, corresponding to dayside and nightside conditions at the top and bottom of the solar cycle.
+In \cref{def_va}, $B$ is the magnitude of the zeroth-order magnetic field, taken to be an ideal dipole field with magnitude \SI{3.1e4}{\nT} at the equator at Earth's surface. The density profile is modeled as the sum of two distributions: a plasmasphere profile (\SI{e4}{\percc} at the ionosphere, with a sharp drop at $L = 4$), and an ``auroral'' profile (\SI{10}{\percc} at the ionosphere, falling off as $\frac{1}{r}$). Four different physical parameter profiles are used for conductivity and Alfve\'n speed, corresponding to dayside and nightside conditions at the top and bottom of the solar cycle.
 
 % ======================================================================
 
