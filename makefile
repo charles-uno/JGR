@@ -16,7 +16,7 @@ TODAY := $(shell date +"%Y%m%d")
 
 # The default target.
 all: $(MAIN_PDF)
-	cp $(MAIN_PDF) cmceachern_$(TODAY).pdf
+	cp $(MAIN_PDF) mceachern_$(TODAY).pdf
 
 
 # Instructions to make the main pdf.

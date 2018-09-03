@@ -505,23 +505,28 @@ Curiously, odd toroidal events are found to occur at a higher rate than even one
 
 \section{Discussion}
 
-The present work discusses the development of Tuna, a numerical model created with Pc4 waves in mind. Using Tuna, Pc4 waves are modeled across varying frequencies, azimuthal modenumbers, and ionospheric conductivity profiles, suggesting novel connections between several properties. Numerical results are complemented by a survey of Pc4 events measured by the Van Allen Probes.
+The present work discusses the development of Tuna, a numerical model created with Pc4 waves in mind. Using Tuna, Pc4 waves are modeled across varying frequencies, azimuthal modenumbers, and ionospheric conductivity profiles, suggesting novel connections between several properties. Numerical results are complemented by a survey of Pc4 events measured by the Van Allen Probes; 762 half-hour Pc4 events are identified using data from the EMFISIS and EFW instruments, and each event is classified by polarizarion and harmonic.
 
-Numerical work suggests that poloidal Pc4 waves convert to the toroidal mode on timescales comparable to the oscillation period, suggesting poloidal waves as a significant source for toroidal waves. On the nightside, the dissipation timescale is comparable to the oscillation period as well, so much poloidal energy is lost before converting to the toroidal mode.
+% ----------------------------------------------------------------------
+
+Numerical work suggests that poloidal Pc4 waves convert to the toroidal mode on timescales comparable to the oscillation period, suggesting poloidal waves as a significant source for toroidal waves. Mode conversion is most effective on the dayside, where conductivity is higher; on the nightside, the dissipation timescale is comparable to the oscillation period, so much poloidal energy is lost before converting to the toroidal mode.
+
+This is consistent with observations. Odd toroidal events exhibit a similar distribution to odd poloidal events, but are skewed dayward across the morningside. The same is true for even events: even poloidal events peak at noon and are spread across the evening side, while even toroidal events peak at noon and are far less spread.
+
+Poloidal events are primarily even, while toroidal events are primarily odd. As a result, poloidal events overall exhibit a significantly different spatial distribution compared to toroidal events overall. The above similarities in spatial distribution are not apparent until Pc4 events are classified by harmonic as well as polarization.
+
+% ----------------------------------------------------------------------
 
 Numerical results also suggest that the distinctive ground signatures attributed to giant pulsations may be features of first-harmonic poloidal Pc4 waves overall. Generic first harmonic poloidal waves are shown to exhibit peak ground signatures around ${m = 16}$, which are sharply peaked at auroral latitudes, and which occur preferrentially during times of quiet solar activity.
 
-The present results are limited to a first-harmonic, sinusoidal, poloidal driver; however, Tuna has the capacity to deliver more interesting driving waveforms as well, and higher harmonics could be added with trivial modifications to the code.
+Using Van Allen Probe data, odd poloidal events are found to be concentrated from midnight through the morning --- as with the numerical results, it seems that giant pulsations are unusual when compared to Pc4 waves overall, but not compared to odd poloidal Pc4 waves specifically.
 
-% -----------------------------------------------------------------------------
+% ----------------------------------------------------------------------
 
-Using data from the Van Allen Probes EMFISIS and EMF instruments, a survey of 762 half-hour Pc4 events is presented with each event classified by both polarization and harmonic.
+The present numerical results are limited to a first-harmonic, sinusoidal, poloidal driver; however, Tuna has the capacity to deliver more interesting driving waveforms as well, and higher harmonics could be added with trivial modifications to the code.
 
-Odd poloidal events are shown to be concentrated from midnight through the morning --- as with the numerical results, it seems that giant pulsations are unusual when compared to Pc4 waves overall, but not compared to odd poloidal Pc4 waves specifically.
 
-Odd toroidal events exhibit a similar distribution to odd poloidal events, but are skewed dayward across the morningside. The same is true for even events: even poloidal events peak at noon and are spread across the evening side, while even toroidal events peak at noon and are far less spread. These distributions are consistent with the poloidal mode as a significant source for same-harmonic toroidal events, particularly on the dayside, as suggested by the numerical results.
 
-Overall, poloidal and toroidal events exhibit disparate distributions because poloidal events are primarily even, while toroidal events are mostly odd; the cause is not apparent.
 
 % Aaron: reviewer might want me to look at the whole data set. maybe avoid suggesting that I could, since it now exists.
 
