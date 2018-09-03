@@ -12,8 +12,12 @@ FIGURES := $(wildcard figures/*)
 # needed each time.
 .PHONY: ALWAYS_COMPILE clean all tidy
 
+TODAY := $(shell date +"%Y%m%d")
+
 # The default target.
 all: $(MAIN_PDF)
+	cp $(MAIN_PDF) cmceachern_$(TODAY).pdf
+
 
 # Instructions to make the main pdf.
 $(MAIN_PDF): ALWAYS_COMPILE $(MAIN_TEX) $(HELPER_FILES) $(FIGURES)
@@ -22,7 +26,7 @@ $(MAIN_PDF): ALWAYS_COMPILE $(MAIN_TEX) $(HELPER_FILES) $(FIGURES)
 # Clean up all the regeneratable files, including the final document,
 # and any temporary files. Don't echo the commands, don't print the
 # LaTeXmk version number, and don't complain if there are no temporary
-# files to clean up. 
+# files to clean up.
 clean:
 	@ echo 'Cleaning up.'
 	@- $(LATEXMK) -C $(MAIN_TEX) > /dev/null 2>&1 ||:
